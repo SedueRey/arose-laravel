@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\GroceryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +17,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/admin/customers-management', [GroceryController::class, 'users']);
+Route::get('/admin/customers-management/{operation}', [GroceryController::class, 'users']);
+Route::get('/admin/customers-management/{operation}/{id}', [GroceryController::class, 'users']);
+Route::post('/admin/customers-management', [GroceryController::class, 'users']);
+Route::post('/admin/customers-management/{operation}', [GroceryController::class, 'users']);
+Route::post('/admin/customers-management/{operation}/{id}', [GroceryController::class, 'users']);
