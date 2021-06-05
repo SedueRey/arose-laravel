@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GroceryController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,3 +25,9 @@ Route::get('/admin/customers-management/{operation}/{id}', [GroceryController::c
 Route::post('/admin/customers-management', [GroceryController::class, 'users']);
 Route::post('/admin/customers-management/{operation}', [GroceryController::class, 'users']);
 Route::post('/admin/customers-management/{operation}/{id}', [GroceryController::class, 'users']);
+
+Auth::routes();
+Route::get('/chat', [HomeController::class, 'chat'])->name('chat');
+Route::post('pusher/auth', function() {
+  return auth()->user();
+});
