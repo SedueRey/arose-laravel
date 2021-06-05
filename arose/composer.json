@@ -20,7 +20,9 @@
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.3",
-        "musonza/chat": "^4.6"
+        "musonza/chat": "^4.6",
+        "riari/laravel-forum": "~4.0",
+        "riari/laravel-forum-frontend": "~1.0"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
