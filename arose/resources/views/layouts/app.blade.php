@@ -19,10 +19,8 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     @if(Route::current()->getName() == 'chat')
     <script>
-        try {
-            window.conversations = {!! isset($conversations) ? json_encode($conversations) : '' !!};
-            window.participant = {!! isset($participant) ? json_encode($participant) : '' !!};
-        }
+        window.conversations = {!! isset($conversations) ? json_encode($conversations) : '' !!};
+        window.participant = {!! isset($participant) ? json_encode($participant) : '' !!};
     </script>
     <script>
         var user = {!! json_encode((array)auth()->user()) !!};
