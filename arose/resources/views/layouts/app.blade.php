@@ -63,6 +63,9 @@
                                 <a class="nav-link" href="/home">Dashboard</a>
                             </li>
                             <li class="nav-item">
+                                <a class="nav-link" href="/">Resources</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" href="/chat">Chat</a>
                             </li>
                             <li class="nav-item">
