@@ -19,11 +19,10 @@ class HomeController extends Controller
         $this->middleware('auth');
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return Response
-     */
+    public function home(){
+        return view('home');
+    }
+
     public function chat()
     {
         $conversations = Chat::conversations(Chat::conversations()->conversation)
@@ -41,6 +40,6 @@ class HomeController extends Controller
             ]
         ];
 
-        return view('home', $data);
+        return view('chat', $data);
     }
 }

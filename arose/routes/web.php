@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GroceryController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ResourcesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,9 +16,10 @@ use App\Http\Controllers\HomeController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/resources/filter/level/{level}', [ResourcesController::class, 'filterByLevel']);
+Route::post('/resources/search', [ResourcesController::class, 'search']);
+Route::get('/resources/filter/format/{format}', [ResourcesController::class, 'filterByFormat']);
+Route::get('/', [ResourcesController::class, 'getData']);
 
 Route::get('/admin/customers-management', [GroceryController::class, 'users']);
 Route::get('/admin/customers-management/{operation}', [GroceryController::class, 'users']);
@@ -27,6 +29,7 @@ Route::post('/admin/customers-management/{operation}', [GroceryController::class
 Route::post('/admin/customers-management/{operation}/{id}', [GroceryController::class, 'users']);
 
 Auth::routes();
+Route::get('/home', [HomeController::class, 'home'])->name('home');
 Route::get('/chat', [HomeController::class, 'chat'])->name('chat');
 Route::post('pusher/auth', function() {
   return auth()->user();

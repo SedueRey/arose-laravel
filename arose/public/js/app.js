@@ -1886,8 +1886,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -1896,6 +1894,11 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   props: ["messages"],
+  computed: {
+    isAdmin: function isAdmin() {
+      return window.isAdmin === 1;
+    }
+  },
   methods: {
     createConversation: function createConversation() {
       axios.post("/chat/conversations").then(function (response) {
@@ -42836,6 +42839,27 @@ var render = function() {
     _c("div", { staticClass: "card-header" }, [_vm._v("Conversations")]),
     _vm._v(" "),
     _c("div", { staticClass: "card-body" }, [
+      _vm.isAdmin
+        ? _c("span", [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-primary btn-sm",
+                on: {
+                  click: function($event) {
+                    return _vm.createConversation()
+                  }
+                }
+              },
+              [_vm._v("New Conversation")]
+            ),
+            _vm._v(" "),
+            _c("br"),
+            _vm._v(" "),
+            _c("br")
+          ])
+        : _vm._e(),
+      _vm._v(" "),
       _c(
         "ul",
         { staticClass: "conversation" },
@@ -42880,7 +42904,19 @@ var render = function() {
                           _c("strong", [_vm._v("Join")])
                         ]
                       )
-                    : _vm._e()
+                    : _c(
+                        "a",
+                        {
+                          staticClass: "text-danger",
+                          attrs: { href: "#", title: "leave conversation" },
+                          on: {
+                            click: function($event) {
+                              return _vm.leaveConversation(convo.id)
+                            }
+                          }
+                        },
+                        [_c("strong", [_vm._v("Leave")])]
+                      )
                 ])
               ])
             ]

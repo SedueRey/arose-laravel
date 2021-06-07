@@ -3,46 +3,40 @@
 @section('content')
 
 @php
-$conversationId = Request::query('conversation_id');
 $user = \Auth::user();
-// dd($user->id);
 @endphp
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="mb-2 col-md-3">
-          <chat-conversations></chat-conversations>
+<div class="card">
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4 d-flex bg-success p-5">
+            <h1 class="mx-auto align-self-center"><i class="fas fa-chalkboard-teacher"></i></h1>
         </div>
-        <div class="mb-2 col-md-6">
-          <div class="card card-default">
-            <div class="card-header">Conversations</div>
-            <div class="card-body">
-              <h4>Conversation #{{ $conversationId }}</h4>
-              <hr/>
-              <div class="container chats">
-                  <div class="row">
-                      <div class="col-md-12">
-                              @if($conversationId)
-                              <div class="w-100 py-2">
-                                  <chat-messages :conversation="{{ $conversationId }}"></chat-messages>
-                              </div>
-                              <div class="w-100">
-                                  <chat-form
-                                          :conversation="{{ $conversationId }}"
-                                          :user="{{ auth()->user() }}"
-                                  ></chat-form>
-                              </div>
-                              @endif
-                      </div>
-                    </div>
-                </div>
-              </div>
-          </div>
-        </div>
-        <div class="mb-2 col-md-3">
-          @if($conversationId)
-          <conversation-participants :conversation="{{ $conversationId }}"></conversation-participants>
-          @endif
+        <div class="col-md-8 py-3">
+            <h3 class="card-title">Arose webtool private app</h3>
+            <p class="card-text">With supporting roots below as a natural lead-in to additional content and then some more content that is here.</p>
+            <a href="#" class="btn btn-outline-success btn-block">Outline</a>
         </div>
     </div>
+
+</div>
+</div>
+<div class="card my-3">
+<div class="container-fluid">
+    <div class="row bg-info py-5">
+        <div class="col-3 mx-auto">
+            <img class="rounded-circle img-fluid" src="//api.randomuser.me/portraits/men/73.jpg" alt="person">
+        </div>
+        <div class="col-12 text-center">
+            <h3>{{$user->name}}</h3>
+        </div>
+    </div>
+    <div class="row mb-2">
+        <div class="col-12 py-3">
+            <p>Horton started at ACME 4 years ago and, is a pooch pooch with clever lyrics. This is a card.</p>
+        </div>
+    </div>
+</div>
+</div>
 </div>
 @endsection

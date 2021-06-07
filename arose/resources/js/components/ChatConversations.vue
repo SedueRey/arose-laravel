@@ -2,11 +2,11 @@
   <div class="card card-default">
     <div class="card-header">Conversations</div>
     <div class="card-body">
-      <!--
+      <span v-if="isAdmin">
       <button class="btn btn-primary btn-sm" @click="createConversation()">New Conversation</button>
       <br />
       <br />
-      -->
+      </span>
       <ul class="conversation">
         <li class="clearfix py-2 border-bottom" v-for="(convo, index) in conversations" :key="index">
           <div class="chat-body clearfix">
@@ -22,7 +22,6 @@
               >
                  | <strong>Join</strong>
               </a>
-              <!--
               <a
                 v-else
                 href="#"
@@ -32,7 +31,6 @@
               >
                 <strong>Leave</strong>
               </a>
-              -->
             </div>
           </div>
         </li>
@@ -49,6 +47,12 @@ export default {
   }),
 
   props: ["messages"],
+
+  computed: {
+      isAdmin() {
+          return window.isAdmin === 1;
+      }
+  },
 
   methods: {
     createConversation() {

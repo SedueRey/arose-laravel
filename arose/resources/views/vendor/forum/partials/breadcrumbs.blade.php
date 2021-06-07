@@ -1,4 +1,5 @@
 <ol class="breadcrumb">
+    <li><a href="/">Arose Project WebTool</a></li>
     <li><a href="{{ url(config('forum.routing.prefix')) }}">{{ trans('forum::general.index') }}</a></li>
     @if (isset($category) && $category)
         @include ('forum::partials.breadcrumb-categories', ['category' => $category])
