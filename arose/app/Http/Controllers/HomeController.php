@@ -42,4 +42,30 @@ class HomeController extends Controller
 
         return view('chat', $data);
     }
+
+    public function profile(){
+        return view('profile');
+    }
+
+    public function profilephoto(Request $request){
+        if($request->hasFile('photo')){
+            $filename = Auth()->user()->id.time().$request->photo->getClientOriginalName();
+            $request->photo->storeAs('avatar', $filename, 'public');
+            Auth()->user()->update([ 'photo' => $filename ]);
+        }
+        return redirect()->back();
+    }
+
+    public function profileuser(Request $request){
+        $validated = $request->validate([
+            'name' => 'required',
+        ]);
+        Auth()->user()->name = $request->name;
+        Auth()->user()->school = $request->school;
+        Auth()->user()->city = $request->city;
+        Auth()->user()->country = $request->country;
+        Auth()->user()->biography = $request->biography;
+        Auth()->user()->save();
+        return redirect()->back()->with('message', 'Your profile has been updated!');;
+    }
 }

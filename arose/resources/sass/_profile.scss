@@ -1,0 +1,36 @@
+/* Profile sidebar */
+.profile-sidebar {
+    padding: 1.25rem 0 1rem 0;
+    background: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 0.25rem;
+    margin: 0 0 1.5rem 0;
+}
+
+.profile-userpic img {
+float: none;
+margin: 0 auto;
+width: 50%;
+height: 50%;
+-webkit-border-radius: 50% !important;
+-moz-border-radius: 50% !important;
+border-radius: 50% !important;
+}
+
+.profile-usertitle {
+    text-align: center;
+    margin-top: 1.5rem;
+}
+
+.profile-usertitle-name {
+color: #a5252d;
+font-size: 1.5rem;
+font-weight: 500;
+margin-bottom: 0.5rem;
+}
+
+.profile-usertitle-job {
+font-weight: 300;
+margin-bottom: 1rem;
+}
+

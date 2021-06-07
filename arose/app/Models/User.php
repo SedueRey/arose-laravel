@@ -26,7 +26,7 @@ class User extends Authenticatable
         'city',
         'country',
         'photo',
-        'numberStudents'
+        'bio'
     ];
 
     /**

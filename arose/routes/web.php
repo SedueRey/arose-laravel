@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Input;
 use App\Http\Controllers\GroceryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ResourcesController;
@@ -32,5 +33,9 @@ Auth::routes();
 Route::get('/home', [HomeController::class, 'home'])->name('home');
 Route::get('/chat', [HomeController::class, 'chat'])->name('chat');
 Route::post('pusher/auth', function() {
-  return auth()->user();
+    return auth()->user();
 });
+
+Route::get('/profile', [HomeController::class, 'profile'])->name('profile');
+Route::post('/profilephoto', [HomeController::class, 'profilephoto'])->name('profilephoto');
+Route::post('/profileuser', [HomeController::class, 'profileuser'])->name('profileuser');

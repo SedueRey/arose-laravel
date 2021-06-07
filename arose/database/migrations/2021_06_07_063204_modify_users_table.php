@@ -18,8 +18,7 @@ class ModifyUsersTable extends Migration
             $table->string('city')->nullable();
             $table->string('country')->nullable();
             $table->string('photo')->nullable();
-            $table->text('bio')->nullable();
-            $table->integer('numberStudents')->default(0);
+            $table->longText('biography')->default('');
             $table->boolean('isadmin')->default(false);
         });
     }
@@ -36,7 +35,7 @@ class ModifyUsersTable extends Migration
             $table->dropColumn('city');
             $table->dropColumn('country');
             $table->dropColumn('photo');
-            $table->dropColumn('numberStudents');
+            $table->dropColumn('biography');
             $table->dropColumn('isadmin');
         });
     }

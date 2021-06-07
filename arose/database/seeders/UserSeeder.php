@@ -21,6 +21,7 @@ class UserSeeder extends Seeder
             'email' => 'instructor@mk.app',
             'password' => Hash::make('123456'),
             'isadmin' => true,
+            'biography' => 'A little bit about me'
         ]);
         for ($i=0; $i < 10; $i++) {
             User::create([
