@@ -11,6 +11,7 @@ $user = \Auth::user();
   <div class="profile-sidebar">
     <!-- SIDEBAR USERPIC -->
     <div class="profile-userpic text-center">
+        <img src="{{ asset('/storage/avatar/01.jpg) }}" class="img-responsive" alt="avatar">
         @if ($user->photo)
         <img src="{{ asset('/storage/avatar/'.Auth::user()->photo) }}" class="img-responsive" alt="avatar">
         @else

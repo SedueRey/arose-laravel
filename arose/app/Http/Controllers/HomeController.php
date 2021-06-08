@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Chat;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Arr;
 
 class HomeController extends Controller
@@ -54,6 +55,26 @@ class HomeController extends Controller
             Auth()->user()->update([ 'photo' => $filename ]);
         }
         return redirect()->back();
+    }
+
+    public function avatar() {
+        $headers = array('Content-Type: application/jpeg');
+        $filename = '/home/prepareyvg/hosted/arose/storage/app/public/avatar/'.Auth()->user()->photo;
+        $data = pathinfo($filename);
+        $fp = fopen($filename, 'rb');
+        if ( !$fp ) {
+            abort(404);
+        }
+        header("Content-Type: image/".$data['extension']);
+        header("Content-Length: " . filesize($filename));
+        fpassthru($fp);
+        //return Storage::get('', $headers);
+        /*
+        $avatar = ;
+        $extension = pathinfo($avatar, PATHINFO_FILENAME);
+        // dd($extension);
+        return Storage::get($avatar);
+        */
     }
 
     public function profileuser(Request $request){

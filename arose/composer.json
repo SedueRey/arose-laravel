@@ -23,7 +23,8 @@
         "laravel/ui": "^3.3",
         "musonza/chat": "^4.6",
         "riari/laravel-forum": "~4.0",
-        "riari/laravel-forum-frontend": "~1.0"
+        "riari/laravel-forum-frontend": "~1.0",
+        "symfony/filesystem": "^5.3"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

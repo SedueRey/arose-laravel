@@ -39,3 +39,21 @@ Route::post('pusher/auth', function() {
 Route::get('/profile', [HomeController::class, 'profile'])->name('profile');
 Route::post('/profilephoto', [HomeController::class, 'profilephoto'])->name('profilephoto');
 Route::post('/profileuser', [HomeController::class, 'profileuser'])->name('profileuser');
+Route::get('/admin/clear-cache', function() {
+    if (Auth()->user()->isadmin == true) {
+        Artisan::call('optimize:clear');
+        return "Cache is cleared";
+    } else {
+        return "Cache is cleared?";
+    }
+});
+Route::get('/symlink', function() {
+    if (Auth()->user()->isadmin == true) {
+        Artisan::call('storage:link');
+        return "storage ok";
+    } else {
+        return "storage ?: ok";
+    }
+});
+
+Route::get('/avatar', [HomeController::class, 'avatar'])->name('avatar');
