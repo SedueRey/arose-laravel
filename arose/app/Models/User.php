@@ -49,6 +49,10 @@ class User extends Authenticatable
     ];
 
     public function resources() {
-        return $this->hasMany(Resources::class);
+        return $this->hasMany(Resources::class, 'uploaded_by');
+    }
+
+    public function students() {
+        return $this->hasMany(Student::class);
     }
 }

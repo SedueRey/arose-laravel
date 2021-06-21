@@ -26,6 +26,13 @@ class ResourcesController extends Controller
         return view('resources', compact('resourceData'));
     }
 
+    public function mine(){
+        $resourceData = Resources::where('uploaded_by', Auth()->user()->id)
+            ->orderBy('filename','asc')
+            ->paginate(20);
+        return view('resources', compact('resourceData'));
+    }
+
     public function search(Request $request){
         $search = $request->input('search');
         $resourceData = Resources::where('filename', 'LIKE', "%$search%")

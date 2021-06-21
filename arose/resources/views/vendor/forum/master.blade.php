@@ -24,7 +24,6 @@
     body {
         padding: 30px 0;
     }
-
     textarea {
         min-height: 200px;
     }
@@ -35,6 +34,7 @@
     </style>
 </head>
 <body class="aroseforum">
+
     <div class="container">
         @include ('forum::partials.breadcrumbs')
         @include ('forum::partials.alerts')

@@ -20,14 +20,17 @@ use App\Http\Controllers\ResourcesController;
 Route::get('/resources/filter/level/{level}', [ResourcesController::class, 'filterByLevel']);
 Route::post('/resources/search', [ResourcesController::class, 'search']);
 Route::get('/resources/filter/format/{format}', [ResourcesController::class, 'filterByFormat']);
+Route::get('/resources/mine', [ResourcesController::class, 'mine']);
 Route::get('/', [ResourcesController::class, 'getData']);
 
+/*
 Route::get('/admin/customers-management', [GroceryController::class, 'users']);
 Route::get('/admin/customers-management/{operation}', [GroceryController::class, 'users']);
 Route::get('/admin/customers-management/{operation}/{id}', [GroceryController::class, 'users']);
 Route::post('/admin/customers-management', [GroceryController::class, 'users']);
 Route::post('/admin/customers-management/{operation}', [GroceryController::class, 'users']);
 Route::post('/admin/customers-management/{operation}/{id}', [GroceryController::class, 'users']);
+*/
 
 Auth::routes();
 Route::get('/home', [HomeController::class, 'home'])->name('home');

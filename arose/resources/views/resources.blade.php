@@ -61,7 +61,6 @@ $user = \Auth::user();
                     <hr>
                     <div>
                         <a href="/resources/filter/level/{{$data->level}}" class="badge badge-secondary">{{$data->level}}</a>
-                        <span class="badge badge-secondary">{{$data->country}}</span>
                         <a href="/resources/filter/format/{{$data->format}}" class="badge badge-secondary">{{$data->format}}</a>
                     </div>
                 </div>
