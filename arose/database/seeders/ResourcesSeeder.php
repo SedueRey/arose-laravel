@@ -23,7 +23,8 @@ class ResourcesSeeder extends Seeder
                 'level' => $row[2],
                 'format' => $row[3],
                 'type' => $row[4],
-                'creation' => $row[5]
+                'creation' => $row[5],
+                'uploaded_by' => 1
             ]);
         }
     }

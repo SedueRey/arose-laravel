@@ -19,17 +19,16 @@ class CreateResourcesTable extends Migration
             $table->string('filename')->nullable();
             $table->string('filepath')->nullable();
             $table->string('country')->nullable();
+            $table->text('desc')->nullable();
             $table->enum('level', ['', 'A1', 'A2', 'B1', 'B2', 'C1', 'C2'])->default('');
             $table->enum('format', ['', 'Text', 'Audio', 'Video', 'Multimedia'] )->default('');
             $table->string('type')->nullable();
             $table->string('creation')->nullable();
-            $table->text('description')->nullable();
 
-            $table->index(['filename']);
             $table->index(['level']);
             $table->index(['format']);
-            $table->index(['type']);
-            $table->index(['country']);
+
+            $table->foreign('uploaded_by')->references('id')->on('users');
         });
     }
 
