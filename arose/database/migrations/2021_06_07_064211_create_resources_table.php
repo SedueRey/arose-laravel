@@ -24,6 +24,7 @@ class CreateResourcesTable extends Migration
             $table->enum('format', ['', 'Text', 'Audio', 'Video', 'Multimedia'] )->default('');
             $table->string('type')->nullable();
             $table->string('creation')->nullable();
+            $table->unsignedBigInteger('uploaded_by');
 
             $table->index(['level']);
             $table->index(['format']);
