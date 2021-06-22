@@ -176,6 +176,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         Riari\Forum\ForumServiceProvider::class,
         Riari\Forum\Frontend\ForumFrontendServiceProvider::class,
+        LaravelCaptcha\Providers\LaravelCaptchaServiceProvider::class
     ],
 
     /*

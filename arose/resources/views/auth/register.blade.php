@@ -61,6 +61,26 @@
                             </div>
                         </div>
 
+
+                        <div class="form-group{{ $errors->has('CaptchaCode') ? ' has-error' : '' }} row">
+                            <label class="col-md-4 col-form-label text-md-right">Are you a robot?</label>
+
+                                <div class="col-md-6">
+                                {!! captcha_image_html('ContactCaptcha') !!}
+                                <input class="form-control" type="text" id="CaptchaCode" name="CaptchaCode">
+                                <style>
+                                #CaptchaCode { padding: 0 0 0 2rem; }
+                                </style>
+                                @if ($errors->has('CaptchaCode'))
+                                    <span class="help-block">
+                                <strong>{{ $errors->first('CaptchaCode') }}</strong>
+                                    </span>
+                                @endif
+
+                            </div>
+                        </div>
+
+
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
