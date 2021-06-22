@@ -59,10 +59,17 @@ $user = \Auth::user();
                     </h5>
                     <p>{{ ucfirst($data->type)}}</p>
                     <hr>
-                    <div>
+                    <p>
                         <a href="/resources/filter/level/{{$data->level}}" class="badge badge-secondary">{{$data->level}}</a>
                         <a href="/resources/filter/format/{{$data->format}}" class="badge badge-secondary">{{$data->format}}</a>
-                    </div>
+                    </p>
+                    @auth
+                    @if($user->id == $data->uploaded_by)
+                    <p>
+                        <a href="/resources/edit/{{$data->id}}" class="btn btn-light btn-sm">Edit</a>
+                    </p>
+                    @endif
+                    @endauth
                 </div>
             </div>
         </div>

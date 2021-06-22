@@ -31,7 +31,7 @@
 </head>
 <body>
     <div id="app">
-        @include('header');
+        @include('header')
         <main class="container py-4">
             @yield('content')
         </main>

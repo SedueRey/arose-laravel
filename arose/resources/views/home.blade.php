@@ -66,7 +66,7 @@ $photo = $user->photo;
                     </a>
                 </div>
                 <div class="col-sm-4 py-3">
-                    <a href="#" class="card">
+                    <a href="/students" class="card">
                         <div class="card-body text-center">
                             <h1 class="p-3 text-danger"><i class="fa fa-2x fa-user-graduate"></i></h1>
                         </div>

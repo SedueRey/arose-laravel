@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Input;
 use App\Http\Controllers\GroceryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ResourcesController;
+use App\Http\Controllers\StudentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,3 +61,9 @@ Route::get('/symlink', function() {
 });
 
 Route::get('/avatar', [HomeController::class, 'avatar'])->name('avatar');
+
+Route::get('/students', [StudentController::class, 'index'])->name('students');
+Route::get('/students/new', [StudentController::class, 'create'])->name('newstudent');
+Route::post('/students/newaction', [StudentController::class, 'store'])->name('createStudent');
+Route::get('/students/edit/{uuid}', [StudentController::class, 'edit'])->name('editStudent');
+Route::post('/students/update/{uuid}', [StudentController::class, 'update'])->name('updateStudent');

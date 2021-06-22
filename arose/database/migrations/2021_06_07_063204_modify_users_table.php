@@ -18,7 +18,7 @@ class ModifyUsersTable extends Migration
             $table->string('city')->nullable();
             $table->string('country')->nullable();
             $table->string('photo')->nullable();
-            $table->longText('biography')->default('');
+            $table->longText('biography')->default('')->nullable();
             $table->boolean('isadmin')->default(false);
         });
     }

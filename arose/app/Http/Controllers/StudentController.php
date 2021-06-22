@@ -14,7 +14,16 @@ class StudentController extends Controller
      */
     public function index()
     {
-        //
+        $user = Auth()->user();
+        $instructorId = $user->id;
+        $data = [
+            'user' => $user
+        ];
+        $studentData = Student::where('user_id', $instructorId)
+            ->orderBy('name','asc')
+            ->paginate(20);
+        $data['studentData'] = $studentData;
+        return view('students', $data);
     }
 
     /**
@@ -24,7 +33,7 @@ class StudentController extends Controller
      */
     public function create()
     {
-        //
+        return view('studentnew');
     }
 
     /**
@@ -35,7 +44,19 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required',
+            'age' => 'integer',
+        ]);
+        $instructorId = Auth()->user()->id;
+        Student::create([
+            'name' => $request->name,
+            'age' => $request->age,
+            'class' => $request->class,
+            'group' => $request->group,
+            'user_id' => $instructorId,
+        ]);
+        return redirect()->to('students')->with('message', 'Student created!');
     }
 
     /**
@@ -55,9 +76,15 @@ class StudentController extends Controller
      * @param  \App\Models\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function edit(Student $student)
+    public function edit($uuid)
     {
-        //
+        $student = Student::find($uuid);
+        if ($student->user_id !== Auth()->user()->id) {
+            abort(403, 'PERMISSION DENIED… YOU DIDN’T SAY THE MAGIC WORD!');
+        }
+        return view('studentedit', [
+            'student' => $student
+        ]);
     }
 
     /**
@@ -67,9 +94,26 @@ class StudentController extends Controller
      * @param  \App\Models\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Student $student)
+    public function update(Request $request, $uuid)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required',
+            'age' => 'integer',
+        ]);
+        $instructorId = Auth()->user()->id;
+        $student = Student::find($uuid);
+        if (
+            $student->user_id !== Auth()->user()->id
+            || $uuid !== $student->id
+        ) {
+            abort(403, 'PERMISSION DENIED… YOU DIDN’T SAY THE MAGIC WORD!');
+        }
+        $student->name = $request->name;
+        $student->age = $request->age;
+        $student->class = $request->class;
+        $student->group = $request->group;
+        $student->save();
+        return redirect()->to('students')->with('message', $student->name.' data modified!');
     }
 
     /**
