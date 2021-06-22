@@ -18,11 +18,11 @@ use App\Http\Controllers\StudentController;
 |
 */
 
-Route::get('/resources/filter/level/{level}', [ResourcesController::class, 'filterByLevel']);
 Route::post('/resources/search', [ResourcesController::class, 'search']);
-Route::get('/resources/filter/format/{format}', [ResourcesController::class, 'filterByFormat']);
 Route::get('/resources/mine', [ResourcesController::class, 'mine']);
 Route::get('/', [ResourcesController::class, 'getData']);
+Route::get('/resources', [ResourcesController::class, 'getData']);
+Route::get('/resources/filter/{format}/{level}', [ResourcesController::class, 'filterByAll']);
 
 /*
 Route::get('/admin/customers-management', [GroceryController::class, 'users']);

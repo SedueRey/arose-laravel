@@ -4,6 +4,12 @@
 
 @php
 $user = \Auth::user();
+if(!isset($level)) {
+    $level = 'all';
+}
+if(!isset($format)) {
+    $format = 'all';
+}
 @endphp
 <div class="container">
     <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
@@ -22,18 +28,21 @@ $user = \Auth::user();
                 </form>
             </li>
             <li class="list-group-item">
+                <a href="/resources/">Clear all filters</a>
+            </li>
+            <li class="list-group-item">
                 <h6>Filter by level:</h6>
-                <a href="/">No filter</a><br>
-                <a href="/resources/filter/level/A2">A2</a><br>
-                <a href="/resources/filter/level/B2">B2</a>
+                <a href="/resources/filter/{{$format}}/all">No filter</a><br>
+                <a href="/resources/filter/{{$format}}/A2">A2</a><br>
+                <a href="/resources/filter/{{$format}}/B2">B2</a>
             </li>
             <li class="list-group-item">
                 <h6>Filter by format:</h6>
-                <a href="/">No filter</a><br>
-                <a href="/resources/filter/format/Text">Text</a><br>
-                <a href="/resources/filter/format/Audio">Audio</a><br>
-                <a href="/resources/filter/format/Video">Video</a><br>
-                <a href="/resources/filter/format/Multimedia">Multimedia</a>
+                <a href="/resources/filter/all/{{$level}}/">No filter</a><br>
+                <a href="/resources/filter/Text/{{$level}}">Text</a><br>
+                <a href="/resources/filter/Audio/{{$level}}">Audio</a><br>
+                <a href="/resources/filter/Video/{{$level}}">Video</a><br>
+                <a href="/resources/filter/Multimedia/{{$level}}">Multimedia</a>
             </li>
         </ul>
         </aside>
@@ -48,6 +57,16 @@ $user = \Auth::user();
     Sorry, there are no results for this search.
     </div>
     @endif
+    @if($level !== 'all')
+    <div class="col-md-12 alert alert-dark" role="alert">
+        Filtering by level: <strong>{{strtoupper($level)}}</strong>. <a href="/resources/">Clear all filters</a>
+    </div>
+    @endif
+    @if($format !== 'all')
+    <div class="col-md-12 alert alert-dark" role="alert">
+        Filtering by format: <strong>{{ucfirst($format)}}</strong>. <a href="/resources/">Clear all filters</a>
+    </div>
+    @endif
     @foreach($resourceData as $data)
     <div class="col-lg-6">
     <article class="card card-arose">
@@ -60,8 +79,8 @@ $user = \Auth::user();
                     <p>{{ ucfirst($data->type)}}</p>
                     <hr>
                     <p>
-                        <a href="/resources/filter/level/{{$data->level}}" class="badge badge-secondary">{{$data->level}}</a>
-                        <a href="/resources/filter/format/{{$data->format}}" class="badge badge-secondary">{{$data->format}}</a>
+                        <a href="/resources/filter/{{$format}}/{{$data->level}}" class="badge badge-secondary">{{$data->level}}</a>
+                        <a href="/resources/filter/{{$data->format}}/{{$level}}" class="badge badge-secondary">{{$data->format}}</a>
                     </p>
                     @auth
                     @if($user->id == $data->uploaded_by)

@@ -40,4 +40,24 @@ class ResourcesController extends Controller
             ->paginate(20);
         return view('resources', compact('resourceData'));
     }
+
+    public function filterByAll($format, $level){
+        // dd($format, $level);
+        $resourceData = Resources::when($format, function($query, $format){
+                if ($format !== 'all') {
+                    return $query->where('format', $format);
+                }
+            })->when($level, function($query, $level){
+                if( $level !== 'all' ) {
+                    return $query->where('level', strtoupper($level));
+                }
+            })->orderBy('filename','asc')
+            ->paginate(20);
+
+        return view('resources', [
+            'resourceData' => $resourceData,
+            'format' => $format,
+            'level' => $level,
+        ]);
+    }
 }
