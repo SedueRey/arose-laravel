@@ -34,36 +34,40 @@ Route::post('/admin/customers-management/{operation}/{id}', [GroceryController::
 */
 
 Auth::routes();
-Route::get('/home', [HomeController::class, 'home'])->name('home');
-Route::get('/chat', [HomeController::class, 'chat'])->name('chat');
-Route::post('pusher/auth', function() {
-    return auth()->user();
-});
+Route::group(['middleware' => ['auth']], function () {
 
-Route::get('/profile', [HomeController::class, 'profile'])->name('profile');
-Route::post('/profilephoto', [HomeController::class, 'profilephoto'])->name('profilephoto');
-Route::post('/profileuser', [HomeController::class, 'profileuser'])->name('profileuser');
-Route::get('/admin/clear-cache', function() {
-    if (Auth()->user()->isadmin == true) {
-        Artisan::call('optimize:clear');
-        return "Cache is cleared";
-    } else {
-        return "Cache is cleared?";
-    }
-});
-Route::get('/symlink', function() {
-    if (Auth()->user()->isadmin == true) {
-        Artisan::call('storage:link');
-        return "storage ok";
-    } else {
-        return "storage ?: ok";
-    }
-});
+    Route::get('/home', [HomeController::class, 'home'])->name('home');
+    Route::get('/chat', [HomeController::class, 'chat'])->name('chat');
+    Route::post('pusher/auth', function() {
+        return auth()->user();
+    });
 
-Route::get('/avatar', [HomeController::class, 'avatar'])->name('avatar');
+    Route::get('/profile', [HomeController::class, 'profile'])->name('profile');
+    Route::post('/profilephoto', [HomeController::class, 'profilephoto'])->name('profilephoto');
+    Route::post('/profileuser', [HomeController::class, 'profileuser'])->name('profileuser');
+    Route::get('/admin/clear-cache', function() {
+        if (Auth()->user()->isadmin == true) {
+            Artisan::call('optimize:clear');
+            return "Cache is cleared";
+        } else {
+            return "Cache is cleared?";
+        }
+    });
+    Route::get('/symlink', function() {
+        if (Auth()->user()->isadmin == true) {
+            Artisan::call('storage:link');
+            return "storage ok";
+        } else {
+            return "storage ?: ok";
+        }
+    });
 
-Route::get('/students', [StudentController::class, 'index'])->name('students');
-Route::get('/students/new', [StudentController::class, 'create'])->name('newstudent');
-Route::post('/students/newaction', [StudentController::class, 'store'])->name('createStudent');
-Route::get('/students/edit/{uuid}', [StudentController::class, 'edit'])->name('editStudent');
-Route::post('/students/update/{uuid}', [StudentController::class, 'update'])->name('updateStudent');
+    Route::get('/avatar', [HomeController::class, 'avatar'])->name('avatar');
+
+    Route::get('/students', [StudentController::class, 'index'])->name('students');
+    Route::get('/students/new', [StudentController::class, 'create'])->name('newstudent');
+    Route::post('/students/newaction', [StudentController::class, 'store'])->name('createStudent');
+    Route::get('/students/edit/{uuid}', [StudentController::class, 'edit'])->name('editStudent');
+    Route::post('/students/update/{uuid}', [StudentController::class, 'update'])->name('updateStudent');
+
+});

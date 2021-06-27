@@ -23,6 +23,7 @@
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.3",
+        "laravelcollective/html": "^6.2",
         "musonza/chat": "^4.6",
         "riari/laravel-forum": "~4.0",
         "riari/laravel-forum-frontend": "~1.0",
