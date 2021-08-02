@@ -28,6 +28,9 @@ if(!isset($format)) {
                 </form>
             </li>
             <li class="list-group-item">
+                <a href="/resources/arose/">Arose project resources</a>
+            </li>
+            <li class="list-group-item">
                 <a href="/resources/">Clear all filters</a>
             </li>
             <li class="list-group-item">
@@ -81,6 +84,9 @@ if(!isset($format)) {
                     <p>
                         <a href="/resources/filter/{{$format}}/{{$data->level}}" class="badge badge-secondary">{{$data->level}}</a>
                         <a href="/resources/filter/{{$data->format}}/{{$level}}" class="badge badge-secondary">{{$data->format}}</a>
+                        @if($data->uploaded_by === 1)
+                        <a href="/resources/arose/" class="badge badge-info text-white">By Arose Project</a>
+                        @endif
                     </p>
                     @auth
                     @if($user->id == $data->uploaded_by)

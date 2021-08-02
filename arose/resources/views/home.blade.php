@@ -53,14 +53,16 @@ $photo = $user->photo;
                 </div>
                 <div class="col-md-8 py-3">
                     <h3 class="card-title">Arose webtool private app</h3>
-                    <p class="card-text">With supporting roots below as a natural lead-in to additional content and then some more content that is here.</p>
+                    <p class="card-text">This is the area of the app where you can add the data you think you need to evaluate your students. </p>
+                    <p class="card-text">
+                        Once you have added the rubrics (you can use the ones that already exist in the system) you must create an evaluation sheet to be able to use them with your class..</p>
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm-4 py-3">
                     <a href="#" class="card">
                         <div class="card-body text-center">
-                            <h1 class="p-3 text-primary"><i class="fa fa-2x fa-signature"></i></h1>
+                            <h1 class="p-3 text-info"><i class="fa fa-2x fa-signature"></i></h1>
                         </div>
                         <div class="card-footer text-center">0 Rubrics</div>
                     </a>
@@ -68,7 +70,7 @@ $photo = $user->photo;
                 <div class="col-sm-4 py-3">
                     <a href="/students" class="card">
                         <div class="card-body text-center">
-                            <h1 class="p-3 text-danger"><i class="fa fa-2x fa-user-graduate"></i></h1>
+                            <h1 class="p-3 text-info"><i class="fa fa-2x fa-user-graduate"></i></h1>
                         </div>
                         <div class="card-footer text-center">{{$user->students()->count()}} Students</div>
                     </a>
@@ -79,6 +81,16 @@ $photo = $user->photo;
                             <h1 class="p-3 text-success"><i class="fa fa-2x fa-folder"></i></h1>
                         </div>
                         <div class="card-footer text-center">{{$user->resources()->count()}} Resources</div>
+                    </a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 py-3">
+                    <a href="#" class="card">
+                        <div class="card-body text-center">
+                            <h1 class="p-3 text-primary"><i class="fas fa-2x fa-sort-numeric-down"></i></h1>
+                        </div>
+                        <div class="card-footer text-center">Evaluation card</div>
                     </a>
                 </div>
             </div>

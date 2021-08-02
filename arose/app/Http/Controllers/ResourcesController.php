@@ -60,4 +60,15 @@ class ResourcesController extends Controller
             'level' => $level,
         ]);
     }
+
+    public function filterArose(){
+        // dd($format, $level);
+        $resourceData = Resources::where('uploaded_by', 1)
+            ->orderBy('filename','asc')
+            ->paginate(20);
+
+        return view('resources', [
+            'resourceData' => $resourceData
+        ]);
+    }
 }

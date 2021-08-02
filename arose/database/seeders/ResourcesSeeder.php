@@ -24,6 +24,7 @@ class ResourcesSeeder extends Seeder
                 'format' => $row[3],
                 'type' => $row[4],
                 'creation' => $row[5],
+                'desc' => $row[6],
                 'uploaded_by' => 1
             ]);
         }

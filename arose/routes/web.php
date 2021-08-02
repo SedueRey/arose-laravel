@@ -23,6 +23,7 @@ Route::get('/resources/mine', [ResourcesController::class, 'mine']);
 Route::get('/', [ResourcesController::class, 'getData']);
 Route::get('/resources', [ResourcesController::class, 'getData']);
 Route::get('/resources/filter/{format}/{level}', [ResourcesController::class, 'filterByAll']);
+Route::get('/resources/arose', [ResourcesController::class, 'filterArose']);
 
 /*
 Route::get('/admin/customers-management', [GroceryController::class, 'users']);
@@ -34,6 +35,8 @@ Route::post('/admin/customers-management/{operation}/{id}', [GroceryController::
 */
 
 Auth::routes();
+Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
+
 Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/home', [HomeController::class, 'home'])->name('home');
@@ -61,8 +64,6 @@ Route::group(['middleware' => ['auth']], function () {
             return "storage ?: ok";
         }
     });
-
-    Route::get('/avatar', [HomeController::class, 'avatar'])->name('avatar');
 
     Route::get('/students', [StudentController::class, 'index'])->name('students');
     Route::get('/students/new', [StudentController::class, 'create'])->name('newstudent');

@@ -46,6 +46,7 @@ class StudentController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required',
+            'level' => 'required',
             'age' => 'integer',
         ]);
         $instructorId = Auth()->user()->id;
@@ -54,6 +55,7 @@ class StudentController extends Controller
             'age' => $request->age,
             'class' => $request->class,
             'group' => $request->group,
+            'level' => $request->level,
             'user_id' => $instructorId,
         ]);
         return redirect()->to('students')->with('message', 'Student created!');
@@ -98,6 +100,7 @@ class StudentController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required',
+            'level' => 'required',
             'age' => 'integer',
         ]);
         $instructorId = Auth()->user()->id;
@@ -111,6 +114,7 @@ class StudentController extends Controller
         $student->name = $request->name;
         $student->age = $request->age;
         $student->class = $request->class;
+        $student->level = $request->level;
         $student->group = $request->group;
         $student->save();
         return redirect()->to('students')->with('message', $student->name.' data modified!');

@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Arose project') }}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -43,16 +43,7 @@
             <img class="mb-2" src="/assets/arose/logo.png" />
             <small class="d-block mb-3 text-muted">© 2021</small>
           </div>
-          <div class="col-6 col-md">
-            <h5>Resources</h5>
-            <ul class="list-unstyled text-small">
-              <li><a class="text-muted" href="#">Resource</a></li>
-              <li><a class="text-muted" href="#">Resource name</a></li>
-              <li><a class="text-muted" href="#">Another resource</a></li>
-              <li><a class="text-muted" href="#">Final resource</a></li>
-            </ul>
-          </div>
-          <div class="col-6 col-md">
+          <div class="col-12 col-md">
             <h5>About Arose Project</h5>
             <ul class="list-unstyled text-small">
               <li><a class="text-muted" href="https://www.um.es/aroseproject/objetives/">Objectives</a></li>

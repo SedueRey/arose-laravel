@@ -17,12 +17,17 @@
     <!-- jQuery -->
     <script src="//code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
 
+    <!-- Custom CSS Bootstrap -->
+    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <link href="/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" crossorigin="anonymous">
     <!-- Bootstrap -->
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     <style>
+    @import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700&display=swap');
     body {
-        padding: 30px 0;
+        font-size: "Lato", sans-serif;
+        font-weight: 300;
+        padding: 0 0 30px 0;
     }
     textarea {
         min-height: 200px;
@@ -34,7 +39,7 @@
     </style>
 </head>
 <body class="aroseforum">
-
+    @include ('forum::arose.nav')
     <div class="container">
         @include ('forum::partials.breadcrumbs')
         @include ('forum::partials.alerts')
