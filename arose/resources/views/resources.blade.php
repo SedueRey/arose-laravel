@@ -14,8 +14,18 @@ if(!isset($format)) {
 <div class="container">
     <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
       <h1 class="display-4">Arose Resources for teachers</h1>
-      <p class="lead">Lorem ipsum dolor sit amet.</p>
+      <p class="lead">
+          Resources available for the assessment of English
+          language proficiency for students. You can add your
+          own or use existing ones.</p>
     </div>
+    @if (isset($message))
+    <div class="row">
+        <div class="col-md-12 alert alert-info" role="alert">
+            {{ $message }}
+        </div>
+    </div>
+    @endif
     <div class="row">
         <aside class="col-lg-4 col-md-6">
         <ul class="list-group">
@@ -30,6 +40,11 @@ if(!isset($format)) {
             <li class="list-group-item">
                 <a href="/resources/arose/">Arose project resources</a>
             </li>
+            @if($user !== null)
+            <li class="list-group-item">
+                <a href="/resources/mine/">My resources</a>
+            </li>
+            @endif
             <li class="list-group-item">
                 <a href="/resources/">Clear all filters</a>
             </li>
@@ -77,10 +92,11 @@ if(!isset($format)) {
             <div class="row p-3">
                 <div class="col-12">
                     <h5>
-                        <a href="{{$data->filepath}}">{{$data->filename}}</a>
+                        <a target="_blank" href="{{$data->filepath}}">{{$data->filename}}</a>
                     </h5>
                     <p>{{ ucfirst($data->type)}}</p>
                     <hr>
+                    <p>{{ $data->desc }}</p>
                     <p>
                         <a href="/resources/filter/{{$format}}/{{$data->level}}" class="badge badge-secondary">{{$data->level}}</a>
                         <a href="/resources/filter/{{$data->format}}/{{$level}}" class="badge badge-secondary">{{$data->format}}</a>
@@ -90,8 +106,15 @@ if(!isset($format)) {
                     </p>
                     @auth
                     @if($user->id == $data->uploaded_by)
+                    <form class="float-right" style="display:inline;" action="{{ route('destroyResource', $data->id)}}" method="POST">
+                        @csrf
+                        @method("DELETE")
+                        <button type="submit" class="btn btn-warning btn-sm">
+                            <i class="fa fa-close"></i> Delete
+                        </button>
+                    </form>
                     <p>
-                        <a href="/resources/edit/{{$data->id}}" class="btn btn-light btn-sm">Edit</a>
+                        <a href="/resources/edit/{{$data->id}}" class="btn btn-primary btn-sm">Edit</a>
                     </p>
                     @endif
                     @endauth

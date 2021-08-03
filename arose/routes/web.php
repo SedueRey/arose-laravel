@@ -19,9 +19,8 @@ use App\Http\Controllers\StudentController;
 */
 
 Route::post('/resources/search', [ResourcesController::class, 'search']);
-Route::get('/resources/mine', [ResourcesController::class, 'mine']);
 Route::get('/', [ResourcesController::class, 'getData']);
-Route::get('/resources', [ResourcesController::class, 'getData']);
+Route::get('/resources', [ResourcesController::class, 'getData'])->name('resources');
 Route::get('/resources/filter/{format}/{level}', [ResourcesController::class, 'filterByAll']);
 Route::get('/resources/arose', [ResourcesController::class, 'filterArose']);
 
@@ -38,6 +37,13 @@ Auth::routes();
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
 Route::group(['middleware' => ['auth']], function () {
+
+    Route::get('/resources/mine', [ResourcesController::class, 'mine']);
+    Route::get('/resources/new', [ResourcesController::class, 'create'])->name('createResource');
+    Route::post('/resources/store', [ResourcesController::class, 'store'])->name('storeResource');
+    Route::get('/resources/edit/{id}', [ResourcesController::class, 'edit'])->name('editResource');
+    Route::post('/resources/update/{id}', [ResourcesController::class, 'update'])->name('updateResource');
+    Route::delete('/resources/delete/{id}', [ResourcesController::class, 'destroy'])->name('destroyResource');
 
     Route::get('/home', [HomeController::class, 'home'])->name('home');
     Route::get('/chat', [HomeController::class, 'chat'])->name('chat');

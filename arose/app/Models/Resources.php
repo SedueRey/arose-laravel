@@ -12,10 +12,11 @@ class Resources extends Model
         'filename',
         'filepath',
         'country',
-        'description',
+        'desc',
         'level',
         'format',
-        'type'
+        'type',
+        'uploaded_by'
     ];
 
     public function user() {

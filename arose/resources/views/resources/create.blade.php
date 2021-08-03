@@ -12,12 +12,13 @@ $user = \Auth::user();
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item"><a href="/">Arose project</a></li>
                   <li class="breadcrumb-item"><a href="/home">Dashboard</a></li>
-                  <li class="breadcrumb-item"><a href="/students">My students</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Create student</li>
+                  <li class="breadcrumb-item"><a href="/resources/mine">My resources</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Upload resource</li>
                 </ol>
             </nav>
-            <form autocomplete="off" class="form" action="{{route('createStudent')}}" method="post" id="registrationForm">
-                <h2>Create student</h2>
+            <form autocomplete="off" class="form" action="{{route('storeResource')}}" method="post" id="registrationForm"
+            enctype="multipart/form-data">
+                <h2>Upload resource</h2>
                 @csrf
                 @if(session()->has('message'))
                     <div class="alert alert-success">
@@ -49,41 +50,25 @@ $user = \Auth::user();
                 </div>
                 <div class="form-group">
                     <div class="col-xs-6">
-                        <label for="name">
-                            <h4>Age</h4>
-                        </label>
-                        <input
-                            type="number"
-                            class="form-control"
-                            name="age"
-                            id="age"
-                            value="{{old('age')}}">
+                        <label for="filepath">
+                            <h4>File*</h4>
+                        </label><br>
+                        <div class="alert alert-warning" role="alert">
+                            Maximum file size may not exceed 3MB.
+                            Allowed file formats: <em>png, jpg, txt, pdf, mp3, mp4, avi, mov.</em>
+                        </div>
+                        <input type="file"
+                         id="filepath" name="filepath"
+                         required >
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-xs-6">
-                        <label for="name">
-                            <h4>Class</h4>
+                        <label for="description">
+                            <h4>Description</h4>
                         </label>
-                        <input
-                            type="text"
-                            class="form-control"
-                            name="class"
-                            id="class"
-                            value="{{old('class')}}">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-xs-6">
-                        <label for="name">
-                            <h4>Group</h4>
-                        </label>
-                        <input
-                            type="text"
-                            class="form-control"
-                            name="group"
-                            id="group"
-                            value="{{old('group')}}">
+                        <textarea class="form-control" name="description" rows="4"
+                        id="description">{{ old('description') }}</textarea>
                     </div>
                 </div>
                 <div class="form-group">
@@ -98,6 +83,19 @@ $user = \Auth::user();
                             <input type="radio" value="B2" name="level" @if(old('level') == 'B2') checked @endif> B2 &nbsp;&nbsp;&nbsp;
                             <input type="radio" value="C1" name="level" @if(old('level') == 'C1') checked @endif> C1 &nbsp;&nbsp;&nbsp;
                             <input type="radio" value="C2" name="level" @if(old('level') == 'C2') checked @endif> C2 &nbsp;&nbsp;&nbsp;
+                        </fieldset>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-6">
+                        <label for="format">
+                            <h4>Format</h4>
+                        </label>
+                        <fieldset id="format">
+                            <input type="radio" value="Text" name="format" @if(old('format') == 'Text') checked @endif> Text &nbsp;&nbsp;&nbsp;
+                            <input type="radio" value="Audio" name="format" @if(old('format') == 'Audio') checked @endif> Audio &nbsp;&nbsp;&nbsp;
+                            <input type="radio" value="Video" name="format" @if(old('format') == 'Video') checked @endif> Video &nbsp;&nbsp;&nbsp;
+                            <input type="radio" value="Multimedia" name="format" @if(old('format') == 'Multimedia') checked @endif> Multimedia  &nbsp;&nbsp;&nbsp;
                         </fieldset>
                     </div>
                 </div>
