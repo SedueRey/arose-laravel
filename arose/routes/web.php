@@ -6,6 +6,7 @@ use App\Http\Controllers\GroceryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ResourcesController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\RubricController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,6 +45,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/resources/edit/{id}', [ResourcesController::class, 'edit'])->name('editResource');
     Route::post('/resources/update/{id}', [ResourcesController::class, 'update'])->name('updateResource');
     Route::delete('/resources/delete/{id}', [ResourcesController::class, 'destroy'])->name('destroyResource');
+
+    Route::get('/rubrics', [RubricController::class, 'index'])->name('rubrics');
+    Route::post('/rubrics/store', [RubricController::class, 'store'])->name('storeRubric');
 
     Route::get('/home', [HomeController::class, 'home'])->name('home');
     Route::get('/chat', [HomeController::class, 'chat'])->name('chat');

@@ -13,6 +13,7 @@ import ChatForm from './components/ChatForm';
 import ChatMessages from './components/ChatMessages';
 import ConversationParticipants from './components/ConversationParticipants';
 import ExampleComponent from './components/ExampleComponent';
+import RubricForm from './components/rubrics/RubricForm';
 
 /**
  * The following block of code may be used to automatically register your
@@ -32,6 +33,7 @@ const app = new Vue({
     ChatForm,
     ChatMessages,
     ConversationParticipants,
-    ExampleComponent
+    ExampleComponent,
+    RubricForm
   }
 });

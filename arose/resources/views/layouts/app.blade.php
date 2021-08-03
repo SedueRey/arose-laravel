@@ -10,10 +10,12 @@
     <title>{{ config('app.name', 'Arose project') }}</title>
 
     <!-- Scripts -->
+    @yield('script')
     <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link rel="dns-prefetch" href="//kit.fontawesome.com">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">

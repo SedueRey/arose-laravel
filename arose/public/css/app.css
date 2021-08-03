@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700&display=swap');
+@import url(https://fonts.googleapis.com/css?family=Lato);
 @charset "UTF-8";
 /*!
  * Bootstrap v4.6.0 (https://getbootstrap.com/)
@@ -58,7 +58,7 @@ body {
   margin: 0;
   font-family: "Lato", Arial, sans-serif;
   font-size: 1rem;
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1.55;
   color: #212529;
   text-align: left;
@@ -10028,13 +10028,28 @@ h3 {
   color: #a5252d;
   font-size: 1.5rem;
   font-weight: 500;
-  line-height: 1;
   margin-bottom: 0.5rem;
 }
 
 .profile-usertitle-job {
   font-weight: 300;
   margin-bottom: 1rem;
+}
+
+.criterion {
+  border: 1px solid #d9e1f2;
+  background: #fbfcfe;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+
+.rating {
+  margin: 1rem 0;
+}
+
+.remove-criterion {
+  position: relative;
+  top: -0.5rem;
 }
 
 .navbar-laravel {
@@ -10044,4 +10059,9 @@ h3 {
 
 .card.card-arose {
   margin: 0 0 1rem 0;
+}
+
+.breadcrumb {
+  background-color: #FFF;
+  margin-bottom: 2rem;
 }

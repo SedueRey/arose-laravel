@@ -2186,6 +2186,399 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/rubrics/RubricCriteriaForm.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/rubrics/RubricCriteriaForm.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _utils_randomString__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../utils/randomString */ "./resources/js/utils/randomString.js");
+/* harmony import */ var _RubricRatingForm_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RubricRatingForm.vue */ "./resources/js/components/rubrics/RubricRatingForm.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: "RubricCriteriaForm",
+  components: {
+    RubricRatingForm: _RubricRatingForm_vue__WEBPACK_IMPORTED_MODULE_1__.default
+  },
+  props: {
+    criterion: {
+      type: Object,
+      required: true
+    },
+    uuid: {
+      type: String,
+      required: true
+    },
+    old: {
+      type: Object,
+      required: true,
+      "default": {}
+    }
+  },
+  data: function data() {
+    return {
+      ratings: []
+    };
+  },
+  computed: {
+    totalPoints: function totalPoints() {
+      var total = this.ratings.reduce(function (a, b) {
+        return a + (b.points || 0);
+      }, 0);
+      this.$emit("totalPoints", {
+        uuid: this.uuid,
+        points: total
+      });
+      return total;
+    }
+  },
+  methods: {
+    addRating: function addRating() {
+      this.ratings.push({
+        uuid: (0,_utils_randomString__WEBPACK_IMPORTED_MODULE_0__.default)(32),
+        title: "",
+        points: 0,
+        description: ""
+      });
+    },
+    deleteRating: function deleteRating(ratingid) {
+      var removeIndex = this.ratings.findIndex(function (item) {
+        return item.uuid === ratingid;
+      });
+      this.ratings.splice(removeIndex, 1);
+    },
+    pointsEvent: function pointsEvent(value) {
+      /*const rating = this.ratings.find((el) => el.uuid === value.uuid);
+      rating.points = value.points;*/
+    }
+  },
+  mounted: function mounted() {
+    // Adaptar para arrays de 2 dimensiones
+    if (this.old !== null && this.old !== undefined) {
+      if (this.old.ratingtitle) {
+        var uuids = Object.keys(this.old.ratingtitle[this.uuid]);
+
+        for (var i = 0; i < uuids.length; i++) {
+          var uuid = uuids[i];
+          this.ratings.push({
+            uuid: uuid,
+            title: this.old.ratingtitle[this.uuid][uuid] || '',
+            description: this.old.ratingdescription[this.uuid][uuid] || '',
+            points: this.old.ratingpoints[this.uuid][uuid] || 0
+          });
+          console.log(this.ratings);
+        }
+
+        console.log(uuids);
+      }
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/rubrics/RubricForm.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/rubrics/RubricForm.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _utils_randomString__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../utils/randomString */ "./resources/js/utils/randomString.js");
+/* harmony import */ var _RubricCriteriaForm_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RubricCriteriaForm.vue */ "./resources/js/components/rubrics/RubricCriteriaForm.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: 'RubricForm',
+  props: {
+    old: {
+      type: Object,
+      required: false,
+      "default": {}
+    }
+  },
+  data: function data() {
+    return {
+      criteria: []
+    };
+  },
+  components: {
+    RubricCriteriaForm: _RubricCriteriaForm_vue__WEBPACK_IMPORTED_MODULE_1__.default
+  },
+  computed: {
+    totalPoints: function totalPoints() {
+      return this.criteria.reduce(function (a, b) {
+        return a + (b.points || 0);
+      }, 0);
+    }
+  },
+  methods: {
+    addCriterion: function addCriterion() {
+      this.criteria.push({
+        uuid: (0,_utils_randomString__WEBPACK_IMPORTED_MODULE_0__.default)(32),
+        title: '',
+        description: '',
+        points: 0
+      });
+    },
+    deleteCriterion: function deleteCriterion(uuid) {
+      var removeIndex = this.criteria.findIndex(function (item) {
+        return item.uuid === uuid;
+      });
+      this.criteria.splice(removeIndex, 1);
+    },
+    criterionPoints: function criterionPoints(value) {
+      var criterion = this.criteria.find(function (el) {
+        return el.uuid === value.uuid;
+      });
+      criterion.points = value.points;
+    }
+  },
+  mounted: function mounted() {
+    if (this.old !== null && this.old !== undefined) {
+      if (this.old.criteriatitle) {
+        var criteriaUUids = Object.keys(this.old.criteriatitle);
+
+        for (var i = 0; i < criteriaUUids.length; i++) {
+          var uuid = criteriaUUids[i];
+          this.criteria.push({
+            uuid: uuid,
+            title: this.old.criteriatitle[uuid] || '',
+            description: this.old.criteriadescription[uuid] || '',
+            points: 0
+          });
+        }
+      }
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/rubrics/RubricRatingForm.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/rubrics/RubricRatingForm.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: "RubricRatingForm",
+  props: {
+    rating: {
+      type: Object,
+      required: true
+    },
+    uuid: {
+      type: String,
+      required: true
+    }
+  },
+  mounted: function mounted() {
+    console.log("funciona RubricRatingForm", this.uuid);
+  },
+  methods: {
+    passPoints: function passPoints(e) {
+      /*const points = parseFloat(e.target.value.replace(',', '.'));
+      this.$emit('points', {
+          uuid: this.rating.uuid,
+          points: points
+      });*/
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./resources/js/app.js":
 /*!*****************************!*\
   !*** ./resources/js/app.js ***!
@@ -2194,18 +2587,20 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
 /* harmony import */ var _components_ChatConversations__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/ChatConversations */ "./resources/js/components/ChatConversations.vue");
 /* harmony import */ var _components_ChatForm__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/ChatForm */ "./resources/js/components/ChatForm.vue");
 /* harmony import */ var _components_ChatMessages__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/ChatMessages */ "./resources/js/components/ChatMessages.vue");
 /* harmony import */ var _components_ConversationParticipants__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/ConversationParticipants */ "./resources/js/components/ConversationParticipants.vue");
 /* harmony import */ var _components_ExampleComponent__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/ExampleComponent */ "./resources/js/components/ExampleComponent.vue");
+/* harmony import */ var _components_rubrics_RubricForm__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/rubrics/RubricForm */ "./resources/js/components/rubrics/RubricForm.vue");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
+
 
 
 
@@ -2224,16 +2619,17 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 var files = __webpack_require__("./resources/js sync recursive \\.vue$/");
 
 files.keys().map(function (key) {
-  return vue__WEBPACK_IMPORTED_MODULE_5__.default.component(key.split('/').pop().split('.')[0], files(key));
+  return vue__WEBPACK_IMPORTED_MODULE_6__.default.component(key.split('/').pop().split('.')[0], files(key));
 });
-var app = new vue__WEBPACK_IMPORTED_MODULE_5__.default({
+var app = new vue__WEBPACK_IMPORTED_MODULE_6__.default({
   el: '#app',
   components: {
     ChatConversations: _components_ChatConversations__WEBPACK_IMPORTED_MODULE_0__.default,
     ChatForm: _components_ChatForm__WEBPACK_IMPORTED_MODULE_1__.default,
     ChatMessages: _components_ChatMessages__WEBPACK_IMPORTED_MODULE_2__.default,
     ConversationParticipants: _components_ConversationParticipants__WEBPACK_IMPORTED_MODULE_3__.default,
-    ExampleComponent: _components_ExampleComponent__WEBPACK_IMPORTED_MODULE_4__.default
+    ExampleComponent: _components_ExampleComponent__WEBPACK_IMPORTED_MODULE_4__.default,
+    RubricForm: _components_rubrics_RubricForm__WEBPACK_IMPORTED_MODULE_5__.default
   }
 });
 
@@ -2298,6 +2694,32 @@ window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/d
 //   // encrypted: true,
 //   // namespace: 'Musonza.Chat.Eventing'
 // });
+
+/***/ }),
+
+/***/ "./resources/js/utils/randomString.js":
+/*!********************************************!*\
+  !*** ./resources/js/utils/randomString.js ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+function randomString(length) {
+  var chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  var result = '';
+
+  for (var i = length; i > 0; --i) {
+    result += chars[Math.floor(Math.random() * chars.length)];
+  }
+
+  return result;
+}
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (randomString);
 
 /***/ }),
 
@@ -42603,6 +43025,123 @@ component.options.__file = "resources/js/components/ExampleComponent.vue"
 
 /***/ }),
 
+/***/ "./resources/js/components/rubrics/RubricCriteriaForm.vue":
+/*!****************************************************************!*\
+  !*** ./resources/js/components/rubrics/RubricCriteriaForm.vue ***!
+  \****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _RubricCriteriaForm_vue_vue_type_template_id_05b242f8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./RubricCriteriaForm.vue?vue&type=template&id=05b242f8& */ "./resources/js/components/rubrics/RubricCriteriaForm.vue?vue&type=template&id=05b242f8&");
+/* harmony import */ var _RubricCriteriaForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RubricCriteriaForm.vue?vue&type=script&lang=js& */ "./resources/js/components/rubrics/RubricCriteriaForm.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+  _RubricCriteriaForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _RubricCriteriaForm_vue_vue_type_template_id_05b242f8___WEBPACK_IMPORTED_MODULE_0__.render,
+  _RubricCriteriaForm_vue_vue_type_template_id_05b242f8___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/rubrics/RubricCriteriaForm.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/rubrics/RubricForm.vue":
+/*!********************************************************!*\
+  !*** ./resources/js/components/rubrics/RubricForm.vue ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _RubricForm_vue_vue_type_template_id_33e42305___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./RubricForm.vue?vue&type=template&id=33e42305& */ "./resources/js/components/rubrics/RubricForm.vue?vue&type=template&id=33e42305&");
+/* harmony import */ var _RubricForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RubricForm.vue?vue&type=script&lang=js& */ "./resources/js/components/rubrics/RubricForm.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+  _RubricForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _RubricForm_vue_vue_type_template_id_33e42305___WEBPACK_IMPORTED_MODULE_0__.render,
+  _RubricForm_vue_vue_type_template_id_33e42305___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/rubrics/RubricForm.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/rubrics/RubricRatingForm.vue":
+/*!**************************************************************!*\
+  !*** ./resources/js/components/rubrics/RubricRatingForm.vue ***!
+  \**************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _RubricRatingForm_vue_vue_type_template_id_a7aeadfc___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./RubricRatingForm.vue?vue&type=template&id=a7aeadfc& */ "./resources/js/components/rubrics/RubricRatingForm.vue?vue&type=template&id=a7aeadfc&");
+/* harmony import */ var _RubricRatingForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RubricRatingForm.vue?vue&type=script&lang=js& */ "./resources/js/components/rubrics/RubricRatingForm.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+  _RubricRatingForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _RubricRatingForm_vue_vue_type_template_id_a7aeadfc___WEBPACK_IMPORTED_MODULE_0__.render,
+  _RubricRatingForm_vue_vue_type_template_id_a7aeadfc___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/rubrics/RubricRatingForm.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/ChatConversations.vue?vue&type=script&lang=js&":
 /*!********************************************************************************!*\
   !*** ./resources/js/components/ChatConversations.vue?vue&type=script&lang=js& ***!
@@ -42680,6 +43219,54 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ExampleComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ExampleComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ExampleComponent.vue?vue&type=script&lang=js&");
  /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ExampleComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
+/***/ "./resources/js/components/rubrics/RubricCriteriaForm.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************!*\
+  !*** ./resources/js/components/rubrics/RubricCriteriaForm.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_RubricCriteriaForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./RubricCriteriaForm.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/rubrics/RubricCriteriaForm.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_RubricCriteriaForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
+/***/ "./resources/js/components/rubrics/RubricForm.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************!*\
+  !*** ./resources/js/components/rubrics/RubricForm.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_RubricForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./RubricForm.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/rubrics/RubricForm.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_RubricForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
+/***/ "./resources/js/components/rubrics/RubricRatingForm.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/components/rubrics/RubricRatingForm.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_RubricRatingForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./RubricRatingForm.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/rubrics/RubricRatingForm.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_RubricRatingForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
 
 /***/ }),
 
@@ -42764,6 +43351,57 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ExampleComponent_vue_vue_type_template_id_299e239e___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ExampleComponent_vue_vue_type_template_id_299e239e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ExampleComponent.vue?vue&type=template&id=299e239e& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ExampleComponent.vue?vue&type=template&id=299e239e&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/rubrics/RubricCriteriaForm.vue?vue&type=template&id=05b242f8&":
+/*!***********************************************************************************************!*\
+  !*** ./resources/js/components/rubrics/RubricCriteriaForm.vue?vue&type=template&id=05b242f8& ***!
+  \***********************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RubricCriteriaForm_vue_vue_type_template_id_05b242f8___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RubricCriteriaForm_vue_vue_type_template_id_05b242f8___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RubricCriteriaForm_vue_vue_type_template_id_05b242f8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./RubricCriteriaForm.vue?vue&type=template&id=05b242f8& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/rubrics/RubricCriteriaForm.vue?vue&type=template&id=05b242f8&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/rubrics/RubricForm.vue?vue&type=template&id=33e42305&":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/components/rubrics/RubricForm.vue?vue&type=template&id=33e42305& ***!
+  \***************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RubricForm_vue_vue_type_template_id_33e42305___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RubricForm_vue_vue_type_template_id_33e42305___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RubricForm_vue_vue_type_template_id_33e42305___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./RubricForm.vue?vue&type=template&id=33e42305& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/rubrics/RubricForm.vue?vue&type=template&id=33e42305&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/rubrics/RubricRatingForm.vue?vue&type=template&id=a7aeadfc&":
+/*!*********************************************************************************************!*\
+  !*** ./resources/js/components/rubrics/RubricRatingForm.vue?vue&type=template&id=a7aeadfc& ***!
+  \*********************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RubricRatingForm_vue_vue_type_template_id_a7aeadfc___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RubricRatingForm_vue_vue_type_template_id_a7aeadfc___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RubricRatingForm_vue_vue_type_template_id_a7aeadfc___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./RubricRatingForm.vue?vue&type=template&id=a7aeadfc& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/rubrics/RubricRatingForm.vue?vue&type=template&id=a7aeadfc&");
 
 
 /***/ }),
@@ -43178,6 +43816,450 @@ var staticRenderFns = [
     ])
   }
 ]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/rubrics/RubricCriteriaForm.vue?vue&type=template&id=05b242f8&":
+/*!**************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/rubrics/RubricCriteriaForm.vue?vue&type=template&id=05b242f8& ***!
+  \**************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm.criterion
+    ? _c(
+        "div",
+        { staticClass: "criterion" },
+        [
+          _c("div", { staticClass: "row" }, [
+            _c(
+              "div",
+              { staticClass: "col-sm-12" },
+              [
+                _vm._v("\n      Criteria points: "),
+                _c("strong", [_vm._v(_vm._s(_vm.totalPoints))]),
+                _vm._v(" "),
+                _vm._t("default")
+              ],
+              2
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group row" }, [
+            _c(
+              "label",
+              {
+                staticClass: "col-sm-3 col-form-label",
+                attrs: { for: "criteriatitle[" + _vm.uuid + "]" }
+              },
+              [
+                _vm._v("Criteria title "),
+                _c("i", { staticClass: "far fa-edit" })
+              ]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-sm-9" }, [
+              _c("input", {
+                staticClass: "form-control",
+                attrs: {
+                  type: "text",
+                  required: "",
+                  id: "criteriatitle[" + _vm.uuid + "]",
+                  name: "criteriatitle[" + _vm.uuid + "]"
+                },
+                domProps: { value: _vm.criterion.title }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group row" }, [
+            _c(
+              "label",
+              {
+                staticClass: "col-sm-3 col-form-label",
+                attrs: { for: "criteriadescription[" + _vm.uuid + "]" }
+              },
+              [
+                _vm._v("Criteria description "),
+                _c("i", { staticClass: "far fa-edit" })
+              ]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-sm-9" }, [
+              _c("input", {
+                staticClass: "form-control",
+                attrs: {
+                  type: "text",
+                  required: "",
+                  id: "criteriadescription[" + _vm.uuid + "]",
+                  name: "criteriadescription[" + _vm.uuid + "]"
+                },
+                domProps: { value: _vm.criterion.description }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("hr"),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-primary btn-sm float-right",
+              attrs: { type: "button" },
+              on: { click: _vm.addRating }
+            },
+            [
+              _c("i", { staticClass: "far fa-plus-square" }),
+              _vm._v(" Add rating\n  ")
+            ]
+          ),
+          _vm._v(" "),
+          _c("h3", { staticClass: "h5" }, [
+            _vm._v("Edit rating titles and points")
+          ]),
+          _vm._v(" "),
+          _vm.ratings.length == 0
+            ? _c(
+                "div",
+                { staticClass: "alert alert-info", attrs: { role: "alert" } },
+                [
+                  _vm._v(
+                    "\n    There are no ratings for this criterion. Feel free to append one clicking\n    "
+                  ),
+                  _c("em", [_vm._v('"Add rating"')]),
+                  _vm._v(" button.\n  ")
+                ]
+              )
+            : _c("p", [
+                _vm._v("\n    There are\n    "),
+                _c("strong", { staticClass: "text-primary" }, [
+                  _vm._v(_vm._s(_vm.ratings.length))
+                ]),
+                _vm._v(" ratings for\n    this criterion.\n  ")
+              ]),
+          _vm._v(" "),
+          _vm._l(_vm.ratings, function(rating) {
+            return _c(
+              "rubric-rating-form",
+              {
+                key: rating.uuid,
+                attrs: { rating: rating, uuid: _vm.uuid },
+                on: { points: _vm.pointsEvent }
+              },
+              [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary btn-sm",
+                    attrs: { type: "button" },
+                    on: {
+                      click: function($event) {
+                        return _vm.deleteRating(rating.uuid)
+                      }
+                    }
+                  },
+                  [
+                    _c("i", { staticClass: "fas fa-trash" }),
+                    _vm._v(" Remove this rating\n    ")
+                  ]
+                )
+              ]
+            )
+          })
+        ],
+        2
+      )
+    : _vm._e()
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/rubrics/RubricForm.vue?vue&type=template&id=33e42305&":
+/*!******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/rubrics/RubricForm.vue?vue&type=template&id=33e42305& ***!
+  \******************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm.old
+    ? _c(
+        "div",
+        { staticClass: "RubricForm" },
+        [
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-sm-12" }, [
+              _vm._v(
+                "\n            Rubric total points: " +
+                  _vm._s(_vm.totalPoints) +
+                  "\n        "
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _vm._m(0),
+          _vm._v(" "),
+          _c("hr", { staticClass: "hr" }),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-primary btn-sm float-right",
+              attrs: { type: "button" },
+              on: { click: _vm.addCriterion }
+            },
+            [
+              _c("i", { staticClass: "far fa-plus-square" }),
+              _vm._v(" Add criterion\n    ")
+            ]
+          ),
+          _vm._v(" "),
+          _c("h2", { staticClass: "h4" }, [_vm._v("Criteria")]),
+          _vm._v(" "),
+          _vm.criteria.length == 0
+            ? _c(
+                "div",
+                { staticClass: "alert alert-info", attrs: { role: "alert" } },
+                [
+                  _vm._v(
+                    "\n        There are no criteria for this rubric. Feel free to append one clicking "
+                  ),
+                  _c("em", [_vm._v('"Add criterion"')]),
+                  _vm._v(" button.\n    ")
+                ]
+              )
+            : _c("p", [
+                _vm._v("\n        There are "),
+                _c("strong", { staticClass: "text-primary" }, [
+                  _vm._v(_vm._s(_vm.criteria.length))
+                ]),
+                _vm._v(" criteria for this rubric.\n    ")
+              ]),
+          _vm._v(" "),
+          _vm._l(_vm.criteria, function(criterion) {
+            return _c(
+              "rubric-criteria-form",
+              {
+                key: criterion.uuid,
+                attrs: {
+                  uuid: criterion.uuid,
+                  criterion: criterion,
+                  old: _vm.old
+                },
+                on: { totalPoints: _vm.criterionPoints }
+              },
+              [
+                _c(
+                  "button",
+                  {
+                    staticClass:
+                      "btn btn-warning btn-sm float-right remove-criterion",
+                    attrs: { type: "button" },
+                    on: {
+                      click: function($event) {
+                        return _vm.deleteCriterion(criterion.uuid)
+                      }
+                    }
+                  },
+                  [
+                    _c("i", { staticClass: "fas fa-trash" }),
+                    _vm._v(" Remove criterion\n        ")
+                  ]
+                )
+              ]
+            )
+          }),
+          _vm._v(" "),
+          _c("pre", [_vm._v(_vm._s(_vm.old))])
+        ],
+        2
+      )
+    : _vm._e()
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c("label", { attrs: { for: "rubricTitle" } }, [_vm._v("Rubric title")]),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "form-control form-control-sm",
+        attrs: {
+          type: "text",
+          id: "rubricTitle",
+          name: "rubricTitle",
+          value: "",
+          required: "",
+          placeholder: "Add your rubric title"
+        }
+      })
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/rubrics/RubricRatingForm.vue?vue&type=template&id=a7aeadfc&":
+/*!************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/rubrics/RubricRatingForm.vue?vue&type=template&id=a7aeadfc& ***!
+  \************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm.rating
+    ? _c("div", { staticClass: "rating" }, [
+        _c("div", { staticClass: "form-group row" }, [
+          _c("aside", { staticClass: "col-sm-12" }, [_vm._t("default")], 2)
+        ]),
+        _vm._v(" "),
+        _vm.rating
+          ? _c("div", { staticClass: "form-group row" }, [
+              _c(
+                "label",
+                {
+                  staticClass: "col-sm-2 col-form-label",
+                  attrs: {
+                    for:
+                      "ratingtitle[" + _vm.uuid + "][" + _vm.rating.uuid + "]"
+                  }
+                },
+                [_vm._v("Rating title")]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-sm-6" }, [
+                _c("input", {
+                  staticClass: "form-control",
+                  attrs: {
+                    required: "",
+                    type: "text",
+                    id:
+                      "ratingtitle[" + _vm.uuid + "][" + _vm.rating.uuid + "]",
+                    name:
+                      "ratingtitle[" + _vm.uuid + "][" + _vm.rating.uuid + "]"
+                  },
+                  domProps: { value: _vm.rating.title }
+                })
+              ]),
+              _vm._v(" "),
+              _c(
+                "label",
+                {
+                  staticClass: "col-sm-2 col-form-label text-sm-right",
+                  attrs: { for: "ratingpoints[" + _vm.rating.uuid + "]" }
+                },
+                [_vm._v("Rating points")]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-sm-2" }, [
+                _c("input", {
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "number",
+                    required: "",
+                    id:
+                      "ratingpoints[" + _vm.uuid + "][" + _vm.rating.uuid + "]",
+                    name:
+                      "ratingpoints[" + _vm.uuid + "][" + _vm.rating.uuid + "]",
+                    min: "0",
+                    step: "0.5"
+                  },
+                  domProps: { value: _vm.rating.points },
+                  on: { change: _vm.passPoints }
+                })
+              ])
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group row" }, [
+          _c(
+            "label",
+            {
+              staticClass: "col-sm-2 col-form-label",
+              attrs: {
+                for:
+                  "ratingdescription[" + _vm.uuid + "][" + _vm.rating.uuid + "]"
+              }
+            },
+            [_vm._v("\n      Rating description\n    ")]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-10" }, [
+            _c("textarea", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.rating.description,
+                  expression: "rating.description"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: {
+                rows: "2",
+                required: "",
+                id:
+                  "ratingdescription[" +
+                  _vm.uuid +
+                  "][" +
+                  _vm.rating.uuid +
+                  "]",
+                name:
+                  "ratingdescription[" + _vm.uuid + "][" + _vm.rating.uuid + "]"
+              },
+              domProps: { value: _vm.rating.description },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.rating, "description", $event.target.value)
+                }
+              }
+            })
+          ])
+        ])
+      ])
+    : _vm._e()
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -55695,7 +56777,10 @@ var map = {
 	"./components/ChatForm.vue": "./resources/js/components/ChatForm.vue",
 	"./components/ChatMessages.vue": "./resources/js/components/ChatMessages.vue",
 	"./components/ConversationParticipants.vue": "./resources/js/components/ConversationParticipants.vue",
-	"./components/ExampleComponent.vue": "./resources/js/components/ExampleComponent.vue"
+	"./components/ExampleComponent.vue": "./resources/js/components/ExampleComponent.vue",
+	"./components/rubrics/RubricCriteriaForm.vue": "./resources/js/components/rubrics/RubricCriteriaForm.vue",
+	"./components/rubrics/RubricForm.vue": "./resources/js/components/rubrics/RubricForm.vue",
+	"./components/rubrics/RubricRatingForm.vue": "./resources/js/components/rubrics/RubricRatingForm.vue"
 };
 
 
