@@ -1,11 +1,11 @@
 <template>
-  <div class="rating" v-if="rating">
+  <div class="rating">
     <div class="form-group row">
         <aside class="col-sm-12">
         <slot></slot>
         </aside>
     </div>
-    <div class="form-group row" v-if="rating">
+    <div class="form-group row">
       <label
         :for="`ratingtitle[${uuid}][${rating.uuid}]`"
         class="col-sm-2 col-form-label"
@@ -17,7 +17,7 @@
           class="form-control"
           :id="`ratingtitle[${uuid}][${rating.uuid}]`"
           :name="`ratingtitle[${uuid}][${rating.uuid}]`"
-          :value="rating.title"
+          v-model="usingRating.title"
         />
       </div>
       <label :for="`ratingpoints[${rating.uuid}]`" class="col-sm-2 col-form-label text-sm-right">Rating points</label>
@@ -28,7 +28,7 @@
           class="form-control"
           :id="`ratingpoints[${uuid}][${rating.uuid}]`"
           :name="`ratingpoints[${uuid}][${rating.uuid}]`"
-          :value="rating.points"
+          v-model="usingRating.points"
           min="0"
           step="0.5"
           @change="passPoints"
@@ -46,7 +46,7 @@
           class="form-control"
           :id="`ratingdescription[${uuid}][${rating.uuid}]`"
           :name="`ratingdescription[${uuid}][${rating.uuid}]`"
-          v-model="rating.description"
+          v-model="usingRating.description"
         ></textarea>
       </div>
     </div>
@@ -60,16 +60,21 @@ export default {
     rating: { type: Object, required: true },
     uuid: { type: String, required: true },
   },
+  data() {
+      return {
+          usingRating: {}
+      }
+  },
   mounted() {
-    console.log("funciona RubricRatingForm", this.uuid);
+    this.usingRating = {...this.rating};
   },
   methods: {
       passPoints(e) {
-          /*const points = parseFloat(e.target.value.replace(',', '.'));
+          const points = parseFloat(e.target.value.replace(',', '.'));
           this.$emit('points', {
               uuid: this.rating.uuid,
               points: points
-          });*/
+          });
       }
   },
 };

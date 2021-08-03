@@ -1,5 +1,5 @@
 <template>
-  <div class="criterion" v-if="criterion">
+  <div class="criterion">
     <div class="row">
       <div class="col-sm-12">
         Criteria points: <strong>{{ totalPoints }}</strong>
@@ -17,7 +17,7 @@
           class="form-control"
           :id="`criteriatitle[${uuid}]`"
           :name="`criteriatitle[${uuid}]`"
-          :value="criterion.title"
+          v-model="usingCriterion.title"
         />
       </div>
     </div>
@@ -34,7 +34,7 @@
           class="form-control"
           :id="`criteriadescription[${uuid}]`"
           :name="`criteriadescription[${uuid}]`"
-          :value="criterion.description"
+          v-model="usingCriterion.description"
         />
       </div>
     </div>
@@ -90,6 +90,7 @@ export default {
   },
   data() {
     return {
+      usingCriterion: {},
       ratings: [],
     };
   },
@@ -119,13 +120,12 @@ export default {
       this.ratings.splice(removeIndex, 1);
     },
     pointsEvent(value) {
-      /*const rating = this.ratings.find((el) => el.uuid === value.uuid);
-      rating.points = value.points;*/
+      const rating = this.ratings.find((el) => el.uuid === value.uuid);
+      rating.points = value.points;
     },
   },
   mounted() {
-    // Adaptar para arrays de 2 dimensiones
-
+    this.usingCriterion = {...this.criterion};
     if (this.old !== null && this.old !== undefined) {
         if (this.old.ratingtitle) {
             const uuids = Object.keys(this.old.ratingtitle[this.uuid]);

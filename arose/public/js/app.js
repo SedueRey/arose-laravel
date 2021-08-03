@@ -2199,6 +2199,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _utils_randomString__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../utils/randomString */ "./resources/js/utils/randomString.js");
 /* harmony import */ var _RubricRatingForm_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RubricRatingForm.vue */ "./resources/js/components/rubrics/RubricRatingForm.vue");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -2299,6 +2305,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      usingCriterion: {},
       ratings: []
     };
   },
@@ -2330,12 +2337,15 @@ __webpack_require__.r(__webpack_exports__);
       this.ratings.splice(removeIndex, 1);
     },
     pointsEvent: function pointsEvent(value) {
-      /*const rating = this.ratings.find((el) => el.uuid === value.uuid);
-      rating.points = value.points;*/
+      var rating = this.ratings.find(function (el) {
+        return el.uuid === value.uuid;
+      });
+      rating.points = value.points;
     }
   },
   mounted: function mounted() {
-    // Adaptar para arrays de 2 dimensiones
+    this.usingCriterion = _objectSpread({}, this.criterion);
+
     if (this.old !== null && this.old !== undefined) {
       if (this.old.ratingtitle) {
         var uuids = Object.keys(this.old.ratingtitle[this.uuid]);
@@ -2496,6 +2506,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -2563,16 +2579,21 @@ __webpack_require__.r(__webpack_exports__);
       required: true
     }
   },
+  data: function data() {
+    return {
+      usingRating: {}
+    };
+  },
   mounted: function mounted() {
-    console.log("funciona RubricRatingForm", this.uuid);
+    this.usingRating = _objectSpread({}, this.rating);
   },
   methods: {
     passPoints: function passPoints(e) {
-      /*const points = parseFloat(e.target.value.replace(',', '.'));
+      var points = parseFloat(e.target.value.replace(',', '.'));
       this.$emit('points', {
-          uuid: this.rating.uuid,
-          points: points
-      });*/
+        uuid: this.rating.uuid,
+        points: points
+      });
     }
   }
 });
@@ -43838,150 +43859,177 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.criterion
-    ? _c(
-        "div",
-        { staticClass: "criterion" },
-        [
-          _c("div", { staticClass: "row" }, [
-            _c(
-              "div",
-              { staticClass: "col-sm-12" },
-              [
-                _vm._v("\n      Criteria points: "),
-                _c("strong", [_vm._v(_vm._s(_vm.totalPoints))]),
-                _vm._v(" "),
-                _vm._t("default")
-              ],
-              2
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group row" }, [
-            _c(
-              "label",
-              {
-                staticClass: "col-sm-3 col-form-label",
-                attrs: { for: "criteriatitle[" + _vm.uuid + "]" }
-              },
-              [
-                _vm._v("Criteria title "),
-                _c("i", { staticClass: "far fa-edit" })
-              ]
-            ),
+  return _c(
+    "div",
+    { staticClass: "criterion" },
+    [
+      _c("div", { staticClass: "row" }, [
+        _c(
+          "div",
+          { staticClass: "col-sm-12" },
+          [
+            _vm._v("\n      Criteria points: "),
+            _c("strong", [_vm._v(_vm._s(_vm.totalPoints))]),
             _vm._v(" "),
-            _c("div", { staticClass: "col-sm-9" }, [
-              _c("input", {
-                staticClass: "form-control",
-                attrs: {
-                  type: "text",
-                  required: "",
-                  id: "criteriatitle[" + _vm.uuid + "]",
-                  name: "criteriatitle[" + _vm.uuid + "]"
-                },
-                domProps: { value: _vm.criterion.title }
-              })
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group row" }, [
-            _c(
-              "label",
+            _vm._t("default")
+          ],
+          2
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group row" }, [
+        _c(
+          "label",
+          {
+            staticClass: "col-sm-3 col-form-label",
+            attrs: { for: "criteriatitle[" + _vm.uuid + "]" }
+          },
+          [_vm._v("Criteria title "), _c("i", { staticClass: "far fa-edit" })]
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-sm-9" }, [
+          _c("input", {
+            directives: [
               {
-                staticClass: "col-sm-3 col-form-label",
-                attrs: { for: "criteriadescription[" + _vm.uuid + "]" }
-              },
-              [
-                _vm._v("Criteria description "),
-                _c("i", { staticClass: "far fa-edit" })
-              ]
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-sm-9" }, [
-              _c("input", {
-                staticClass: "form-control",
-                attrs: {
-                  type: "text",
-                  required: "",
-                  id: "criteriadescription[" + _vm.uuid + "]",
-                  name: "criteriadescription[" + _vm.uuid + "]"
-                },
-                domProps: { value: _vm.criterion.description }
-              })
-            ])
-          ]),
-          _vm._v(" "),
-          _c("hr"),
-          _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-primary btn-sm float-right",
-              attrs: { type: "button" },
-              on: { click: _vm.addRating }
+                name: "model",
+                rawName: "v-model",
+                value: _vm.usingCriterion.title,
+                expression: "usingCriterion.title"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: {
+              type: "text",
+              required: "",
+              id: "criteriatitle[" + _vm.uuid + "]",
+              name: "criteriatitle[" + _vm.uuid + "]"
             },
-            [
-              _c("i", { staticClass: "far fa-plus-square" }),
-              _vm._v(" Add rating\n  ")
-            ]
-          ),
-          _vm._v(" "),
-          _c("h3", { staticClass: "h5" }, [
-            _vm._v("Edit rating titles and points")
-          ]),
-          _vm._v(" "),
-          _vm.ratings.length == 0
-            ? _c(
-                "div",
-                { staticClass: "alert alert-info", attrs: { role: "alert" } },
-                [
-                  _vm._v(
-                    "\n    There are no ratings for this criterion. Feel free to append one clicking\n    "
-                  ),
-                  _c("em", [_vm._v('"Add rating"')]),
-                  _vm._v(" button.\n  ")
-                ]
-              )
-            : _c("p", [
-                _vm._v("\n    There are\n    "),
-                _c("strong", { staticClass: "text-primary" }, [
-                  _vm._v(_vm._s(_vm.ratings.length))
-                ]),
-                _vm._v(" ratings for\n    this criterion.\n  ")
-              ]),
-          _vm._v(" "),
-          _vm._l(_vm.ratings, function(rating) {
-            return _c(
-              "rubric-rating-form",
+            domProps: { value: _vm.usingCriterion.title },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.usingCriterion, "title", $event.target.value)
+              }
+            }
+          })
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group row" }, [
+        _c(
+          "label",
+          {
+            staticClass: "col-sm-3 col-form-label",
+            attrs: { for: "criteriadescription[" + _vm.uuid + "]" }
+          },
+          [
+            _vm._v("Criteria description "),
+            _c("i", { staticClass: "far fa-edit" })
+          ]
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-sm-9" }, [
+          _c("input", {
+            directives: [
               {
-                key: rating.uuid,
-                attrs: { rating: rating, uuid: _vm.uuid },
-                on: { points: _vm.pointsEvent }
+                name: "model",
+                rawName: "v-model",
+                value: _vm.usingCriterion.description,
+                expression: "usingCriterion.description"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: {
+              type: "text",
+              required: "",
+              id: "criteriadescription[" + _vm.uuid + "]",
+              name: "criteriadescription[" + _vm.uuid + "]"
+            },
+            domProps: { value: _vm.usingCriterion.description },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.usingCriterion, "description", $event.target.value)
+              }
+            }
+          })
+        ])
+      ]),
+      _vm._v(" "),
+      _c("hr"),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-primary btn-sm float-right",
+          attrs: { type: "button" },
+          on: { click: _vm.addRating }
+        },
+        [
+          _c("i", { staticClass: "far fa-plus-square" }),
+          _vm._v(" Add rating\n  ")
+        ]
+      ),
+      _vm._v(" "),
+      _c("h3", { staticClass: "h5" }, [
+        _vm._v("Edit rating titles and points")
+      ]),
+      _vm._v(" "),
+      _vm.ratings.length == 0
+        ? _c(
+            "div",
+            { staticClass: "alert alert-info", attrs: { role: "alert" } },
+            [
+              _vm._v(
+                "\n    There are no ratings for this criterion. Feel free to append one clicking\n    "
+              ),
+              _c("em", [_vm._v('"Add rating"')]),
+              _vm._v(" button.\n  ")
+            ]
+          )
+        : _c("p", [
+            _vm._v("\n    There are\n    "),
+            _c("strong", { staticClass: "text-primary" }, [
+              _vm._v(_vm._s(_vm.ratings.length))
+            ]),
+            _vm._v(" ratings for\n    this criterion.\n  ")
+          ]),
+      _vm._v(" "),
+      _vm._l(_vm.ratings, function(rating) {
+        return _c(
+          "rubric-rating-form",
+          {
+            key: rating.uuid,
+            attrs: { rating: rating, uuid: _vm.uuid },
+            on: { points: _vm.pointsEvent }
+          },
+          [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-primary btn-sm",
+                attrs: { type: "button" },
+                on: {
+                  click: function($event) {
+                    return _vm.deleteRating(rating.uuid)
+                  }
+                }
               },
               [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-primary btn-sm",
-                    attrs: { type: "button" },
-                    on: {
-                      click: function($event) {
-                        return _vm.deleteRating(rating.uuid)
-                      }
-                    }
-                  },
-                  [
-                    _c("i", { staticClass: "fas fa-trash" }),
-                    _vm._v(" Remove this rating\n    ")
-                  ]
-                )
+                _c("i", { staticClass: "fas fa-trash" }),
+                _vm._v(" Remove this rating\n    ")
               ]
             )
-          })
-        ],
-        2
-      )
-    : _vm._e()
+          ]
+        )
+      })
+    ],
+    2
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -44006,99 +44054,93 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.old
-    ? _c(
-        "div",
-        { staticClass: "RubricForm" },
+  return _c(
+    "div",
+    { staticClass: "RubricForm" },
+    [
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-sm-12" }, [
+          _vm._v(
+            "\n            Rubric total points: " +
+              _vm._s(_vm.totalPoints) +
+              "\n        "
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _vm._m(0),
+      _vm._v(" "),
+      _c("hr", { staticClass: "hr" }),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-primary btn-sm float-right",
+          attrs: { type: "button" },
+          on: { click: _vm.addCriterion }
+        },
         [
-          _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-sm-12" }, [
-              _vm._v(
-                "\n            Rubric total points: " +
-                  _vm._s(_vm.totalPoints) +
-                  "\n        "
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _vm._m(0),
-          _vm._v(" "),
-          _c("hr", { staticClass: "hr" }),
-          _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-primary btn-sm float-right",
-              attrs: { type: "button" },
-              on: { click: _vm.addCriterion }
-            },
+          _c("i", { staticClass: "far fa-plus-square" }),
+          _vm._v(" Add criterion\n    ")
+        ]
+      ),
+      _vm._v(" "),
+      _c("h2", { staticClass: "h4" }, [_vm._v("Criteria")]),
+      _vm._v(" "),
+      _vm.criteria.length == 0
+        ? _c(
+            "div",
+            { staticClass: "alert alert-info", attrs: { role: "alert" } },
             [
-              _c("i", { staticClass: "far fa-plus-square" }),
-              _vm._v(" Add criterion\n    ")
+              _vm._v(
+                "\n        There are no criteria for this rubric. Feel free to append one clicking "
+              ),
+              _c("em", [_vm._v('"Add criterion"')]),
+              _vm._v(" button.\n    ")
             ]
-          ),
-          _vm._v(" "),
-          _c("h2", { staticClass: "h4" }, [_vm._v("Criteria")]),
-          _vm._v(" "),
-          _vm.criteria.length == 0
-            ? _c(
-                "div",
-                { staticClass: "alert alert-info", attrs: { role: "alert" } },
-                [
-                  _vm._v(
-                    "\n        There are no criteria for this rubric. Feel free to append one clicking "
-                  ),
-                  _c("em", [_vm._v('"Add criterion"')]),
-                  _vm._v(" button.\n    ")
-                ]
-              )
-            : _c("p", [
-                _vm._v("\n        There are "),
-                _c("strong", { staticClass: "text-primary" }, [
-                  _vm._v(_vm._s(_vm.criteria.length))
-                ]),
-                _vm._v(" criteria for this rubric.\n    ")
-              ]),
-          _vm._v(" "),
-          _vm._l(_vm.criteria, function(criterion) {
-            return _c(
-              "rubric-criteria-form",
+          )
+        : _c("p", [
+            _vm._v("\n        There are "),
+            _c("strong", { staticClass: "text-primary" }, [
+              _vm._v(_vm._s(_vm.criteria.length))
+            ]),
+            _vm._v(" criteria for this rubric.\n    ")
+          ]),
+      _vm._v(" "),
+      _vm._l(_vm.criteria, function(criterion) {
+        return _c(
+          "rubric-criteria-form",
+          {
+            key: criterion.uuid,
+            attrs: { uuid: criterion.uuid, criterion: criterion, old: _vm.old },
+            on: { totalPoints: _vm.criterionPoints }
+          },
+          [
+            _c(
+              "button",
               {
-                key: criterion.uuid,
-                attrs: {
-                  uuid: criterion.uuid,
-                  criterion: criterion,
-                  old: _vm.old
-                },
-                on: { totalPoints: _vm.criterionPoints }
+                staticClass:
+                  "btn btn-warning btn-sm float-right remove-criterion",
+                attrs: { type: "button" },
+                on: {
+                  click: function($event) {
+                    return _vm.deleteCriterion(criterion.uuid)
+                  }
+                }
               },
               [
-                _c(
-                  "button",
-                  {
-                    staticClass:
-                      "btn btn-warning btn-sm float-right remove-criterion",
-                    attrs: { type: "button" },
-                    on: {
-                      click: function($event) {
-                        return _vm.deleteCriterion(criterion.uuid)
-                      }
-                    }
-                  },
-                  [
-                    _c("i", { staticClass: "fas fa-trash" }),
-                    _vm._v(" Remove criterion\n        ")
-                  ]
-                )
+                _c("i", { staticClass: "fas fa-trash" }),
+                _vm._v(" Remove criterion\n        ")
               ]
             )
-          }),
-          _vm._v(" "),
-          _c("pre", [_vm._v(_vm._s(_vm.old))])
-        ],
-        2
-      )
-    : _vm._e()
+          ]
+        )
+      }),
+      _vm._v(" "),
+      _c("pre", [_vm._v(_vm._s(_vm.old))])
+    ],
+    2
+  )
 }
 var staticRenderFns = [
   function() {
@@ -44144,120 +44186,136 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.rating
-    ? _c("div", { staticClass: "rating" }, [
-        _c("div", { staticClass: "form-group row" }, [
-          _c("aside", { staticClass: "col-sm-12" }, [_vm._t("default")], 2)
-        ]),
-        _vm._v(" "),
-        _vm.rating
-          ? _c("div", { staticClass: "form-group row" }, [
-              _c(
-                "label",
-                {
-                  staticClass: "col-sm-2 col-form-label",
-                  attrs: {
-                    for:
-                      "ratingtitle[" + _vm.uuid + "][" + _vm.rating.uuid + "]"
-                  }
-                },
-                [_vm._v("Rating title")]
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-sm-6" }, [
-                _c("input", {
-                  staticClass: "form-control",
-                  attrs: {
-                    required: "",
-                    type: "text",
-                    id:
-                      "ratingtitle[" + _vm.uuid + "][" + _vm.rating.uuid + "]",
-                    name:
-                      "ratingtitle[" + _vm.uuid + "][" + _vm.rating.uuid + "]"
-                  },
-                  domProps: { value: _vm.rating.title }
-                })
-              ]),
-              _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass: "col-sm-2 col-form-label text-sm-right",
-                  attrs: { for: "ratingpoints[" + _vm.rating.uuid + "]" }
-                },
-                [_vm._v("Rating points")]
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-sm-2" }, [
-                _c("input", {
-                  staticClass: "form-control",
-                  attrs: {
-                    type: "number",
-                    required: "",
-                    id:
-                      "ratingpoints[" + _vm.uuid + "][" + _vm.rating.uuid + "]",
-                    name:
-                      "ratingpoints[" + _vm.uuid + "][" + _vm.rating.uuid + "]",
-                    min: "0",
-                    step: "0.5"
-                  },
-                  domProps: { value: _vm.rating.points },
-                  on: { change: _vm.passPoints }
-                })
-              ])
-            ])
-          : _vm._e(),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group row" }, [
-          _c(
-            "label",
+  return _c("div", { staticClass: "rating" }, [
+    _c("div", { staticClass: "form-group row" }, [
+      _c("aside", { staticClass: "col-sm-12" }, [_vm._t("default")], 2)
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "form-group row" }, [
+      _c(
+        "label",
+        {
+          staticClass: "col-sm-2 col-form-label",
+          attrs: {
+            for: "ratingtitle[" + _vm.uuid + "][" + _vm.rating.uuid + "]"
+          }
+        },
+        [_vm._v("Rating title")]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-sm-6" }, [
+        _c("input", {
+          directives: [
             {
-              staticClass: "col-sm-2 col-form-label",
-              attrs: {
-                for:
-                  "ratingdescription[" + _vm.uuid + "][" + _vm.rating.uuid + "]"
+              name: "model",
+              rawName: "v-model",
+              value: _vm.usingRating.title,
+              expression: "usingRating.title"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: {
+            required: "",
+            type: "text",
+            id: "ratingtitle[" + _vm.uuid + "][" + _vm.rating.uuid + "]",
+            name: "ratingtitle[" + _vm.uuid + "][" + _vm.rating.uuid + "]"
+          },
+          domProps: { value: _vm.usingRating.title },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
               }
-            },
-            [_vm._v("\n      Rating description\n    ")]
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-sm-10" }, [
-            _c("textarea", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.rating.description,
-                  expression: "rating.description"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: {
-                rows: "2",
-                required: "",
-                id:
-                  "ratingdescription[" +
-                  _vm.uuid +
-                  "][" +
-                  _vm.rating.uuid +
-                  "]",
-                name:
-                  "ratingdescription[" + _vm.uuid + "][" + _vm.rating.uuid + "]"
-              },
-              domProps: { value: _vm.rating.description },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.rating, "description", $event.target.value)
-                }
+              _vm.$set(_vm.usingRating, "title", $event.target.value)
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c(
+        "label",
+        {
+          staticClass: "col-sm-2 col-form-label text-sm-right",
+          attrs: { for: "ratingpoints[" + _vm.rating.uuid + "]" }
+        },
+        [_vm._v("Rating points")]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-sm-2" }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.usingRating.points,
+              expression: "usingRating.points"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: {
+            type: "number",
+            required: "",
+            id: "ratingpoints[" + _vm.uuid + "][" + _vm.rating.uuid + "]",
+            name: "ratingpoints[" + _vm.uuid + "][" + _vm.rating.uuid + "]",
+            min: "0",
+            step: "0.5"
+          },
+          domProps: { value: _vm.usingRating.points },
+          on: {
+            change: _vm.passPoints,
+            input: function($event) {
+              if ($event.target.composing) {
+                return
               }
-            })
-          ])
-        ])
+              _vm.$set(_vm.usingRating, "points", $event.target.value)
+            }
+          }
+        })
       ])
-    : _vm._e()
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "form-group row" }, [
+      _c(
+        "label",
+        {
+          staticClass: "col-sm-2 col-form-label",
+          attrs: {
+            for: "ratingdescription[" + _vm.uuid + "][" + _vm.rating.uuid + "]"
+          }
+        },
+        [_vm._v("\n      Rating description\n    ")]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-sm-10" }, [
+        _c("textarea", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.usingRating.description,
+              expression: "usingRating.description"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: {
+            rows: "2",
+            required: "",
+            id: "ratingdescription[" + _vm.uuid + "][" + _vm.rating.uuid + "]",
+            name: "ratingdescription[" + _vm.uuid + "][" + _vm.rating.uuid + "]"
+          },
+          domProps: { value: _vm.usingRating.description },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.usingRating, "description", $event.target.value)
+            }
+          }
+        })
+      ])
+    ])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true

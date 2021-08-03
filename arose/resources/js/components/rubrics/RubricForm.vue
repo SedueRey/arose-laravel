@@ -1,5 +1,5 @@
 <template>
-<div class="RubricForm" v-if="old">
+<div class="RubricForm">
     <div class="row">
         <div class="col-sm-12">
             Rubric total points: {{ totalPoints }}
@@ -60,6 +60,7 @@ export default {
     },
     computed: {
       totalPoints() {
+        // TO-DO: Comprobar que cuando viene de OLD se transforma a flotante (no lo está haciendo)
         return this.criteria.reduce((a, b) => a + (b.points || 0), 0);
       },
     },
