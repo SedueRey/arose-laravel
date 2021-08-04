@@ -15,7 +15,41 @@ class CreateRubricsTable extends Migration
     {
         Schema::create('rubrics', function (Blueprint $table) {
             $table->id();
+            $table->string('title')->nullable();
+            $table->float('points')->nullable();
             $table->timestamps();
+
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
+
+            $table->index(['title']);
+            $table->index(['points']);
+        });
+
+        Schema::create('criteria', function (Blueprint $table) {
+            $table->id();
+            $table->string('title')->nullable();
+            $table->text('description')->nullable();
+            $table->timestamps();
+
+            $table->index(['title']);
+
+            $table->unsignedBigInteger('rubric_id');
+            $table->foreign('rubric_id')->references('id')->on('rubrics');
+        });
+
+        Schema::create('ratings', function (Blueprint $table) {
+            $table->id();
+            $table->string('title')->nullable();
+            $table->float('points')->nullable();
+            $table->text('description')->nullable();
+            $table->timestamps();
+
+            $table->index(['title']);
+            $table->index(['points']);
+
+            $table->unsignedBigInteger('criterion_id');
+            $table->foreign('criterion_id')->references('id')->on('criteria');
         });
     }
 
@@ -26,6 +60,8 @@ class CreateRubricsTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('ratings');
+        Schema::dropIfExists('criteria');
         Schema::dropIfExists('rubrics');
     }
 }

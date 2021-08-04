@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Rubric;
+use App\Models\Criterion;
+use App\Models\Rating;
 use Illuminate\Http\Request;
 
 class RubricController extends Controller
@@ -36,10 +38,46 @@ class RubricController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'test' => 'required',
+            'rubricTitle' => 'required',
         ]);
+        $criteriaKeys = array_keys($request->criteriatitle);
 
-        dd($request);
+        $rubric = new Rubric;
+        $rubric->title = $request->rubricTitle;
+        $rubric->points = $request->rubricPoints;
+        $rubric->user_id = Auth()->user()->id;
+        $rubric->save();
+
+        for ($i = 0; $i < count($criteriaKeys); $i++) {
+            $key = $criteriaKeys[$i];
+
+            $criterion = new Criterion;
+            $criterion->title = $request->criteriatitle[$key];
+            if ( isset( $request->criteriadescription[$key]) ) {
+                $criterion->description = $request->criteriadescription[$key];
+            } else {
+                $criterion->description = '';
+            }
+            $criterion->rubric_id = $rubric->id;
+            $criterion->save();
+
+            $ratingKeys = array_keys($request->ratingtitle[$key]);
+            for ($j = 0; $j < count($ratingKeys); $j++) {
+                $rkey = $ratingKeys[$j];
+                $rating = new Rating;
+                $rating->title = $request->ratingtitle[$key][$rkey];
+                $rating->points = $request->ratingpoints[$key][$rkey];
+                if( isset( $request->ratingdescription[$key][$rkey] ) ) {
+                    $rating->description = $request->ratingdescription[$key][$rkey];
+                } else {
+                    $rating->description = '';
+                }
+                $rating->criterion_id = $criterion->id;
+                $rating->save();
+            }
+        }
+        // dd(array_values($request->criteriatitle), array_keys($request->criteriatitle), $request);
+        return redirect()->to('home')->with('message', 'Rubric created!');
     }
 
     /**

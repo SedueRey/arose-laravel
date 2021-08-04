@@ -42,7 +42,6 @@
       <div class="col-sm-10">
         <textarea
           rows="2"
-          required
           class="form-control"
           :id="`ratingdescription[${uuid}][${rating.uuid}]`"
           :name="`ratingdescription[${uuid}][${rating.uuid}]`"
@@ -71,6 +70,7 @@ export default {
   methods: {
       passPoints(e) {
           const points = parseFloat(e.target.value.replace(',', '.'));
+          this.usingRating.points = points;
           this.$emit('points', {
               uuid: this.rating.uuid,
               points: points

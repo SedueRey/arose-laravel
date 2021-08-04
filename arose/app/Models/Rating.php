@@ -5,21 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Rubric extends Model
+class Rating extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'title',
+        'description',
         'points',
-        'user_id'
+        'criterion_id'
     ];
 
-    public function user() {
-        return $this->belongsTo(User::class, 'user_id');
-    }
-
-    public function criteria() {
-        return $this->hasMany(Criterion::class);
+    public function criterion() {
+        return $this->belongsTo(Criterion::class, 'criterion_id');
     }
 }

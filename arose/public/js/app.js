@@ -1924,8 +1924,8 @@ __webpack_require__.r(__webpack_exports__);
       var participationId;
       var convo = this.conversations.find(function (c) {
         return c.id === id;
-      });
-      console.log(convo);
+      }); // console.log(convo);
+
       participationId = convo.participants.find(function (p) {
         return p.id == window.participant.id;
       }).participation[0]["id"];
@@ -2179,8 +2179,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  mounted: function mounted() {
-    console.log('Component mounted.');
+  mounted: function mounted() {// console.log('Component mounted.')
   }
 });
 
@@ -2205,7 +2204,6 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-//
 //
 //
 //
@@ -2352,16 +2350,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
         for (var i = 0; i < uuids.length; i++) {
           var uuid = uuids[i];
+          var points = parseFloat(this.old.ratingpoints[this.uuid][uuid].replace(',', '.')) || 0;
           this.ratings.push({
             uuid: uuid,
             title: this.old.ratingtitle[this.uuid][uuid] || '',
             description: this.old.ratingdescription[this.uuid][uuid] || '',
-            points: this.old.ratingpoints[this.uuid][uuid] || 0
+            points: points || 0
           });
-          console.log(this.ratings);
         }
-
-        console.log(uuids);
       }
     }
   }
@@ -2426,6 +2422,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -2439,7 +2442,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      criteria: []
+      criteria: [],
+      rubricTitle: ''
     };
   },
   components: {
@@ -2476,6 +2480,10 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     if (this.old !== null && this.old !== undefined) {
+      if (this.old.rubricTitle) {
+        this.rubricTitle = this.old.rubricTitle;
+      }
+
       if (this.old.criteriatitle) {
         var criteriaUUids = Object.keys(this.old.criteriatitle);
 
@@ -2566,7 +2574,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "RubricRatingForm",
   props: {
@@ -2590,6 +2597,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   methods: {
     passPoints: function passPoints(e) {
       var points = parseFloat(e.target.value.replace(',', '.'));
+      this.usingRating.points = points;
       this.$emit('points', {
         uuid: this.rating.uuid,
         points: points
@@ -43943,7 +43951,6 @@ var render = function() {
             staticClass: "form-control",
             attrs: {
               type: "text",
-              required: "",
               id: "criteriadescription[" + _vm.uuid + "]",
               name: "criteriadescription[" + _vm.uuid + "]"
             },
@@ -44063,12 +44070,64 @@ var render = function() {
           _vm._v(
             "\n            Rubric total points: " +
               _vm._s(_vm.totalPoints) +
-              "\n        "
-          )
+              "\n            "
+          ),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.totalPoints,
+                expression: "totalPoints"
+              }
+            ],
+            attrs: { type: "hidden", name: "rubricPoints", id: "rubricPoints" },
+            domProps: { value: _vm.totalPoints },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.totalPoints = $event.target.value
+              }
+            }
+          })
         ])
       ]),
       _vm._v(" "),
-      _vm._m(0),
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", { attrs: { for: "rubricTitle" } }, [
+          _vm._v("Rubric title")
+        ]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.rubricTitle,
+              expression: "rubricTitle"
+            }
+          ],
+          staticClass: "form-control form-control-sm",
+          attrs: {
+            type: "text",
+            id: "rubricTitle",
+            name: "rubricTitle",
+            required: "",
+            placeholder: "Add your rubric title"
+          },
+          domProps: { value: _vm.rubricTitle },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.rubricTitle = $event.target.value
+            }
+          }
+        })
+      ]),
       _vm._v(" "),
       _c("hr", { staticClass: "hr" }),
       _vm._v(" "),
@@ -44135,35 +44194,12 @@ var render = function() {
             )
           ]
         )
-      }),
-      _vm._v(" "),
-      _c("pre", [_vm._v(_vm._s(_vm.old))])
+      })
     ],
     2
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("label", { attrs: { for: "rubricTitle" } }, [_vm._v("Rubric title")]),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "form-control form-control-sm",
-        attrs: {
-          type: "text",
-          id: "rubricTitle",
-          name: "rubricTitle",
-          value: "",
-          required: "",
-          placeholder: "Add your rubric title"
-        }
-      })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -44299,7 +44335,6 @@ var render = function() {
           staticClass: "form-control",
           attrs: {
             rows: "2",
-            required: "",
             id: "ratingdescription[" + _vm.uuid + "][" + _vm.rating.uuid + "]",
             name: "ratingdescription[" + _vm.uuid + "][" + _vm.rating.uuid + "]"
           },

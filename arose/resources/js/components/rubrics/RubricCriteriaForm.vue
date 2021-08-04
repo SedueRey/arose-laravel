@@ -30,7 +30,6 @@
       <div class="col-sm-9">
         <input
           type="text"
-          required
           class="form-control"
           :id="`criteriadescription[${uuid}]`"
           :name="`criteriadescription[${uuid}]`"
@@ -96,7 +95,9 @@ export default {
   },
   computed: {
     totalPoints() {
-      const total = this.ratings.reduce((a, b) => a + (b.points || 0), 0);
+      const total = this.ratings.reduce(
+        (a, b) => a + (b.points || 0), 0
+      );
       this.$emit("totalPoints", {
         uuid: this.uuid,
         points: total,
@@ -132,18 +133,18 @@ export default {
 
             for(let i = 0; i < uuids.length; i++) {
                 const uuid = uuids[i];
+                const points = (
+                    parseFloat(this.old.ratingpoints[this.uuid][uuid].replace(',', '.')) || 0
+                );
                 this.ratings.push(
                 {
                     uuid: uuid,
                     title: (this.old.ratingtitle[this.uuid][uuid] || ''),
                     description: (this.old.ratingdescription[this.uuid][uuid] || ''),
-                    points: (this.old.ratingpoints[this.uuid][uuid] || 0),
+                    points: (points || 0),
                 }
                 );
-                console.log(this.ratings);
             }
-
-            console.log(uuids);
         }
     }
   },

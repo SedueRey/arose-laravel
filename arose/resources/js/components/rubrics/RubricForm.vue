@@ -3,11 +3,19 @@
     <div class="row">
         <div class="col-sm-12">
             Rubric total points: {{ totalPoints }}
+            <input type="hidden" name="rubricPoints" id="rubricPoints" v-model="totalPoints" />
         </div>
     </div>
     <div class="form-group">
         <label for="rubricTitle">Rubric title</label>
-        <input type="text" class="form-control form-control-sm" id="rubricTitle" name="rubricTitle" value="" required placeholder="Add your rubric title">
+        <input
+            type="text"
+            class="form-control form-control-sm"
+            id="rubricTitle"
+            name="rubricTitle"
+            v-model="rubricTitle"
+            required placeholder="Add your rubric title"
+        >
     </div>
     <hr class="hr" />
     <button
@@ -39,7 +47,6 @@
             <i class="fas fa-trash"></i> Remove criterion
         </button>
     </rubric-criteria-form>
-    <pre>{{ old }}</pre>
 </div>
 </template>
 <script>
@@ -53,6 +60,7 @@ export default {
     data() {
         return {
             criteria: [],
+            rubricTitle: '',
         }
     },
     components: {
@@ -60,7 +68,6 @@ export default {
     },
     computed: {
       totalPoints() {
-        // TO-DO: Comprobar que cuando viene de OLD se transforma a flotante (no lo está haciendo)
         return this.criteria.reduce((a, b) => a + (b.points || 0), 0);
       },
     },
@@ -84,6 +91,9 @@ export default {
     },
     mounted() {
         if (this.old !== null && this.old !== undefined) {
+            if (this.old.rubricTitle) {
+                this.rubricTitle = this.old.rubricTitle;
+            }
             if (this.old.criteriatitle) {
                 const criteriaUUids = Object.keys(this.old.criteriatitle);
                 for(let i = 0; i < criteriaUUids.length; i++) {

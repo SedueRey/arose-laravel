@@ -55,4 +55,8 @@ class User extends Authenticatable
     public function students() {
         return $this->hasMany(Student::class);
     }
+
+    public function rubrics() {
+        return $this->hasMany(Rubric::class);
+    }
 }
