@@ -8,6 +8,9 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Arr;
 
+use App\Models\Resources;
+use App\Models\Rubric;
+
 class HomeController extends Controller
 {
     /**
@@ -21,7 +24,13 @@ class HomeController extends Controller
     }
 
     public function home(){
-        return view('home');
+        $resources = Resources::count();
+        $rubrics = Rubric::count();
+        $stats = [
+            'resources' => $resources,
+            'rubrics' => $rubrics,
+        ];
+        return view('home', $stats);
     }
 
     public function chat()

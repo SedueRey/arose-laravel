@@ -60,11 +60,14 @@ $photo = $user->photo;
             </div>
             <div class="row">
                 <div class="col-sm-4 py-3">
-                    <a href="#" class="card">
+                    <a href="/rubrics" class="card">
                         <div class="card-body text-center">
                             <h1 class="p-3 text-info"><i class="fa fa-2x fa-signature"></i></h1>
                         </div>
-                        <div class="card-footer text-center">0 Rubrics</div>
+                        <div class="card-footer text-center">
+                            {{$rubrics}} Rubrics,
+                            {{$user->rubrics()->count()}} mine
+                        </div>
                     </a>
                 </div>
                 <div class="col-sm-4 py-3">
@@ -80,7 +83,10 @@ $photo = $user->photo;
                         <div class="card-body text-center">
                             <h1 class="p-3 text-success"><i class="fa fa-2x fa-folder"></i></h1>
                         </div>
-                        <div class="card-footer text-center">{{$user->resources()->count()}} Resources</div>
+                        <div class="card-footer text-center">
+                            {{$resources}} Resources,
+                            {{$user->resources()->count()}} mine
+                        </div>
                     </a>
                 </div>
             </div>

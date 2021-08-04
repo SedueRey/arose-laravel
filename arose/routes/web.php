@@ -47,6 +47,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::delete('/resources/delete/{id}', [ResourcesController::class, 'destroy'])->name('destroyResource');
 
     Route::get('/rubrics', [RubricController::class, 'index'])->name('rubrics');
+    Route::get('/rubrics/show/{id}', [RubricController::class, 'show'])->name('showRubric');
+    Route::get('/rubrics/new', [RubricController::class, 'create'])->name('createRubric');
     Route::post('/rubrics/store', [RubricController::class, 'store'])->name('storeRubric');
 
     Route::get('/home', [HomeController::class, 'home'])->name('home');
