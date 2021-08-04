@@ -128,14 +128,14 @@ export default {
   mounted() {
     this.usingCriterion = {...this.criterion};
     if (this.old !== null && this.old !== undefined) {
-        if (this.old.ratingtitle) {
-            const uuids = Object.keys(this.old.ratingtitle[this.uuid]);
-
+        if (this.old.ratingtitle && this.old.ratingtitle[this.uuid]) {
+            const uuids = Object.keys(this.old.ratingtitle[this.uuid]) || [];
             for(let i = 0; i < uuids.length; i++) {
                 const uuid = uuids[i];
-                const points = (
+                const prePoints = this.old.ratingpoints[this.uuid][uuid];
+                const points = isNaN(prePoints) ? (
                     parseFloat(this.old.ratingpoints[this.uuid][uuid].replace(',', '.')) || 0
-                );
+                ) : prePoints;
                 this.ratings.push(
                 {
                     uuid: uuid,

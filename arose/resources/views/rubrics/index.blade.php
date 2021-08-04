@@ -1,7 +1,9 @@
 @extends('layouts.app')
 
+@php
+$user = \Auth::user();
+@endphp
 @section('content')
-
 <div class="container bootstrap snippet">
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
@@ -30,11 +32,11 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Title</th>
-                <th>Points</th>
-                <th>Criteria</th>
-                <th>Used in gradings</th>
-                <th>Actions</th>
+                <th class="text-nowrap">Title</th>
+                <th class="text-nowrap">Points</th>
+                <th class="text-nowrap">Criteria</th>
+                <th class="text-nowrap">Used in gradings</th>
+                <th class="text-right">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -45,16 +47,26 @@
                         {{$data->title}}
                     </a>
                 </td>
-                <td>{{$data->points}}</td>
-                <td>{{count($data->criteria)}}</td>
-                <td>0 times</td>
-                <td>
+                <td class="text-nowrap">{{$data->points}}</td>
+                <td class="text-nowrap">{{count($data->criteria)}}</td>
+                <td class="text-nowrap">0 times</td>
+                <td class="text-right">
                     <a href="/rubrics/show/{{$data->id}}" class="btn btn-light btn-sm">
                         <i class="fa fa-eye"></i> View
                     </a>
+                    @if ($user->id === $data->user_id)
                     <a href="/rubrics/edit/{{$data->id}}" class="btn btn-light btn-sm">
                         <i class="fa fa-edit"></i> Edit
                     </a>
+                    @endif
+                    <a href="/rubrics/duplicate/{{$data->id}}" class="btn btn-light btn-sm">
+                        <i class="fa fa-copy"></i> Duplicate
+                    </a>
+                    @if ($user->id === $data->user_id)
+                    <a href="/rubrics/delete/{{$data->id}}" class="btn btn-light btn-sm">
+                        <i class="fa fa-trash"></i> Delete
+                    </a>
+                    @endif
                 </td>
             </tr>
         @endforeach

@@ -11,14 +11,14 @@ $user = \Auth::user();
           <li class="breadcrumb-item"><a href="/">Arose project</a></li>
           <li class="breadcrumb-item"><a href="/home">Dashboard</a></li>
           <li class="breadcrumb-item"><a href="/rubrics">My Rubrics</a></li>
-          <li class="breadcrumb-item active" aria-current="page">Create Rubric</li>
+          <li class="breadcrumb-item active" aria-current="page">Edit Rubric</li>
         </ol>
     </nav>
-    <form method="POST" action="{{route('storeRubric')}}">
+    <form method="POST" action="{{route('updateRubric', ['id' => $rubric['id']])}}">
         @csrf
-        <h1 class="h3">Create Rubric</h1>
-        <rubric-form :old="{{ json_encode(Session::getOldInput(), JSON_FORCE_OBJECT) }}"></rubric-form>
-        <button class="btn btn-primary btn-sm" type="submit">Save rubric</button>
+        <h1 class="h3">Edit Rubric</h1>
+        <rubric-form :old="{{ json_encode($rubric) }}"></rubric-form>
+        <button class="btn btn-primary btn-sm" type="submit">Edit rubric</button>
     </form>
 </div>
 @endsection

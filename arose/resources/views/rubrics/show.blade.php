@@ -1,7 +1,9 @@
 @extends('layouts.app')
 
+@php
+$user = \Auth::user();
+@endphp
 @section('content')
-
 <div class="container bootstrap snippet">
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
@@ -55,6 +57,19 @@
             </li>
             @endforeach
         </ul>
+        @endif
+        @if ($user->id === $rubric->user_id)
+        <nav class="py-5">
+            <a href="/rubrics/edit/{{$rubric->id}}" class="btn btn-primary btn-sm">
+                <i class="fa fa-edit"></i> Edit
+            </a>
+            <a href="/rubrics/duplicate/{{$rubric->id}}" class="btn btn-light btn-sm  mr-5">
+                <i class="fa fa-copy"></i> Duplicate
+            </a>
+            <a href="/rubrics/delete/{{$rubric->id}}" class="btn btn-light btn-sm">
+                <i class="fa fa-trash"></i> Delete
+            </a>
+        </nav>
         @endif
     </section>
 </div>

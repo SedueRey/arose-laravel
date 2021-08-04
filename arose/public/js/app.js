@@ -2345,12 +2345,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     this.usingCriterion = _objectSpread({}, this.criterion);
 
     if (this.old !== null && this.old !== undefined) {
-      if (this.old.ratingtitle) {
-        var uuids = Object.keys(this.old.ratingtitle[this.uuid]);
+      if (this.old.ratingtitle && this.old.ratingtitle[this.uuid]) {
+        var uuids = Object.keys(this.old.ratingtitle[this.uuid]) || [];
 
         for (var i = 0; i < uuids.length; i++) {
           var uuid = uuids[i];
-          var points = parseFloat(this.old.ratingpoints[this.uuid][uuid].replace(',', '.')) || 0;
+          var prePoints = this.old.ratingpoints[this.uuid][uuid];
+          var points = isNaN(prePoints) ? parseFloat(this.old.ratingpoints[this.uuid][uuid].replace(',', '.')) || 0 : prePoints;
           this.ratings.push({
             uuid: uuid,
             title: this.old.ratingtitle[this.uuid][uuid] || '',

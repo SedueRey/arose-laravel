@@ -51,42 +51,46 @@ class RubricController extends Controller
         $validated = $request->validate([
             'rubricTitle' => 'required',
         ]);
-        $criteriaKeys = array_keys($request->criteriatitle);
+        if (isset($request->criteriatitle)) {
+            $criteriaKeys = array_keys($request->criteriatitle);
 
-        $rubric = new Rubric;
-        $rubric->title = $request->rubricTitle;
-        $rubric->points = $request->rubricPoints;
-        $rubric->user_id = Auth()->user()->id;
-        $rubric->save();
+            $rubric = new Rubric;
+            $rubric->title = $request->rubricTitle;
+            $rubric->points = $request->rubricPoints;
+            $rubric->user_id = Auth()->user()->id;
+            $rubric->save();
 
-        for ($i = 0; $i < count($criteriaKeys); $i++) {
-            $key = $criteriaKeys[$i];
+            for ($i = 0; $i < count($criteriaKeys); $i++) {
+                $key = $criteriaKeys[$i];
 
-            $criterion = new Criterion;
-            $criterion->title = $request->criteriatitle[$key];
-            if ( isset( $request->criteriadescription[$key]) ) {
-                $criterion->description = $request->criteriadescription[$key];
-            } else {
-                $criterion->description = '';
-            }
-            $criterion->rubric_id = $rubric->id;
-            $criterion->save();
-
-            $ratingKeys = array_keys($request->ratingtitle[$key]);
-            for ($j = 0; $j < count($ratingKeys); $j++) {
-                $rkey = $ratingKeys[$j];
-                $rating = new Rating;
-                $rating->title = $request->ratingtitle[$key][$rkey];
-                $rating->points = $request->ratingpoints[$key][$rkey];
-                if( isset( $request->ratingdescription[$key][$rkey] ) ) {
-                    $rating->description = $request->ratingdescription[$key][$rkey];
+                $criterion = new Criterion;
+                $criterion->title = $request->criteriatitle[$key];
+                if ( isset( $request->criteriadescription[$key]) ) {
+                    $criterion->description = $request->criteriadescription[$key];
                 } else {
-                    $rating->description = '';
+                    $criterion->description = '';
                 }
-                $rating->criterion_id = $criterion->id;
-                $rating->save();
+                $criterion->rubric_id = $rubric->id;
+                $criterion->save();
+                if (isset($request->ratingtitle[$key])) {
+                    $ratingKeys = array_keys($request->ratingtitle[$key]);
+                    for ($j = 0; $j < count($ratingKeys); $j++) {
+                        $rkey = $ratingKeys[$j];
+                        $rating = new Rating;
+                        $rating->title = $request->ratingtitle[$key][$rkey];
+                        $rating->points = $request->ratingpoints[$key][$rkey];
+                        if( isset( $request->ratingdescription[$key][$rkey] ) ) {
+                            $rating->description = $request->ratingdescription[$key][$rkey];
+                        } else {
+                            $rating->description = '';
+                        }
+                        $rating->criterion_id = $criterion->id;
+                        $rating->save();
+                    }
+                }
             }
         }
+
         // dd(array_values($request->criteriatitle), array_keys($request->criteriatitle), $request);
         return redirect()->to('home')->with('message', 'Rubric created!');
     }
@@ -117,9 +121,43 @@ class RubricController extends Controller
      * @param  \App\Models\Rubric  $rubric
      * @return \Illuminate\Http\Response
      */
-    public function edit(Rubric $rubric)
+    public function edit($id)
     {
-        //
+        $rubric = Rubric::with('criteria.ratings')->findOrFail($id);
+        if (
+            ($rubric->user_id !== Auth()->user()->id) &&
+            Auth()->user()->isadmin == false
+        ) {
+            abort(403, 'PERMISSION DENIED… YOU DIDN’T SAY THE MAGIC WORD!');
+        }
+        $rubricFormData = [
+            'id' => $rubric->id,
+            'rubricTitle' => $rubric->title,
+            'rubricPoints' => $rubric->points,
+            'criteriatitle' => [],
+            'criteriadescription' => [],
+            'ratingtitle' => [],
+            'ratingpoints' => [],
+            'ratingdescription' => [],
+        ];
+        foreach ($rubric->criteria as $criterion) {
+            $rubricFormData['criteriatitle'][$criterion->id] = $criterion->title;
+            $rubricFormData['criteriadescription'][$criterion->id] = $criterion->description;
+            if (count($criterion->ratings)) {
+                $rubricFormData['ratingtitle'][$criterion->id] = [];
+                $rubricFormData['ratingpoints'][$criterion->id] = [];
+                $rubricFormData['ratingdescription'][$criterion->id] = [];
+                foreach ($criterion->ratings as $rating) {
+                    $rubricFormData['ratingtitle'][$criterion->id][$rating->id] = $rating->title;
+                    $rubricFormData['ratingpoints'][$criterion->id][$rating->id] = $rating->points;
+                    $rubricFormData['ratingdescription'][$criterion->id][$rating->id] = $rating->description;
+                }
+            }
+        }
+        // dd($rubric, $rubricFormData);
+        return view('rubrics.edit', [
+            'rubric' => $rubricFormData
+        ]);
     }
 
     /**
@@ -129,9 +167,93 @@ class RubricController extends Controller
      * @param  \App\Models\Rubric  $rubric
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Rubric $rubric)
+    public function update(Request $request, $id)
     {
-        //
+        $rubric = Rubric::with('criteria.ratings')->findOrFail($id);
+        if (
+            ($rubric->user_id !== Auth()->user()->id) &&
+            Auth()->user()->isadmin == false
+        ) {
+            abort(403, 'PERMISSION DENIED… YOU DIDN’T SAY THE MAGIC WORD!');
+        }
+        $validated = $request->validate([
+            'rubricTitle' => 'required',
+        ]);
+
+        $rubric->title = $request->rubricTitle;
+        $rubric->points = $request->rubricPoints;
+
+
+        foreach ($rubric->criteria as $criterion) {
+            $criterion->ratings->each->delete();
+        }
+        $rubric->criteria->each->delete();
+
+        $rubric->save();
+        if (isset($request->criteriatitle)) {
+            $criteriaKeys = array_keys($request->criteriatitle);
+
+            for ($i = 0; $i < count($criteriaKeys); $i++) {
+                $key = $criteriaKeys[$i];
+
+                $criterion = new Criterion;
+                $criterion->title = $request->criteriatitle[$key];
+                if ( isset( $request->criteriadescription[$key]) ) {
+                    $criterion->description = $request->criteriadescription[$key];
+                } else {
+                    $criterion->description = '';
+                }
+                $criterion->rubric_id = $rubric->id;
+                $criterion->save();
+
+                if (isset($request->ratingtitle[$key])) {
+                    $ratingKeys = array_keys($request->ratingtitle[$key]);
+                    for ($j = 0; $j < count($ratingKeys); $j++) {
+                        $rkey = $ratingKeys[$j];
+                        $rating = new Rating;
+                        $rating->title = $request->ratingtitle[$key][$rkey];
+                        $rating->points = $request->ratingpoints[$key][$rkey];
+                        if( isset( $request->ratingdescription[$key][$rkey] ) ) {
+                            $rating->description = $request->ratingdescription[$key][$rkey];
+                        } else {
+                            $rating->description = '';
+                        }
+                        $rating->criterion_id = $criterion->id;
+                        $rating->save();
+                    }
+                }
+            }
+        }
+
+        return redirect()->route('editRubric', ['id' => $rubric->id])->with('message', 'Rubric edited!');
+    }
+
+    public function duplicate($id) {
+        $fromrubric = Rubric::with('criteria.ratings')->findOrFail($id);
+
+
+
+        $rubric = new Rubric;
+        $rubric->title = 'Copy of '.$fromrubric->title;
+        $rubric->points = $fromrubric->points;
+        $rubric->user_id = Auth()->user()->id;
+        $rubric->save();
+
+        foreach ($fromrubric->criteria as $criterion) {
+            $newcriterion = new Criterion;
+            $newcriterion->title = $criterion->title;
+            $newcriterion->description = $criterion->description;
+            $newcriterion->rubric_id = $rubric->id;
+            $newcriterion->save();
+            foreach ($criterion->ratings as $rating) {
+                $newrating = new Rating;
+                $newrating->title;
+                $newrating->points;
+                $newrating->criterion_id = $newcriterion->id;
+                $newrating->save();
+            }
+        }
+        return redirect()->to('rubrics')->with('message', 'Rubric duplicated!');
     }
 
     /**
@@ -140,8 +262,20 @@ class RubricController extends Controller
      * @param  \App\Models\Rubric  $rubric
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Rubric $rubric)
+    public function destroy($id)
     {
-        //
+        $rubric = Rubric::with('criteria.ratings')->findOrFail($id);
+        if (
+            ($rubric->user_id !== Auth()->user()->id) &&
+            Auth()->user()->isadmin == false
+        ) {
+            abort(403, 'PERMISSION DENIED… YOU DIDN’T SAY THE MAGIC WORD!');
+        }
+        foreach ($rubric->criteria as $criterion) {
+            $criterion->ratings->each->delete();
+        }
+        $rubric->criteria->each->delete();
+        $rubric->delete();
+        return redirect()->to('rubrics')->with('message', 'Rubric deleted!');
     }
 }

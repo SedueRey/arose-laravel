@@ -50,6 +50,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/rubrics/show/{id}', [RubricController::class, 'show'])->name('showRubric');
     Route::get('/rubrics/new', [RubricController::class, 'create'])->name('createRubric');
     Route::post('/rubrics/store', [RubricController::class, 'store'])->name('storeRubric');
+    Route::get('/rubrics/edit/{id}', [RubricController::class, 'edit'])->name('editRubric');
+    Route::get('/rubrics/duplicate/{id}', [RubricController::class, 'duplicate'])->name('duplicateRubric');
+    Route::post('/rubrics/update/{id}', [RubricController::class, 'update'])->name('updateRubric');
+    Route::get('/rubrics/delete/{id}', [RubricController::class, 'destroy'])->name('deleteRubric');
 
     Route::get('/home', [HomeController::class, 'home'])->name('home');
     Route::get('/chat', [HomeController::class, 'chat'])->name('chat');
