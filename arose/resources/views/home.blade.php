@@ -92,11 +92,11 @@ $photo = $user->photo;
             </div>
             <div class="row">
                 <div class="col-sm-12 py-3">
-                    <a href="#" class="card">
+                    <a href="/gradebook" class="card">
                         <div class="card-body text-center">
                             <h1 class="p-3 text-primary"><i class="fas fa-2x fa-sort-numeric-down"></i></h1>
                         </div>
-                        <div class="card-footer text-center">Evaluation card</div>
+                        <div class="card-footer text-center">Evaluation gradebook card</div>
                     </a>
                 </div>
             </div>

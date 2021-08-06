@@ -16,6 +16,11 @@ class Rating extends Model
         'criterion_id'
     ];
 
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
+
     public function criterion() {
         return $this->belongsTo(Criterion::class, 'criterion_id');
     }

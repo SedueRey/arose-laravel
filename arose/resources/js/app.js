@@ -14,6 +14,8 @@ import ChatMessages from './components/ChatMessages';
 import ConversationParticipants from './components/ConversationParticipants';
 import ExampleComponent from './components/ExampleComponent';
 import RubricForm from './components/rubrics/RubricForm';
+import ConfigGrading from './components/gradebook/configGrading/configGrading.vue';
+import StudentGrading from './components/gradebook/studentGrading/studentGrading.vue';
 
 /**
  * The following block of code may be used to automatically register your
@@ -34,6 +36,8 @@ const app = new Vue({
     ChatMessages,
     ConversationParticipants,
     ExampleComponent,
-    RubricForm
+    RubricForm,
+    ConfigGrading,
+    StudentGrading,
   }
 });

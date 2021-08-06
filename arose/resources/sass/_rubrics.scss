@@ -3,6 +3,37 @@
     background: #fbfcfe;
     padding: 1rem;
     margin: 1rem 0;
+    &__title {
+        font-size: 1.25em;
+        margin: 0;
+        padding: 0;
+        // line-height: 1;
+    }
+    &.is-small {
+        font-size: 80%;
+    }
+}
+
+.vuerubric {
+    font-size: 95%;
+    border: 1px solid #ddd;
+    background: white;
+    margin: 0;
+    padding: 0.5rem;
+    &.is-active {
+        border: 1px solid green;
+        background: #d6f5d6;
+    }
+    p {
+        margin: 0;
+        padding: 0;
+    }
+    .criterion {
+        border-left: 0px none;
+        border-right: 0px none;
+        margin: 0.5rem -0.5rem -0.5rem -0.5rem;
+        box-shadow: inset 0 0 0.5rem 0 rgb(200 200 200 / 45%);
+    }
 }
 
 .rating {

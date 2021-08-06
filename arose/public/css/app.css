@@ -10042,6 +10042,36 @@ h3 {
   padding: 1rem;
   margin: 1rem 0;
 }
+.criterion__title {
+  font-size: 1.25em;
+  margin: 0;
+  padding: 0;
+}
+.criterion.is-small {
+  font-size: 80%;
+}
+
+.vuerubric {
+  font-size: 95%;
+  border: 1px solid #ddd;
+  background: white;
+  margin: 0;
+  padding: 0.5rem;
+}
+.vuerubric.is-active {
+  border: 1px solid green;
+  background: #d6f5d6;
+}
+.vuerubric p {
+  margin: 0;
+  padding: 0;
+}
+.vuerubric .criterion {
+  border-left: 0px none;
+  border-right: 0px none;
+  margin: 0.5rem -0.5rem -0.5rem -0.5rem;
+  box-shadow: inset 0 0 0.5rem 0 rgba(200, 200, 200, 0.45);
+}
 
 .rating {
   margin: 1rem 0;

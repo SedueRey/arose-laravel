@@ -7,6 +7,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ResourcesController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\RubricController;
+use App\Http\Controllers\GradebookController;
+use App\Http\Middleware\VerifyCsrfToken;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,6 +56,27 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/rubrics/duplicate/{id}', [RubricController::class, 'duplicate'])->name('duplicateRubric');
     Route::post('/rubrics/update/{id}', [RubricController::class, 'update'])->name('updateRubric');
     Route::get('/rubrics/delete/{id}', [RubricController::class, 'destroy'])->name('deleteRubric');
+
+    /* Gradebook */
+    Route::group(['prefix' => 'gradebook'], function() {
+        // API
+        Route::group(['prefix' => 'api'], function() {
+            Route::get('myself', [GradebookController::class, 'myself']);
+            Route::get('myrubrics', [GradebookController::class, 'myrubrics']);
+            Route::get('mystudents', [GradebookController::class, 'mystudents']);
+            Route::get('aroserubrics', [GradebookController::class, 'aroserubrics']);
+            Route::post('setuserusedrubric', [GradebookController::class, 'setuserusedrubric'])
+                ->withoutMiddleware([VerifyCsrfToken::class]);
+            Route::post('setuserstudentusedrrating', [GradebookController::class, 'setuserstudentusedrrating'])
+                ->withoutMiddleware([VerifyCsrfToken::class]);
+        });
+        // Controladores / Vistas
+        Route::get('/', [GradebookController::class, 'index']);
+        Route::get('config', [GradebookController::class, 'config']);
+    });
+
+
+    /* End gradebook */
 
     Route::get('/home', [HomeController::class, 'home'])->name('home');
     Route::get('/chat', [HomeController::class, 'chat'])->name('chat');

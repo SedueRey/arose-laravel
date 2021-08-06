@@ -59,4 +59,8 @@ class User extends Authenticatable
     public function rubrics() {
         return $this->hasMany(Rubric::class);
     }
+
+    public function usedrubrics() {
+        return $this->hasMany(Usedrubric::class);
+    }
 }
