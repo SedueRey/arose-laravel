@@ -19,10 +19,10 @@ if(!isset($format)) {
           language proficiency for students. You can add your
           own or use existing ones.</p>
     </div>
-    @if (isset($message))
+    @if (session('message'))
     <div class="row">
         <div class="col-md-12 alert alert-info" role="alert">
-            {{ $message }}
+            {{ session('message') }}
         </div>
     </div>
     @endif

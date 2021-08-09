@@ -16,10 +16,10 @@ $user = \Auth::user();
 <div class="px-0 py-0 mx-auto">
     <h1 class="h3">{{ucfirst($rubric->title)}}</h1>
 </div>
-@if (isset($message))
+@if (session('message'))
 <div class="row">
     <div class="col-md-12 alert alert-info" role="alert">
-        {{ $message }}
+        {{ session('message') }}
     </div>
 </div>
 @endif

@@ -26,9 +26,9 @@ $photo = $user->photo;
         Sorry, there are no students yet. You can add one
     </div>
     @else
-    @if (isset($message))
+    @if (session('message'))
     <div class="col-md-12 alert alert-info" role="alert">
-        {{ $message }}
+        {{ session('message') }}
     </div>
     @endif
     <table class="table">

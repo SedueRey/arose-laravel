@@ -24,9 +24,9 @@ $user = \Auth::user();
         Sorry, there are no rubrics yet. You can add one
     </div>
     @endif
-    @if (isset($message))
+    @if (session('message'))
     <div class="col-md-12 alert alert-info" role="alert">
-        {{ $message }}
+        {{ session('message') }}
     </div>
     @endif
     <table class="table">
