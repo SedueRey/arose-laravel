@@ -46,12 +46,14 @@ class StudentController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required',
+            'surname' => 'required',
             'level' => 'required',
             'age' => 'integer',
         ]);
         $instructorId = Auth()->user()->id;
         Student::create([
             'name' => $request->name,
+            'surname' => $request->surname,
             'age' => $request->age,
             'class' => $request->class,
             'group' => $request->group,
@@ -100,6 +102,7 @@ class StudentController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required',
+            'surname' => 'required',
             'level' => 'required',
             'age' => 'integer',
         ]);
@@ -112,6 +115,7 @@ class StudentController extends Controller
             abort(403, 'PERMISSION DENIED… YOU DIDN’T SAY THE MAGIC WORD!');
         }
         $student->name = $request->name;
+        $student->surname = $request->surname;
         $student->age = $request->age;
         $student->class = $request->class;
         $student->level = $request->level;

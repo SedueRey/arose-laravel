@@ -77,7 +77,10 @@ class GradebookController extends Controller
 
     public function mystudents(){
         $user_id = Auth()->user()->id;
-        $myStudents = Student::with('ratings')->where('user_id', $user_id)->orderBy('name')->get();
+        $myStudents = Student::with('ratings')
+            ->where('user_id', $user_id)
+            ->orderBy('surname')
+            ->orderBy('name')->get();
         return response()->json($myStudents);
     }
 

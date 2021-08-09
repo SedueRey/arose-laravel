@@ -10,7 +10,7 @@
                 <span class="btn" v-else><i class="fas fa-chevron-down"></i></span>
             </span>
             <span class="studentrubric__name">
-                <span class="text-primary">{{ student.name }}</span>
+                <span class="text-primary">{{ student.surname }}, {{ student.name }}</span>
                 <small>(English level to grade: {{ student.level }})</small>
             </span>
             <strong class="studentrubric__points">{{points}} / {{ maxPoints }} points</strong>

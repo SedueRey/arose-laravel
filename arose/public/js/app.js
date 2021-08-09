@@ -45177,7 +45177,9 @@ var render = function() {
             _vm._v(" "),
             _c("span", { staticClass: "studentrubric__name" }, [
               _c("span", { staticClass: "text-primary" }, [
-                _vm._v(_vm._s(_vm.student.name))
+                _vm._v(
+                  _vm._s(_vm.student.surname) + ", " + _vm._s(_vm.student.name)
+                )
               ]),
               _vm._v(" "),
               _c("small", [

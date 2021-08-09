@@ -34,7 +34,8 @@ $photo = $user->photo;
     <table class="table">
     <thead>
         <tr>
-            <th>Name</th>
+            <th>Family Name</th>
+            <th>Given Name</th>
             <th>Age</th>
             <th>Class</th>
             <th>Group</th>
@@ -45,6 +46,7 @@ $photo = $user->photo;
     <tbody>
     @foreach($studentData as $data)
         <tr>
+            <td>{{$data->surname}}</td>
             <td>{{$data->name}}</td>
             <td>{{$data->age}}</td>
             <td>{{$data->class}}</td>

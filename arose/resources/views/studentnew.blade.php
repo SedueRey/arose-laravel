@@ -33,10 +33,22 @@ $user = \Auth::user();
                         </ul>
                     </div>
                 @endif
-                <div class="form-group">
-                    <div class="col-xs-6">
+                <div class="form-group row">
+                    <div class="col-md-6">
+                        <label for="surname">
+                            <h4>Family Name*</h4>
+                        </label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            name="surname"
+                            id="surname"
+                            value="{{old('surname')}}"
+                            required>
+                    </div>
+                    <div class="col-md-6">
                         <label for="name">
-                            <h4>Name*</h4>
+                            <h4>Given Name*</h4>
                         </label>
                         <input
                             type="text"
