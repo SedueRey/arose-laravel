@@ -72,6 +72,8 @@ Route::group(['middleware' => ['auth']], function () {
                 ->withoutMiddleware([VerifyCsrfToken::class]);
             Route::post('setuserstudentusedrrating', [GradebookController::class, 'setuserstudentusedrrating'])
                 ->withoutMiddleware([VerifyCsrfToken::class]);
+            Route::post('removeuserstudentusedrrating', [GradebookController::class, 'removeuserstudentusedrrating'])
+                ->withoutMiddleware([VerifyCsrfToken::class]);
         });
         // Controladores / Vistas
         Route::get('/', [GradebookController::class, 'index']);

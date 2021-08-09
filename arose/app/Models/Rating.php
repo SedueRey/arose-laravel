@@ -24,4 +24,8 @@ class Rating extends Model
     public function criterion() {
         return $this->belongsTo(Criterion::class, 'criterion_id');
     }
+
+    public function students() {
+        return $this->belongsToMany(Student::class, 'student_uuid');
+    }
 }

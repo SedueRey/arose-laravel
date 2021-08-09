@@ -13,11 +13,11 @@ class CreateStudentRatingTable extends Migration
      */
     public function up()
     {
-        Schema::create('student_rating', function (Blueprint $table) {
-            $table->uuid('student_uuid');
+        Schema::create('rating_student', function (Blueprint $table) {
+            $table->uuid('student_id');
             $table->unsignedBigInteger('rating_id');
 
-            $table->foreign('student_uuid')->references('id')->on('students');
+            $table->foreign('student_id')->references('id')->on('students');
             $table->foreign('rating_id')->references('id')->on('ratings');
         });
     }
@@ -29,6 +29,6 @@ class CreateStudentRatingTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('student_rating');
+        Schema::dropIfExists('rating_student');
     }
 }

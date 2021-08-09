@@ -54,7 +54,7 @@ class GradebookController extends Controller
 
     public function mystudents(){
         $user_id = Auth()->user()->id;
-        $myStudents = Student::where('user_id', $user_id)->get();
+        $myStudents = Student::with('ratings')->where('user_id', $user_id)->orderBy('name')->get();
         return response()->json($myStudents);
     }
 
@@ -88,6 +88,22 @@ class GradebookController extends Controller
     }
 
     public function setuserstudentusedrrating(Request $request){
-        dd($request);
+        $user_id = Auth()->user()->id;
+        $student = Student::with('ratings')->findOrFail($request->student_id);
+        if ($student->user_id != $user_id) {
+            abort(403, 'PERMISSION DENIED… YOU DIDN’T SAY THE MAGIC WORD!');
+        }
+        $student->ratings()->attach($request->rating_id);
+        return response()->json('ok');
+    }
+
+    public function removeuserstudentusedrrating(Request $request){
+        $user_id = Auth()->user()->id;
+        $student = Student::with('ratings')->findOrFail($request->student_id);
+        if ($student->user_id != $user_id) {
+            abort(403, 'PERMISSION DENIED… YOU DIDN’T SAY THE MAGIC WORD!');
+        }
+        $student->ratings()->detach($request->rating_id);
+        return response()->json('ok');
     }
 }

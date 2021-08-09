@@ -2431,6 +2431,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _StudentGradingStudentArticle_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./StudentGradingStudentArticle.vue */ "./resources/js/components/gradebook/studentGrading/StudentGradingStudentArticle.vue");
 //
 //
 //
@@ -2439,8 +2440,27 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'StudentGrading',
+  components: {
+    StudentGradingStudentArticle: _StudentGradingStudentArticle_vue__WEBPACK_IMPORTED_MODULE_0__.default
+  },
   data: function data() {
     return {
       isLoadedStudents: false,
@@ -2461,6 +2481,183 @@ __webpack_require__.r(__webpack_exports__);
       _this.isLoadedRubricData = true;
       _this.rubrics = response.data;
     });
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/gradebook/studentGrading/StudentGradingRating.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/gradebook/studentGrading/StudentGradingRating.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: 'StudentGradingRating',
+  props: {
+    rating: {
+      type: Object,
+      required: true
+    },
+    student: {
+      type: Object,
+      required: true
+    }
+  },
+  data: function data() {
+    return {
+      isActive: false
+    };
+  },
+  methods: {
+    toggleActive: function toggleActive() {
+      this.isActive = !this.isActive;
+
+      if (this.isActive) {
+        this.$emit('addPoints', this.rating.points);
+        axios.post('/gradebook/api/setuserstudentusedrrating', {
+          student_id: this.student.id,
+          rating_id: this.rating.id
+        }).then(function (response) {
+          console.info(response);
+        });
+      } else {
+        this.$emit('removePoints', this.rating.points);
+        axios.post('/gradebook/api/removeuserstudentusedrrating', {
+          student_id: this.student.id,
+          rating_id: this.rating.id
+        }).then(function (response) {
+          console.info(response);
+        });
+      }
+    }
+  },
+  mounted: function mounted() {}
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/gradebook/studentGrading/StudentGradingStudentArticle.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/gradebook/studentGrading/StudentGradingStudentArticle.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _StudentGradingRating_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./StudentGradingRating.vue */ "./resources/js/components/gradebook/studentGrading/StudentGradingRating.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: 'StudentGradingStudentArticle',
+  components: {
+    StudentGradingRating: _StudentGradingRating_vue__WEBPACK_IMPORTED_MODULE_0__.default
+  },
+  props: {
+    rubrics: {
+      type: Array,
+      required: true
+    },
+    student: {
+      type: Object,
+      required: true
+    }
+  },
+  data: function data() {
+    return {
+      isExpanded: true,
+      points: 0
+    };
+  },
+  computed: {
+    maxPoints: function maxPoints() {
+      if (this.rubrics.length === 0) {
+        return 0;
+      } else {
+        var maprubrics = this.rubrics.map(function (el) {
+          return el.rubric.points;
+        });
+        return maprubrics.reduce(function (a, b) {
+          return a + b;
+        }, 0);
+      }
+    }
+  },
+  methods: {
+    toggleExpand: function toggleExpand() {
+      this.isExpanded = !this.isExpanded;
+    },
+    addPoints: function addPoints(points) {
+      this.points = this.points + points;
+    },
+    removePoints: function removePoints(points) {
+      this.points = this.points - points;
+    }
   }
 });
 
@@ -43459,6 +43656,84 @@ component.options.__file = "resources/js/components/gradebook/studentGrading/Stu
 
 /***/ }),
 
+/***/ "./resources/js/components/gradebook/studentGrading/StudentGradingRating.vue":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/components/gradebook/studentGrading/StudentGradingRating.vue ***!
+  \***********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _StudentGradingRating_vue_vue_type_template_id_6f7b2d3c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./StudentGradingRating.vue?vue&type=template&id=6f7b2d3c& */ "./resources/js/components/gradebook/studentGrading/StudentGradingRating.vue?vue&type=template&id=6f7b2d3c&");
+/* harmony import */ var _StudentGradingRating_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./StudentGradingRating.vue?vue&type=script&lang=js& */ "./resources/js/components/gradebook/studentGrading/StudentGradingRating.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+  _StudentGradingRating_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _StudentGradingRating_vue_vue_type_template_id_6f7b2d3c___WEBPACK_IMPORTED_MODULE_0__.render,
+  _StudentGradingRating_vue_vue_type_template_id_6f7b2d3c___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/gradebook/studentGrading/StudentGradingRating.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/gradebook/studentGrading/StudentGradingStudentArticle.vue":
+/*!*******************************************************************************************!*\
+  !*** ./resources/js/components/gradebook/studentGrading/StudentGradingStudentArticle.vue ***!
+  \*******************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _StudentGradingStudentArticle_vue_vue_type_template_id_ce1d9400___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./StudentGradingStudentArticle.vue?vue&type=template&id=ce1d9400& */ "./resources/js/components/gradebook/studentGrading/StudentGradingStudentArticle.vue?vue&type=template&id=ce1d9400&");
+/* harmony import */ var _StudentGradingStudentArticle_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./StudentGradingStudentArticle.vue?vue&type=script&lang=js& */ "./resources/js/components/gradebook/studentGrading/StudentGradingStudentArticle.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+  _StudentGradingStudentArticle_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _StudentGradingStudentArticle_vue_vue_type_template_id_ce1d9400___WEBPACK_IMPORTED_MODULE_0__.render,
+  _StudentGradingStudentArticle_vue_vue_type_template_id_ce1d9400___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/gradebook/studentGrading/StudentGradingStudentArticle.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/rubrics/RubricCriteriaForm.vue":
 /*!****************************************************************!*\
   !*** ./resources/js/components/rubrics/RubricCriteriaForm.vue ***!
@@ -43704,6 +43979,38 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/gradebook/studentGrading/StudentGradingRating.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************************!*\
+  !*** ./resources/js/components/gradebook/studentGrading/StudentGradingRating.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_StudentGradingRating_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./StudentGradingRating.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/gradebook/studentGrading/StudentGradingRating.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_StudentGradingRating_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
+/***/ "./resources/js/components/gradebook/studentGrading/StudentGradingStudentArticle.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************************************!*\
+  !*** ./resources/js/components/gradebook/studentGrading/StudentGradingStudentArticle.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_StudentGradingStudentArticle_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./StudentGradingStudentArticle.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/gradebook/studentGrading/StudentGradingStudentArticle.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_StudentGradingStudentArticle_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
 /***/ "./resources/js/components/rubrics/RubricCriteriaForm.vue?vue&type=script&lang=js&":
 /*!*****************************************************************************************!*\
   !*** ./resources/js/components/rubrics/RubricCriteriaForm.vue?vue&type=script&lang=js& ***!
@@ -43884,6 +44191,40 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StudentGrading_vue_vue_type_template_id_d8664036___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StudentGrading_vue_vue_type_template_id_d8664036___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./StudentGrading.vue?vue&type=template&id=d8664036& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/gradebook/studentGrading/StudentGrading.vue?vue&type=template&id=d8664036&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/gradebook/studentGrading/StudentGradingRating.vue?vue&type=template&id=6f7b2d3c&":
+/*!******************************************************************************************************************!*\
+  !*** ./resources/js/components/gradebook/studentGrading/StudentGradingRating.vue?vue&type=template&id=6f7b2d3c& ***!
+  \******************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StudentGradingRating_vue_vue_type_template_id_6f7b2d3c___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StudentGradingRating_vue_vue_type_template_id_6f7b2d3c___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StudentGradingRating_vue_vue_type_template_id_6f7b2d3c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./StudentGradingRating.vue?vue&type=template&id=6f7b2d3c& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/gradebook/studentGrading/StudentGradingRating.vue?vue&type=template&id=6f7b2d3c&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/gradebook/studentGrading/StudentGradingStudentArticle.vue?vue&type=template&id=ce1d9400&":
+/*!**************************************************************************************************************************!*\
+  !*** ./resources/js/components/gradebook/studentGrading/StudentGradingStudentArticle.vue?vue&type=template&id=ce1d9400& ***!
+  \**************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StudentGradingStudentArticle_vue_vue_type_template_id_ce1d9400___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StudentGradingStudentArticle_vue_vue_type_template_id_ce1d9400___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StudentGradingStudentArticle_vue_vue_type_template_id_ce1d9400___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./StudentGradingStudentArticle.vue?vue&type=template&id=ce1d9400& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/gradebook/studentGrading/StudentGradingStudentArticle.vue?vue&type=template&id=ce1d9400&");
 
 
 /***/ }),
@@ -44628,12 +44969,228 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _vm.isLoadedStudents && _vm.isLoadedRubricData
     ? _c("section", [
-        _vm._v(
-          "\n    You have " + _vm._s(_vm.students.length) + " students.\n    "
-        ),
-        _c("pre", [_vm._v(_vm._s(_vm.students))]),
+        _c("p", [
+          _vm.students.length === 0
+            ? _c("span", [_vm._v("You have no students to grade.")])
+            : _vm.students.length === 1
+            ? _c("span", [
+                _vm._v(
+                  "You have " +
+                    _vm._s(_vm.students.length) +
+                    " student to grade."
+                )
+              ])
+            : _c("span", [
+                _vm._v(
+                  "You have " +
+                    _vm._s(_vm.students.length) +
+                    " students to grade."
+                )
+              ])
+        ]),
         _vm._v(" "),
-        _c("pre", [_vm._v(_vm._s(_vm.rubrics))])
+        _vm.students.length > 0
+          ? _c(
+              "div",
+              _vm._l(_vm.students, function(student) {
+                return _c("student-grading-student-article", {
+                  key: student.id,
+                  attrs: { student: student, rubrics: _vm.rubrics }
+                })
+              }),
+              1
+            )
+          : _vm._e(),
+        _vm._v(" "),
+         false
+          ? 0
+          : _vm._e()
+      ])
+    : _vm._e()
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/gradebook/studentGrading/StudentGradingRating.vue?vue&type=template&id=6f7b2d3c&":
+/*!*********************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/gradebook/studentGrading/StudentGradingRating.vue?vue&type=template&id=6f7b2d3c& ***!
+  \*********************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm.rating
+    ? _c(
+        "span",
+        {
+          staticClass: "studentratings__rating",
+          class: _vm.isActive ? "active" : "",
+          on: { click: _vm.toggleActive }
+        },
+        [
+          _c("span", { staticClass: "studentratings__title" }, [
+            _vm._v("\n        " + _vm._s(_vm.rating.title) + "\n    ")
+          ]),
+          _vm._v(" "),
+          _c(
+            "span",
+            {
+              staticClass: "studentratings__points",
+              class: _vm.isActive ? "text-success" : "text-primary"
+            },
+            [
+              _vm.isActive
+                ? _c("span", [_vm._v(_vm._s(_vm.rating.points))])
+                : _c("span", [_vm._v("0")]),
+              _vm._v("\n        / " + _vm._s(_vm.rating.points) + " points")
+            ]
+          ),
+          _vm._v(" "),
+          _c("span", { staticClass: "studentratings__description" }, [
+            _vm._v("\n        " + _vm._s(_vm.rating.description) + "\n    ")
+          ])
+        ]
+      )
+    : _vm._e()
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/gradebook/studentGrading/StudentGradingStudentArticle.vue?vue&type=template&id=ce1d9400&":
+/*!*****************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/gradebook/studentGrading/StudentGradingStudentArticle.vue?vue&type=template&id=ce1d9400& ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm.student
+    ? _c("article", { staticClass: "studentrubric" }, [
+        _c(
+          "div",
+          {
+            staticClass: "studentrubric__header",
+            class: _vm.isExpanded ? "expanded" : "unexpanded"
+          },
+          [
+            _c("span", { staticClass: "float-right text-right text-light" }, [
+              _vm.isExpanded
+                ? _c(
+                    "span",
+                    { staticClass: "btn", on: { click: _vm.toggleExpand } },
+                    [_c("i", { staticClass: "fas fa-chevron-up" })]
+                  )
+                : _c(
+                    "span",
+                    { staticClass: "btn", on: { click: _vm.toggleExpand } },
+                    [_c("i", { staticClass: "fas fa-chevron-down" })]
+                  )
+            ]),
+            _vm._v(" "),
+            _c("span", { staticClass: "studentrubric__name" }, [
+              _c("span", { staticClass: "text-primary" }, [
+                _vm._v(_vm._s(_vm.student.name))
+              ]),
+              _vm._v(" "),
+              _c("small", [
+                _vm._v(
+                  "(English level to grade: " + _vm._s(_vm.student.level) + ")"
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("strong", { staticClass: "studentrubric__points" }, [
+              _vm._v(
+                _vm._s(_vm.points) + " / " + _vm._s(_vm.maxPoints) + " points"
+              )
+            ])
+          ]
+        ),
+        _vm._v(" "),
+        _vm.isExpanded
+          ? _c(
+              "div",
+              _vm._l(_vm.rubrics, function(used) {
+                return _c(
+                  "div",
+                  {
+                    key: used.id,
+                    staticClass: "studentrubric__rubric studentusedrubric"
+                  },
+                  [
+                    _c("span", { staticClass: "studentusedrubric__title" }, [
+                      _vm._v(_vm._s(used.rubric.title))
+                    ]),
+                    _vm._v(" "),
+                    _vm._l(used.rubric.criteria, function(criteria) {
+                      return _c(
+                        "div",
+                        {
+                          key: criteria.id,
+                          staticClass: "studentusedcriteria"
+                        },
+                        [
+                          _c(
+                            "span",
+                            { staticClass: "studentusedcriteria__title" },
+                            [_vm._v(_vm._s(criteria.title))]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "span",
+                            { staticClass: "studentusedcriteria__description" },
+                            [_vm._v(_vm._s(criteria.description))]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "studentratings" },
+                            _vm._l(criteria.ratings, function(rating) {
+                              return _c("student-grading-rating", {
+                                key: rating.id,
+                                attrs: { rating: rating, student: _vm.student },
+                                on: {
+                                  removePoints: _vm.removePoints,
+                                  addPoints: _vm.addPoints
+                                }
+                              })
+                            }),
+                            1
+                          )
+                        ]
+                      )
+                    })
+                  ],
+                  2
+                )
+              }),
+              0
+            )
+          : _vm._e()
       ])
     : _vm._e()
 }
@@ -57667,6 +58224,8 @@ var map = {
 	"./components/gradebook/configGrading/ConfigGrading.vue": "./resources/js/components/gradebook/configGrading/ConfigGrading.vue",
 	"./components/gradebook/configGrading/ConfigGradingRubricItem.vue": "./resources/js/components/gradebook/configGrading/ConfigGradingRubricItem.vue",
 	"./components/gradebook/studentGrading/StudentGrading.vue": "./resources/js/components/gradebook/studentGrading/StudentGrading.vue",
+	"./components/gradebook/studentGrading/StudentGradingRating.vue": "./resources/js/components/gradebook/studentGrading/StudentGradingRating.vue",
+	"./components/gradebook/studentGrading/StudentGradingStudentArticle.vue": "./resources/js/components/gradebook/studentGrading/StudentGradingStudentArticle.vue",
 	"./components/rubrics/RubricCriteriaForm.vue": "./resources/js/components/rubrics/RubricCriteriaForm.vue",
 	"./components/rubrics/RubricForm.vue": "./resources/js/components/rubrics/RubricForm.vue",
 	"./components/rubrics/RubricRatingForm.vue": "./resources/js/components/rubrics/RubricRatingForm.vue"

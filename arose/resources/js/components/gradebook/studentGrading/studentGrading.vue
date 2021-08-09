@@ -1,14 +1,33 @@
 <template>
     <section v-if="isLoadedStudents && isLoadedRubricData">
-        You have {{ students.length }} students.
+        <p>
+            <span v-if="students.length === 0">You have no students to grade.</span>
+            <span v-else-if="students.length === 1">You have {{ students.length }} student to grade.</span>
+            <span v-else>You have {{ students.length }} students to grade.</span>
+        </p>
+        <div v-if="students.length > 0">
+        <student-grading-student-article
+            v-for="student in students"
+            :key="student.id"
+            :student="student"
+            :rubrics="rubrics"
+        >
+        </student-grading-student-article>
+        </div>
+        <span v-if="false">
         <pre>{{ students }}</pre>
         <pre>{{ rubrics }}</pre>
+        </span>
     </section>
 </template>
 
 <script>
+import StudentGradingStudentArticle from './StudentGradingStudentArticle.vue';
 export default {
     name: 'StudentGrading',
+    components: {
+        StudentGradingStudentArticle,
+    },
     data() {
         return {
             isLoadedStudents: false,
