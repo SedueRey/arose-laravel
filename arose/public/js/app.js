@@ -2455,6 +2455,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'StudentGrading',
@@ -2466,7 +2470,8 @@ __webpack_require__.r(__webpack_exports__);
       isLoadedStudents: false,
       isLoadedRubricData: false,
       students: [],
-      rubrics: []
+      rubrics: [],
+      message: ''
     };
   },
   mounted: function mounted() {
@@ -2481,6 +2486,16 @@ __webpack_require__.r(__webpack_exports__);
       _this.isLoadedRubricData = true;
       _this.rubrics = response.data;
     });
+  },
+  methods: {
+    messageEvt: function messageEvt(msg) {
+      var _this2 = this;
+
+      this.message = msg;
+      setTimeout(function () {
+        return _this2.message = '';
+      }, 1000);
+    }
   }
 });
 
@@ -2539,6 +2554,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     toggleActive: function toggleActive() {
+      var _this = this;
+
       this.isActive = !this.isActive;
 
       if (this.isActive) {
@@ -2547,7 +2564,7 @@ __webpack_require__.r(__webpack_exports__);
           student_id: this.student.id,
           rating_id: this.rating.id
         }).then(function (response) {
-          console.info(response);
+          _this.$emit('message', "Rating ".concat(_this.rating.title, " added to student successfully"));
         });
       } else {
         this.$emit('removePoints', this.rating.points);
@@ -2555,12 +2572,22 @@ __webpack_require__.r(__webpack_exports__);
           student_id: this.student.id,
           rating_id: this.rating.id
         }).then(function (response) {
-          console.info(response);
+          _this.$emit('message', "Rating ".concat(_this.rating.title, " removed from student successfully"));
         });
       }
     }
   },
-  mounted: function mounted() {}
+  mounted: function mounted() {
+    var _this2 = this;
+
+    this.isActive = this.student.ratings.findIndex(function (el) {
+      return el.id === _this2.rating.id;
+    }) > -1;
+
+    if (this.isActive) {
+      this.$emit('addPoints', this.rating.points);
+    }
+  }
 });
 
 /***/ }),
@@ -2577,6 +2604,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _StudentGradingRating_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./StudentGradingRating.vue */ "./resources/js/components/gradebook/studentGrading/StudentGradingRating.vue");
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2657,6 +2689,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     removePoints: function removePoints(points) {
       this.points = this.points - points;
+    },
+    message: function message(msg) {
+      this.$emit('message', msg);
     }
   }
 });
@@ -44989,13 +45024,25 @@ var render = function() {
               ])
         ]),
         _vm._v(" "),
+        _vm.message
+          ? _c(
+              "div",
+              {
+                staticClass: "alert-fixed alert alert-light",
+                attrs: { role: "alert" }
+              },
+              [_vm._v("\n        " + _vm._s(_vm.message) + "\n    ")]
+            )
+          : _vm._e(),
+        _vm._v(" "),
         _vm.students.length > 0
           ? _c(
               "div",
               _vm._l(_vm.students, function(student) {
                 return _c("student-grading-student-article", {
                   key: student.id,
-                  attrs: { student: student, rubrics: _vm.rubrics }
+                  attrs: { student: student, rubrics: _vm.rubrics },
+                  on: { message: _vm.messageEvt }
                 })
               }),
               1
@@ -45094,21 +45141,18 @@ var render = function() {
           "div",
           {
             staticClass: "studentrubric__header",
-            class: _vm.isExpanded ? "expanded" : "unexpanded"
+            class: _vm.isExpanded ? "expanded" : "unexpanded",
+            on: { click: _vm.toggleExpand }
           },
           [
             _c("span", { staticClass: "float-right text-right text-light" }, [
               _vm.isExpanded
-                ? _c(
-                    "span",
-                    { staticClass: "btn", on: { click: _vm.toggleExpand } },
-                    [_c("i", { staticClass: "fas fa-chevron-up" })]
-                  )
-                : _c(
-                    "span",
-                    { staticClass: "btn", on: { click: _vm.toggleExpand } },
-                    [_c("i", { staticClass: "fas fa-chevron-down" })]
-                  )
+                ? _c("span", { staticClass: "btn" }, [
+                    _c("i", { staticClass: "fas fa-chevron-up" })
+                  ])
+                : _c("span", { staticClass: "btn" }, [
+                    _c("i", { staticClass: "fas fa-chevron-down" })
+                  ])
             ]),
             _vm._v(" "),
             _c("span", { staticClass: "studentrubric__name" }, [
@@ -45131,66 +45175,72 @@ var render = function() {
           ]
         ),
         _vm._v(" "),
-        _vm.isExpanded
-          ? _c(
+        _c(
+          "div",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.isExpanded,
+                expression: "isExpanded"
+              }
+            ]
+          },
+          _vm._l(_vm.rubrics, function(used) {
+            return _c(
               "div",
-              _vm._l(_vm.rubrics, function(used) {
-                return _c(
-                  "div",
-                  {
-                    key: used.id,
-                    staticClass: "studentrubric__rubric studentusedrubric"
-                  },
-                  [
-                    _c("span", { staticClass: "studentusedrubric__title" }, [
-                      _vm._v(_vm._s(used.rubric.title))
-                    ]),
-                    _vm._v(" "),
-                    _vm._l(used.rubric.criteria, function(criteria) {
-                      return _c(
+              {
+                key: used.id,
+                staticClass: "studentrubric__rubric studentusedrubric"
+              },
+              [
+                _c("span", { staticClass: "studentusedrubric__title" }, [
+                  _vm._v(_vm._s(used.rubric.title))
+                ]),
+                _vm._v(" "),
+                _vm._l(used.rubric.criteria, function(criteria) {
+                  return _c(
+                    "div",
+                    { key: criteria.id, staticClass: "studentusedcriteria" },
+                    [
+                      _c(
+                        "span",
+                        { staticClass: "studentusedcriteria__title" },
+                        [_vm._v(_vm._s(criteria.title))]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "span",
+                        { staticClass: "studentusedcriteria__description" },
+                        [_vm._v(_vm._s(criteria.description))]
+                      ),
+                      _vm._v(" "),
+                      _c(
                         "div",
-                        {
-                          key: criteria.id,
-                          staticClass: "studentusedcriteria"
-                        },
-                        [
-                          _c(
-                            "span",
-                            { staticClass: "studentusedcriteria__title" },
-                            [_vm._v(_vm._s(criteria.title))]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "span",
-                            { staticClass: "studentusedcriteria__description" },
-                            [_vm._v(_vm._s(criteria.description))]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            { staticClass: "studentratings" },
-                            _vm._l(criteria.ratings, function(rating) {
-                              return _c("student-grading-rating", {
-                                key: rating.id,
-                                attrs: { rating: rating, student: _vm.student },
-                                on: {
-                                  removePoints: _vm.removePoints,
-                                  addPoints: _vm.addPoints
-                                }
-                              })
-                            }),
-                            1
-                          )
-                        ]
+                        { staticClass: "studentratings" },
+                        _vm._l(criteria.ratings, function(rating) {
+                          return _c("student-grading-rating", {
+                            key: rating.id,
+                            attrs: { rating: rating, student: _vm.student },
+                            on: {
+                              removePoints: _vm.removePoints,
+                              addPoints: _vm.addPoints,
+                              message: _vm.message
+                            }
+                          })
+                        }),
+                        1
                       )
-                    })
-                  ],
-                  2
-                )
-              }),
-              0
+                    ]
+                  )
+                })
+              ],
+              2
             )
-          : _vm._e()
+          }),
+          0
+        )
       ])
     : _vm._e()
 }

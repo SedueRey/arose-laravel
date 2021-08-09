@@ -1,9 +1,13 @@
 <template>
     <article v-if="student" class="studentrubric">
-        <div class="studentrubric__header" :class="isExpanded ? 'expanded': 'unexpanded'">
+        <div
+            class="studentrubric__header"
+            :class="isExpanded ? 'expanded': 'unexpanded'"
+            @click="toggleExpand"
+        >
             <span class="float-right text-right text-light">
-                <span class="btn" @click="toggleExpand" v-if="isExpanded"><i class="fas fa-chevron-up"></i></span>
-                <span class="btn" @click="toggleExpand" v-else><i class="fas fa-chevron-down"></i></span>
+                <span class="btn" v-if="isExpanded"><i class="fas fa-chevron-up"></i></span>
+                <span class="btn" v-else><i class="fas fa-chevron-down"></i></span>
             </span>
             <span class="studentrubric__name">
                 <span class="text-primary">{{ student.name }}</span>
@@ -11,7 +15,7 @@
             </span>
             <strong class="studentrubric__points">{{points}} / {{ maxPoints }} points</strong>
         </div>
-        <div v-if="isExpanded">
+        <div v-show="isExpanded">
         <div class="studentrubric__rubric studentusedrubric" v-for="used in rubrics" :key="used.id">
             <span class="studentusedrubric__title">{{ used.rubric.title }}</span>
             <div class="studentusedcriteria" v-for="criteria in used.rubric.criteria" :key="criteria.id">
@@ -24,6 +28,7 @@
                         :student="student"
                         @removePoints="removePoints"
                         @addPoints="addPoints"
+                        @message="message"
                     >
                     </student-grading-rating>
                 </div>
@@ -71,6 +76,9 @@ export default {
         removePoints(points) {
             this.points = this.points - points;
         },
+        message(msg) {
+            this.$emit('message', msg);
+        }
     },
 }
 </script>

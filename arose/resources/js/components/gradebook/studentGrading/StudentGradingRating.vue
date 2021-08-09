@@ -42,7 +42,7 @@ export default {
                     student_id: this.student.id,
                     rating_id: this.rating.id,
                 }).then(response => {
-                    console.info(response);
+                    this.$emit('message', `Rating ${this.rating.title} added to student successfully`);
                 });
             } else {
                 this.$emit('removePoints', this.rating.points);
@@ -50,13 +50,16 @@ export default {
                     student_id: this.student.id,
                     rating_id: this.rating.id,
                 }).then(response => {
-                    console.info(response);
+                    this.$emit('message', `Rating ${this.rating.title} removed from student successfully`);
                 });
             }
         }
     },
     mounted() {
-
+        this.isActive = this.student.ratings.findIndex(el => el.id === this.rating.id ) > -1;
+        if (this.isActive) {
+            this.$emit('addPoints', this.rating.points);
+        }
     },
 }
 </script>

@@ -5,12 +5,16 @@
             <span v-else-if="students.length === 1">You have {{ students.length }} student to grade.</span>
             <span v-else>You have {{ students.length }} students to grade.</span>
         </p>
+        <div class="alert-fixed alert alert-light" role="alert" v-if="message">
+            {{ message }}
+        </div>
         <div v-if="students.length > 0">
         <student-grading-student-article
             v-for="student in students"
             :key="student.id"
             :student="student"
             :rubrics="rubrics"
+            @message="messageEvt"
         >
         </student-grading-student-article>
         </div>
@@ -34,6 +38,7 @@ export default {
             isLoadedRubricData: false,
             students: [],
             rubrics: [],
+            message: '',
         }
     },
     mounted() {
@@ -48,6 +53,12 @@ export default {
               this.isLoadedRubricData = true;
               this.rubrics = response.data;
           });
+    },
+    methods: {
+        messageEvt(msg) {
+            this.message = msg;
+            setTimeout(() => this.message = '', 1000);
+        }
     },
 }
 </script>
