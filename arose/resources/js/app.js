@@ -14,8 +14,8 @@ import ChatMessages from './components/ChatMessages';
 import ConversationParticipants from './components/ConversationParticipants';
 import ExampleComponent from './components/ExampleComponent';
 import RubricForm from './components/rubrics/RubricForm';
-import ConfigGrading from './components/gradebook/configGrading/configGrading.vue';
-import StudentGrading from './components/gradebook/studentGrading/studentGrading.vue';
+import ConfigGrading from './components/gradebook/configGrading/ConfigGrading.vue';
+import StudentGrading from './components/gradebook/studentGrading/StudentGrading.vue';
 
 /**
  * The following block of code may be used to automatically register your

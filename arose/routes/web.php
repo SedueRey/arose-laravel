@@ -67,6 +67,8 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('aroserubrics', [GradebookController::class, 'aroserubrics']);
             Route::post('setuserusedrubric', [GradebookController::class, 'setuserusedrubric'])
                 ->withoutMiddleware([VerifyCsrfToken::class]);
+            Route::post('removeuserusedrubric', [GradebookController::class, 'removeuserusedrubric'])
+                ->withoutMiddleware([VerifyCsrfToken::class]);
             Route::post('setuserstudentusedrrating', [GradebookController::class, 'setuserstudentusedrrating'])
                 ->withoutMiddleware([VerifyCsrfToken::class]);
         });

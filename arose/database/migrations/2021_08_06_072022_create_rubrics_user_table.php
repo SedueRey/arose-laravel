@@ -16,7 +16,7 @@ class CreateRubricsUserTable extends Migration
         Schema::create('usedrubrics', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->enum('level', ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'])->nullable();
+            $table->enum('level', ['','A1', 'A2', 'B1', 'B2', 'C1', 'C2'])->nullable();
 
             $table->unsignedBigInteger('rubric_id');
             $table->unsignedBigInteger('user_id');
