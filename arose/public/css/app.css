@@ -10113,6 +10113,19 @@ h3 {
   }
 }
 
+.gradebook .nav-tabs .nav-link.active, .gradebook .nav-tabs .nav-item.show .nav-link {
+  border-color: #a5252d #a5252d #edf1f9;
+}
+.gradebook .nav-tabs .nav-link.active:hover, .gradebook .nav-tabs .nav-link.active:focus, .gradebook .nav-tabs .nav-item.show .nav-link:hover, .gradebook .nav-tabs .nav-item.show .nav-link:focus {
+  border-color: #a5252d #a5252d #edf1f9;
+}
+.gradebook .nav-tabs {
+  border-bottom: 1px solid #a5252d;
+}
+.gradebook .nav-tabs .nav-link:hover, .gradebook .nav-tabs .nav-link:focus {
+  border-color: #a0a0a0 #a0a0a0 #a5252d;
+}
+
 .navbar-laravel {
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);

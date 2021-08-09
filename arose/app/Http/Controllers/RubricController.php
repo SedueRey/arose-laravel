@@ -18,7 +18,7 @@ class RubricController extends Controller
     {
         $user_id = Auth()->user()->id;
 
-        $myRubricsData = Rubric::with('criteria')
+        $myRubricsData = Rubric::with('criteria.ratings', 'usedrubrics')
             ->where('user_id', $user_id)
             ->orderBy('title','asc')
             ->paginate(20);
@@ -169,12 +169,15 @@ class RubricController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $rubric = Rubric::with('criteria.ratings')->findOrFail($id);
+        $rubric = Rubric::with('criteria.ratings', 'usedrubrics')->findOrFail($id);
         if (
             ($rubric->user_id !== Auth()->user()->id) &&
             Auth()->user()->isadmin == false
         ) {
             abort(403, 'PERMISSION DENIED… YOU DIDN’T SAY THE MAGIC WORD!');
+        }
+        if (count($rubric->usedrubrics) > 0) {
+            abort(403, "You can't modify an in use rubric");
         }
         $validated = $request->validate([
             'rubricTitle' => 'required',
@@ -230,9 +233,6 @@ class RubricController extends Controller
 
     public function duplicate($id) {
         $fromrubric = Rubric::with('criteria.ratings')->findOrFail($id);
-
-
-
         $rubric = new Rubric;
         $rubric->title = 'Copy of '.$fromrubric->title;
         $rubric->points = $fromrubric->points;
@@ -247,8 +247,9 @@ class RubricController extends Controller
             $newcriterion->save();
             foreach ($criterion->ratings as $rating) {
                 $newrating = new Rating;
-                $newrating->title;
-                $newrating->points;
+                $newrating->title = $rating->title;
+                $newrating->points = $rating->points;
+                $newrating->description = $rating->description;
                 $newrating->criterion_id = $newcriterion->id;
                 $newrating->save();
             }
@@ -264,12 +265,15 @@ class RubricController extends Controller
      */
     public function destroy($id)
     {
-        $rubric = Rubric::with('criteria.ratings')->findOrFail($id);
+        $rubric = Rubric::with('criteria.ratings', 'usedrubrics')->findOrFail($id);
         if (
             ($rubric->user_id !== Auth()->user()->id) &&
             Auth()->user()->isadmin == false
         ) {
             abort(403, 'PERMISSION DENIED… YOU DIDN’T SAY THE MAGIC WORD!');
+        }
+        if (count($rubric->usedrubrics) > 0) {
+            abort(403, "You can't delete a rubric used in a gradebook");
         }
         foreach ($rubric->criteria as $criterion) {
             $criterion->ratings->each->delete();

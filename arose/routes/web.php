@@ -63,6 +63,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::group(['prefix' => 'api'], function() {
             Route::get('myself', [GradebookController::class, 'myself']);
             Route::get('myrubrics', [GradebookController::class, 'myrubrics']);
+            Route::get('myusedrubrics', [GradebookController::class, 'myusedrubrics']);
             Route::get('mystudents', [GradebookController::class, 'mystudents']);
             Route::get('aroserubrics', [GradebookController::class, 'aroserubrics']);
             Route::post('setuserusedrubric', [GradebookController::class, 'setuserusedrubric'])

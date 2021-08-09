@@ -2435,8 +2435,33 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: 'StudentGrading'
+  name: 'StudentGrading',
+  data: function data() {
+    return {
+      isLoadedStudents: false,
+      isLoadedRubricData: false,
+      students: [],
+      rubrics: []
+    };
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    axios.get('/gradebook/api/mystudents/').then(function (response) {
+      _this.isLoadedStudents = true;
+      _this.students = [];
+      _this.students = response.data;
+    });
+    axios.get('/gradebook/api/myusedrubrics').then(function (response) {
+      _this.isLoadedRubricData = true;
+      _this.rubrics = response.data;
+    });
+  }
 });
 
 /***/ }),
@@ -44601,7 +44626,16 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("section", [_vm._v("StudentGrading")])
+  return _vm.isLoadedStudents && _vm.isLoadedRubricData
+    ? _c("section", [
+        _vm._v(
+          "\n    You have " + _vm._s(_vm.students.length) + " students.\n    "
+        ),
+        _c("pre", [_vm._v(_vm._s(_vm.students))]),
+        _vm._v(" "),
+        _c("pre", [_vm._v(_vm._s(_vm.rubrics))])
+      ])
+    : _vm._e()
 }
 var staticRenderFns = []
 render._withStripped = true

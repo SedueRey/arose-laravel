@@ -6,7 +6,7 @@
 $user = \Auth::user();
 $photo = $user->photo;
 @endphp
-<div class="container">
+<div class="container gradebook">
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="/">Arose project</a></li>
@@ -14,6 +14,14 @@ $photo = $user->photo;
         <li class="breadcrumb-item active" aria-current="page">Gradebook / Config</li>
     </ol>
 </nav>
+<ul class="nav nav-tabs mb-4">
+    <li class="nav-item">
+        <a class="nav-link" href="/gradebook/">Gradebook</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link active" href="#">Gradebok configuration</a>
+    </li>
+</ul>
 @if (session('message'))
     <div class="row">
         <div class="col-md-12 alert alert-warning" role="alert">

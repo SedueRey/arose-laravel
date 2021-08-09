@@ -71,3 +71,18 @@
         }
     }
 }
+
+.gradebook {
+    .nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {
+        border-color: #a5252d #a5252d #edf1f9;
+        &:hover, &:focus {
+            border-color: #a5252d #a5252d #edf1f9;
+        }
+    }
+    .nav-tabs {
+        border-bottom: 1px solid #a5252d;
+    }
+    .nav-tabs .nav-link:hover, .nav-tabs .nav-link:focus {
+        border-color: #a0a0a0 #a0a0a0 #a5252d;
+    }
+}

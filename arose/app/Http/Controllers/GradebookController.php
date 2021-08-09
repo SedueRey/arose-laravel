@@ -32,7 +32,6 @@ class GradebookController extends Controller
         return response()->json($user);
     }
 
-
     public function aroserubrics(){
         $aroseRubrics = Rubric::with('criteria.ratings', 'usedrubrics')
             ->where('user_id', 1)->get();
@@ -41,10 +40,15 @@ class GradebookController extends Controller
 
     public function myrubrics(){
         $user_id = Auth()->user()->id;
-
         $myRubrics = Rubric::with('criteria.ratings', 'usedrubrics')
             ->where('user_id', $user_id)->get();
+        return response()->json($myRubrics);
+    }
 
+    public function myusedrubrics() {
+        $user_id = Auth()->user()->id;
+        $myRubrics = Usedrubric::with('rubric.criteria.ratings')
+        ->where('user_id', $user_id)->get();
         return response()->json($myRubrics);
     }
 
