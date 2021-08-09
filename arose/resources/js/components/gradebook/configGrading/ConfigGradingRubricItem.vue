@@ -28,10 +28,17 @@
             </button>
             <button
                 @click="removeFromGradeBook"
-                v-else
+                v-else-if="!rubric.isUsed"
                 class="btn btn-light btn-sm"
             >
                 <i class="fas fa-user-plus"></i> Remove from gradebook
+            </button>
+            <button
+                v-else
+                class="btn btn-light btn-sm disabled"
+                style="cursor: not-allowed;"
+            >
+                Used in a grade. Can't be deleted.
             </button>
         </nav>
     </p>

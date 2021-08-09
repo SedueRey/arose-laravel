@@ -33,15 +33,38 @@ class GradebookController extends Controller
     }
 
     public function aroserubrics(){
-        $aroseRubrics = Rubric::with('criteria.ratings', 'usedrubrics')
+        $aroseRubrics = Rubric::with('criteria.ratings.students', 'usedrubrics')
             ->where('user_id', 1)->get();
+
+        for ($i=0; $i < count($aroseRubrics); $i++) {
+            $aroseRubrics[$i]->isUsed = false;
+            $aroseRubrics[$i]->students = 0;
+            for ($j=0; $j < count($aroseRubrics[$i]->criteria); $j++) {
+                for ($k=0; $k < count($aroseRubrics[$i]->criteria[$j]->ratings); $k++) {
+                    $aroseRubrics[$i]->students = count($aroseRubrics[$i]->criteria[$j]->ratings[$k]->students) + $aroseRubrics[$i]->students;
+                    unset($aroseRubrics[$i]->criteria[$j]->ratings[$k]->students);
+                }
+            }
+            $aroseRubrics[$i]->isUsed = ($aroseRubrics[$i]->students > 0);
+        }
         return response()->json($aroseRubrics);
     }
 
     public function myrubrics(){
         $user_id = Auth()->user()->id;
-        $myRubrics = Rubric::with('criteria.ratings', 'usedrubrics')
+        $myRubrics = Rubric::with('criteria.ratings.students', 'usedrubrics')
             ->where('user_id', $user_id)->get();
+        for ($i=0; $i < count($myRubrics); $i++) {
+            $myRubrics[$i]->isUsed = false;
+            $myRubrics[$i]->students = 0;
+            for ($j=0; $j < count($myRubrics[$i]->criteria); $j++) {
+                for ($k=0; $k < count($myRubrics[$i]->criteria[$j]->ratings); $k++) {
+                    $myRubrics[$i]->students = count($myRubrics[$i]->criteria[$j]->ratings[$k]->students) + $myRubrics[$i]->students;
+                    unset($myRubrics[$i]->criteria[$j]->ratings[$k]->students);
+                }
+            }
+            $myRubrics[$i]->isUsed = ($myRubrics[$i]->students > 0);
+        }
         return response()->json($myRubrics);
     }
 
@@ -78,11 +101,23 @@ class GradebookController extends Controller
     public function removeuserusedrubric(Request $request){
         $user_id = Auth()->user()->id;
         if ($request->level == '') {
-            Usedrubric::where([
-                ['rubric_id', '=', $request->rubricId],
-                ['user_id', '=', $user_id],
-                ['level', '=', ''],
-            ])->delete();
+
+            $cuantos = DB::select("SELECT *
+            FROM ratings rt, rubrics r, criteria c, rating_student rs
+            WHERE rt.criterion_id = c.id
+              AND c.rubric_id = r.id
+              AND r.id = '".$request->rubricId."'
+              AND r.user_id = '".$user_id."'
+              AND rs.rating_id = rt.id");
+
+            if (count($cuantos) == 0) {
+                Usedrubric::where([
+                    ['rubric_id', '=', $request->rubricId],
+                    ['user_id', '=', $user_id],
+                    ['level', '=', ''],
+                ])->delete();
+            }
+
             return response()->json('ok');
         }
     }

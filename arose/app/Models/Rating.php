@@ -26,6 +26,10 @@ class Rating extends Model
     }
 
     public function students() {
-        return $this->belongsToMany(Student::class, 'student_uuid');
+        return $this->belongsToMany(Student::class);
+    }
+
+    public function getFullNameAttribute() {
+        return $this->students();
     }
 }

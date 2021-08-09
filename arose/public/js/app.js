@@ -2356,6 +2356,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'ConfigGradingRubricItem',
   props: {
@@ -44880,7 +44887,8 @@ var render = function() {
                   _vm._v(" Add to gradebook\n            ")
                 ]
               )
-            : _c(
+            : !_vm.rubric.isUsed
+            ? _c(
                 "button",
                 {
                   staticClass: "btn btn-light btn-sm",
@@ -44889,6 +44897,18 @@ var render = function() {
                 [
                   _c("i", { staticClass: "fas fa-user-plus" }),
                   _vm._v(" Remove from gradebook\n            ")
+                ]
+              )
+            : _c(
+                "button",
+                {
+                  staticClass: "btn btn-light btn-sm disabled",
+                  staticStyle: { cursor: "not-allowed" }
+                },
+                [
+                  _vm._v(
+                    "\n                Used in a grade. Can't be deleted.\n            "
+                  )
                 ]
               )
         ])
