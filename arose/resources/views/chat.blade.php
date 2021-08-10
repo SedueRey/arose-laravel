@@ -16,7 +16,11 @@ $user = \Auth::user();
           <div class="card card-default">
             <div class="card-header">Conversations</div>
             <div class="card-body">
-              <h4>Conversation #{{ $conversationId }}</h4>
+              @if ($conversationId == 1)
+                <h4>Offtopic</h4>
+              @else
+                <h4>Conversation #{{ $conversationId - 1 }}</h4>
+              @endif
               <hr/>
               <div class="container chats">
                   <div class="row">

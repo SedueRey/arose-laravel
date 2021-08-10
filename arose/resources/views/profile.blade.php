@@ -21,7 +21,7 @@ $user = \Auth::user();
                 @if ($user->photo)
                 <img src="{{ asset('/storage/avatar/'.Auth::user()->photo) }}" class="avatar img-circle img-thumbnail" alt="avatar">
                 @else
-                <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail" alt="avatar">
+                <img src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail" alt="avatar">
                 @endif
                     Upload a different photo...
                 </label>

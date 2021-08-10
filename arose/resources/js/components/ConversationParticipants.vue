@@ -8,7 +8,7 @@
             <div class="d-flex align-items-center header">
               <div class="primary-font participant-name">{{ participant.name }}</div>
 
-              <span class="participant-type pl-1"> ({{ participant.participation[0].messageable_type}})</span>
+              <span v-show="false" class="participant-type pl-1"> ({{ participant.participation[0].messageable_type}})</span>
             </div>
           </div>
         </li>

@@ -15,7 +15,7 @@ $photo = $user->photo;
         @if ($user->photo)
         <img src="{{ asset('/storage/avatar/'.$photo) }}" class="img-responsive" alt="avatar">
         @else
-        <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png"  class="img-responsive" alt="avatar">
+        <img src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png"  class="img-responsive" alt="avatar">
         @endif
     </div>
     <!-- END SIDEBAR USERPIC -->

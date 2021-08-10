@@ -16,7 +16,7 @@
       </span>
         </div>
         <div v-else>
-            <button class="btn btn-success btn-sm" @click="joinConversation()">Join Conversation</button>
+            <button v-if="false" class="btn btn-success btn-sm" @click="joinConversation()">Join Conversation</button>
         </div>
     </div>
 </template>

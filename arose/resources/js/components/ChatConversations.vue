@@ -12,7 +12,8 @@
           <div class="chat-body clearfix">
             <div class="header">
               <a href="#" @click="showConversation(convo.id)">
-                <strong class="primary-font">Conversation {{ convo.id }}</strong>
+                <strong class="primary-font" v-if="convo.id === 1">Offtopic</strong>
+                <strong class="primary-font" v-else>Conversation {{ convo.id - 1 }}</strong>
               </a>
               <a
                 v-if="!isParticipant(convo.id)"
@@ -80,10 +81,10 @@ export default {
     leaveConversation(id) {
       let participationId;
       const convo = this.conversations.find(c => c.id === id);
-      // console.log(convo);
-      participationId = convo.participants.find(
+      console.log(convo);
+      participationId = convo.participants ? convo.participants.find(
         p => p.id == window.participant.id
-      ).participation[0]["id"];
+      ).participation[0]["id"] : convo.id;
 
       axios
         .delete(`/chat/conversations/${id}/participants/${participationId}`)
