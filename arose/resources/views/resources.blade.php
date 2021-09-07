@@ -13,7 +13,7 @@ if(!isset($format)) {
 @endphp
 <div class="container">
     <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-      <h1 class="display-4">Arose Resources for teachers</h1>
+      <h1 class="display-4">Arose resources for teachers</h1>
       <p class="lead">
           Resources available for the assessment of English
           language proficiency for students. You can add your
@@ -29,6 +29,11 @@ if(!isset($format)) {
     <div class="row">
         <aside class="col-lg-4 col-md-6">
         <ul class="list-group">
+            @if($user !== null)
+            <li class="list-group-item">
+                <a class="btn btn-primary" href="/resources/new/">Add new resource</a>
+            </li>
+            @endif
             <li class="list-group-item">
                 <h6>Search resources:</h6>
                 <form action="/resources/search" method="POST" class="form-inline mt-2 mt-md-0">

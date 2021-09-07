@@ -19,7 +19,7 @@ $photo = $user->photo;
         <a class="nav-link" href="/gradebook/">Gradebook</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link active" href="#">Gradebok configuration</a>
+        <a class="nav-link active" href="#">Gradebook configuration</a>
     </li>
 </ul>
 @if (session('message'))

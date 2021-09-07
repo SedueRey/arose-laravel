@@ -65,7 +65,7 @@ $user = \Auth::user();
                 <div class="form-group">
                     <div class="col-xs-6">
                         <label for="school">
-                            <h4>School</h4>
+                            <h4>School / Institution</h4>
                         </label>
                         <input
                             type="text"
