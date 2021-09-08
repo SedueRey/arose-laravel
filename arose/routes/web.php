@@ -22,7 +22,7 @@ use App\Http\Middleware\VerifyCsrfToken;
 */
 
 Route::post('/resources/search', [ResourcesController::class, 'search']);
-Route::get('/', [ResourcesController::class, 'getData']);
+Route::get('/', [ResourcesController::class, 'getIndex']);
 Route::get('/resources', [ResourcesController::class, 'getData'])->name('resources');
 Route::get('/resources/filter/{format}/{level}', [ResourcesController::class, 'filterByAll']);
 Route::get('/resources/arose', [ResourcesController::class, 'filterArose']);
@@ -48,6 +48,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/resources/update/{id}', [ResourcesController::class, 'update'])->name('updateResource');
     Route::delete('/resources/delete/{id}', [ResourcesController::class, 'destroy'])->name('destroyResource');
 
+    Route::get('/aroserubrics', [RubricController::class, 'arose'])->name('aroserubrics');
     Route::get('/rubrics', [RubricController::class, 'index'])->name('rubrics');
     Route::get('/rubrics/show/{id}', [RubricController::class, 'show'])->name('showRubric');
     Route::get('/rubrics/new', [RubricController::class, 'create'])->name('createRubric');

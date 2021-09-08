@@ -9,7 +9,7 @@ $user = \Auth::user();
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="/">Arose project</a></li>
         <li class="breadcrumb-item"><a href="/home">Dashboard</a></li>
-        <li class="breadcrumb-item"><a href="/rubrics">My Rubrics</a></li>
+        <li class="breadcrumb-item">Rubrics</li>
         <li class="breadcrumb-item active" aria-current="page">Detail: {{ substr($rubric->title, 0, 10) }}&hellip;</li>
     </ol>
 </nav>

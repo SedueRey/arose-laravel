@@ -23,11 +23,34 @@ class RubricController extends Controller
             ->orderBy('title','asc')
             ->paginate(20);
 
+        $otherRubrics = Rubric::with('criteria.ratings', 'usedrubrics')
+            ->where('user_id', 1)->count();
+
         $data = [
             'myrubrics' => $myRubricsData,
+            'otherrubrics' => $otherRubrics,
         ];
 
         return view('rubrics.index', $data );
+    }
+
+    public function arose()
+    {
+
+        $myRubricsData = Rubric::with('criteria.ratings', 'usedrubrics')
+            ->where('user_id', 1)
+            ->orderBy('title','asc')
+            ->paginate(20);
+
+        $otherRubrics = Rubric::with('criteria.ratings', 'usedrubrics')
+            ->where('user_id', Auth()->user()->id)->count();
+
+        $data = [
+            'myrubrics' => $myRubricsData,
+            'otherrubrics' => $otherRubrics,
+        ];
+
+        return view('rubrics.arose', $data );
     }
 
     /**
@@ -104,12 +127,14 @@ class RubricController extends Controller
     public function show($id)
     {
         $rubric = Rubric::with('criteria.ratings')->findOrFail($id);
+        /*
         if (
             ($rubric->user_id !== Auth()->user()->id) &&
             Auth()->user()->isadmin == false
         ) {
             abort(403, 'PERMISSION DENIED… YOU DIDN’T SAY THE MAGIC WORD!');
         }
+        */
         return view('rubrics.show', [
             'rubric' => $rubric
         ]);

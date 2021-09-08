@@ -41,6 +41,25 @@
               <a class="nav-link" href="/">Resources</a>
           </li>
           <li class="nav-item">
+              <a class="nav-link" href="/students">My Students</a>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                Rubrics  <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="/rubrics">My Rubrics</a></li>
+              <li><a href="/aroserubrics">Arose Rubrics</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                Gradebook  <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="/rubrics">Grade students</a></li>
+              <li><a href="/aroserubrics">Config my gradebook</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
               <a class="nav-link" href="/chat">Chat</a>
           </li>
           <li class="nav-item">

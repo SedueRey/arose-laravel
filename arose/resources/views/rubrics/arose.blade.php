@@ -9,33 +9,18 @@ $user = \Auth::user();
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="/">Arose project</a></li>
         <li class="breadcrumb-item"><a href="/home">Dashboard</a></li>
-        <li class="breadcrumb-item active" aria-current="page">My Rubrics</li>
+        <li class="breadcrumb-item active" aria-current="page">Arose project shared Rubrics</li>
     </ol>
 </nav>
 <ul class="nav nav-tabs mb-4">
     <li class="nav-item">
-        <a class="nav-link active" href="#">My {{$myrubrics->total()}} rubrics</a>
+        <a class="nav-link" href="/rubrics">My {{$otherrubrics}} rubrics</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="/aroserubrics">{{$otherrubrics}} Arose project shared rubrics</a>
+        <a class="nav-link active" href="#">{{$myrubrics->total()}} Arose project shared rubrics</a>
     </li>
 </ul>
 <div class="row">
-    <div class="col-md-12">
-    <p>
-        <a href="/rubrics/new" class="btn btn-primary">Add new rubric</a>
-    </p>
-    </div>
-    @if (count($myrubrics) ==  0)
-    <div class="col-md-12 alert alert-warning" role="alert">
-        Sorry, there are no rubrics yet. You can add one or maybe copy one from the <a href="/aroserubrics">Arose shared rubrics</a>.
-    </div>
-    @endif
-    @if (session('message'))
-    <div class="col-md-12 alert alert-info" role="alert">
-        {{ session('message') }}
-    </div>
-    @endif
     <div class="col-md-12">
     <div class="table-responsive">
     <table class="table table-sm">
@@ -63,19 +48,9 @@ $user = \Auth::user();
                     <a href="/rubrics/show/{{$data->id}}" class="btn btn-light btn-sm">
                         <i class="fa fa-eye"></i> View
                     </a>
-                    @if ($user->id === $data->user_id && $usedrubrictimes == 0)
-                    <a href="/rubrics/edit/{{$data->id}}" class="btn btn-light btn-sm">
-                        <i class="fa fa-edit"></i> Edit
-                    </a>
-                    @endif
                     <a href="/rubrics/duplicate/{{$data->id}}" class="btn btn-light btn-sm">
-                        <i class="fa fa-copy"></i> Duplicate
+                        <i class="fa fa-copy"></i> Make a copy for me
                     </a>
-                    @if ($user->id === $data->user_id && $usedrubrictimes == 0)
-                    <a href="/rubrics/delete/{{$data->id}}" class="btn btn-light btn-sm">
-                        <i class="fa fa-trash"></i> Delete
-                    </a>
-                    @endif
                 </td>
             </tr>
             <tr>
@@ -93,11 +68,7 @@ $user = \Auth::user();
                 <td class="text-nowrap">
                     {{ $usedrubrictimes }} times
                 </td>
-                <td class="text-right">
-                    @if ($user->id === $data->user_id && $usedrubrictimes > 0)
-                    <small class="text-nowrap text-danger">You can't edit or delete an used rubric</small>
-                    @endif
-                </td>
+                <td class="text-right"></td>
             </tr>
         @endforeach
         </tbody>

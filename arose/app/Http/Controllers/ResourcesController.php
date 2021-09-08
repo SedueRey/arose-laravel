@@ -13,6 +13,10 @@ class ResourcesController extends Controller
         return view('resources', compact('resourceData'));
     }
 
+    public function getIndex(){
+        return view('index');
+    }
+
     public function filterByLevel($level){
         $resourceData = Resources::where('level', strtoupper($level))
             ->orderBy('filename','asc')
