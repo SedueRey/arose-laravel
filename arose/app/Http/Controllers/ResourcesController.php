@@ -41,6 +41,10 @@ class ResourcesController extends Controller
     public function search(Request $request){
         $search = $request->input('search');
         $resourceData = Resources::where('filename', 'LIKE', "%$search%")
+            ->orWhere('format', 'LIKE', "%$search%")
+            ->orWhere('type', 'LIKE', "%$search%")
+            ->orWhere('desc', 'LIKE', "%$search%")
+            ->orWhere('level', 'LIKE', "%$search%")
             ->orderBy('filename','asc')
             ->paginate(20);
         return view('resources', compact('resourceData'));

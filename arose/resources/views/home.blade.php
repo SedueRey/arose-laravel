@@ -8,23 +8,23 @@ $photo = $user->photo;
 @endphp
 <div class="container">
 <div class="row">
-<div class="col-md-3">
+<div class="col-md-3 text-dark">
   <div class="profile-sidebar px-3">
     <!-- SIDEBAR USERPIC -->
-    <div class="profile-userpic text-center">
+    <a href="/profile" class="profile-userpic text-center">
         @if ($user->photo)
-        <img src="{{ asset('/storage/avatar/'.$photo) }}" class="img-responsive" alt="avatar">
+        <img src="{{ asset('/storage/avatar/'.$photo) }}" class="img-responsive mx-auto" alt="avatar">
         @else
-        <img src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png"  class="img-responsive" alt="avatar">
+        <img src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png"  class="img-responsive mx-auto" alt="avatar">
         @endif
-    </div>
+    </a>
     <!-- END SIDEBAR USERPIC -->
     <!-- SIDEBAR USER TITLE -->
     <div class="profile-usertitle">
       @if($user->name)
-      <div class="profile-usertitle-name">
+      <a href="/profile" class="profile-usertitle-name">
         {{$user->name}}
-      </div>
+      </a>
       @else
       <div class="profile-usertitle-job">
         We don't know you yet. Please fill <a href="/profile">your profile</a> in.
@@ -45,6 +45,74 @@ $photo = $user->photo;
   </div>
 </div>
 <div class="col-9">
+    <section class="py-2">
+        <h2 class="pb-3">Arose webtool dashboard</h2>
+        <div class="row">
+            <div class="col-6">
+                <img src="/img/study.svg" role="presentation" alt="Students" style="max-width: 100%; display:block;" class="mx-auto" />
+            </div>
+            <div class="col-6 pt-4 py-4">
+                <p>This digital tool will be useful to assess oral skills in A2 and B2 levels in English. You can use all the AROSE resources and you will be able to share the new ones you can create.</p>
+            </div>
+        </div>
+        <br>
+        <h3 class="pt-4">What can you do from here?</h3>
+        <p class="lead pb-2">Check all our tools:</p>
+        <ol class="ol mx-0" style="list-style-type:none;">
+            <li class="pb-4" style="position: relative">
+                <span class="olnumber">1</span>
+                <h3>
+                    <a href="/resources">
+                        <i class="fa fa-folder"></i>
+                        Resources
+                    </a>
+                </h3>
+                <p>At this moment, there are <strong>{{$resources}} <a href="/resources">Resources</a></strong> in the digital repository,
+                    <a href="/resources/mine">{{$user->resources()->count()}} mine</a>. Browse them or add your own resources.</p>
+            </li>
+            <li class="pb-4" style="position: relative">
+                <span class="olnumber">2</span>
+                <h3>
+                    <a href="/students">
+                        <i class="fa fa-user-graduate text-primary"></i>
+                        Students
+                    </a>
+                </h3>
+                <p>It is necessary to add, first, the data of the <a href="/students">students</a> in order to be evaluated. You can start anytime from here. Right now, you have <strong>{{$user->students()->count()}} students</strong> added</p>
+            </li>
+            <li class="pb-4" style="position: relative">
+                <span class="olnumber">3</span>
+                <h3>
+                    <a href="/rubrics">
+                        <i class="fa fa-th" aria-hidden="true"></i>
+                        Rubrics
+                    </a>
+                </h3>
+                <p>Once you have added your students you should choose which rubrics you want to evaluate them with.  It can be as simple as a note or as elaborate as you need. You can also use <a href="/aroserubrics">the ones provided by the Arose project</a>, ({{$rubrics}} at this moment. <strong><a href="/rubrics">You have added {{$user->rubrics()->count()}}</a>.</strong></p>
+            </li>
+            <li class="pb-4" style="position: relative">
+                <span class="olnumber">4</span>
+                <h3>
+                    <a href="/gradebook/config">
+                        <i class="fa fa-book" aria-hidden="true"></i>
+                        Config Gradebook
+                    </a>
+                </h3>
+                <p>Before you can evaluate your students you must choose which of your own or shared rubrics you want to use.  You can do this from gradebook, on the Configure tab.</p>
+            </li>
+            <li class="pb-4" style="position: relative">
+                <span class="olnumber">5</span>
+                <h3>
+                    <a href="/gradebook">
+                        <i class="fa fa-book" aria-hidden="true"></i>
+                        Grade Students on gradebook
+                    </a>
+                </h3>
+                <p>And you can evaluate your students by selecting the values of the rubrics you have chosen.</p>
+            </li>
+        </ol>
+    </section>
+    <!--
     <div class="card">
         <div class="container-fluid">
             <div class="row">
@@ -101,6 +169,7 @@ $photo = $user->photo;
                 </div>
             </div>
         </div>
+    -->
     </div>
 </div>
 </div>

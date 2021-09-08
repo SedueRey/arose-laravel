@@ -25,3 +25,23 @@
     background-color: #FFF;
     margin-bottom: 2rem;
 }
+
+.olnumber {
+    font-size: 1.1rem;
+    left: -3rem;
+    position: absolute;
+    top: 0.2rem;
+    color: var(--secondary);
+    border: 1px solid var(--secondary);
+    display: block;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 100%;
+    text-align: center;
+    line-height: 1.7;
+    overflow: hidden;
+}
+
+a.profile-userpic, a.profile-userpic > img-responsive {
+    display: block;
+}

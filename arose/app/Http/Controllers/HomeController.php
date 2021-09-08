@@ -25,7 +25,7 @@ class HomeController extends Controller
 
     public function home(){
         $resources = Resources::count();
-        $rubrics = Rubric::count();
+        $rubrics = Rubric::where('user_id', 1)->count();
         $stats = [
             'resources' => $resources,
             'rubrics' => $rubrics,
