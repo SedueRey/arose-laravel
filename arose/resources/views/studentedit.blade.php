@@ -105,6 +105,7 @@ $user = \Auth::user();
                             <h4>Level</h4>
                         </label>
                         <fieldset id="level">
+                            <input type="radio" value="Unknown" name="level" @if(old('level', $student->level) == 'Unknown') checked @endif> Unknown &nbsp;&nbsp;&nbsp;
                             <input type="radio" value="A1" name="level" @if(old('level', $student->level) == 'A1') checked @endif> A1 &nbsp;&nbsp;&nbsp;
                             <input type="radio" value="A2" name="level" @if(old('level', $student->level) == 'A2') checked @endif> A2 &nbsp;&nbsp;&nbsp;
                             <input type="radio" value="B1" name="level" @if(old('level', $student->level) == 'B1') checked @endif> B1 &nbsp;&nbsp;&nbsp;
