@@ -18,17 +18,10 @@ class UserSeeder extends Seeder
     {
         User::create([
             'name' => 'Arose admin',
-            'email' => 'instructor@mk.app',
-            'password' => Hash::make('123456'),
+            'email' => 'proyectos@seduerey.com',
+            'password' => Hash::make('ar0s3Admin{R4z0r}2020{G4l4ct1c4}'),
             'isadmin' => true,
             'biography' => 'A little bit about me'
         ]);
-        for ($i=0; $i < 10; $i++) {
-            User::create([
-                'name' => Str::random(rand(5,20)),
-                'email' => 'user'.$i.'@mk.app',
-                'password' => Hash::make('123456'),
-            ]);
-        }
     }
 }
