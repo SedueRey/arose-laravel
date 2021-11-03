@@ -56,7 +56,7 @@
         </div>
         <div class="row">
             <div class="col-md-7 offset-md-3 ml-md-auto">
-                <p class="mt-5 text-xs-small text-muted font-weight-light">This project has been funded with support from the European Commission. This webpage reflects the views only of the author, and the Commission cannot be held responsible for any use which may be made of the information contained therein. Project Erasmus+ AROSE Nº 33023 (2019-1-ES01-KA201-065597)</p>
+                <p class="mt-5 text-xs-small text-muted font-weight-light">This project has been funded with support from the European Commission. This webpage reflects the views only of the author, and the Commission cannot be held responsible for any use which may be made of the information contained therein. Project Erasmus+ AROSE (2019-1-ES01-KA201-065597)</p>
             </div>
         </div>
       </footer>
