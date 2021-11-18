@@ -62,7 +62,7 @@ $user = \Auth::user();
                 </div>
                 <div class="form-group">
                     <div class="col-xs-6">
-                        <label for="name">
+                        <label for="age">
                             <h4>Age</h4>
                         </label>
                         <input
@@ -75,7 +75,7 @@ $user = \Auth::user();
                 </div>
                 <div class="form-group">
                     <div class="col-xs-6">
-                        <label for="name">
+                        <label for="class">
                             <h4>Class</h4>
                         </label>
                         <input
@@ -88,7 +88,7 @@ $user = \Auth::user();
                 </div>
                 <div class="form-group">
                     <div class="col-xs-6">
-                        <label for="name">
+                        <label for="group">
                             <h4>Group</h4>
                         </label>
                         <input

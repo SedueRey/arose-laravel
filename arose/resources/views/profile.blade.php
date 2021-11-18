@@ -106,7 +106,7 @@ $user = \Auth::user();
                 </div>
                 <div class="form-group">
                     <div class="col-xs-6">
-                        <label for="country">
+                        <label for="biography">
                             <h4>Bio</h4>
                         </label>
                         <textarea
