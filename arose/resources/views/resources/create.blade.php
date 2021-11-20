@@ -77,12 +77,12 @@ $user = \Auth::user();
                             <h4>Level</h4>
                         </label>
                         <fieldset id="level">
-                            <input type="radio" value="A1" name="level" @if(old('level') == 'A1') checked @endif> A1 &nbsp;&nbsp;&nbsp;
-                            <input type="radio" value="A2" name="level" @if(old('level') == 'A2') checked @endif> A2 &nbsp;&nbsp;&nbsp;
-                            <input type="radio" value="B1" name="level" @if(old('level') == 'B1') checked @endif> B1 &nbsp;&nbsp;&nbsp;
-                            <input type="radio" value="B2" name="level" @if(old('level') == 'B2') checked @endif> B2 &nbsp;&nbsp;&nbsp;
-                            <input type="radio" value="C1" name="level" @if(old('level') == 'C1') checked @endif> C1 &nbsp;&nbsp;&nbsp;
-                            <input type="radio" value="C2" name="level" @if(old('level') == 'C2') checked @endif> C2 &nbsp;&nbsp;&nbsp;
+                            <input aria-labelledby="a1" type="radio" value="A1" name="level" @if(old('level') == 'A1') checked @endif> <span id="a1">A1 &nbsp;&nbsp;&nbsp;</span>
+                            <input aria-labelledby="a2" type="radio" value="A2" name="level" @if(old('level') == 'A2') checked @endif> <span id="a2">A2 &nbsp;&nbsp;&nbsp;</span>
+                            <input aria-labelledby="b1" type="radio" value="B1" name="level" @if(old('level') == 'B1') checked @endif> <span id="b1">B1 &nbsp;&nbsp;&nbsp;</span>
+                            <input aria-labelledby="b2" type="radio" value="B2" name="level" @if(old('level') == 'B2') checked @endif> <span id="b2">B2 &nbsp;&nbsp;&nbsp;</span>
+                            <input aria-labelledby="c1" type="radio" value="C1" name="level" @if(old('level') == 'C1') checked @endif> <span id="c1">C1 &nbsp;&nbsp;&nbsp;</span>
+                            <input aria-labelledby="c2" type="radio" value="C2" name="level" @if(old('level') == 'C2') checked @endif> <span id="c2">C2 &nbsp;&nbsp;&nbsp;</span>
                         </fieldset>
                     </div>
                 </div>
@@ -92,10 +92,10 @@ $user = \Auth::user();
                             <h4>Format</h4>
                         </label>
                         <fieldset id="format">
-                            <input type="radio" value="Text" name="format" @if(old('format') == 'Text') checked @endif> Text &nbsp;&nbsp;&nbsp;
-                            <input type="radio" value="Audio" name="format" @if(old('format') == 'Audio') checked @endif> Audio &nbsp;&nbsp;&nbsp;
-                            <input type="radio" value="Video" name="format" @if(old('format') == 'Video') checked @endif> Video &nbsp;&nbsp;&nbsp;
-                            <input type="radio" value="Multimedia" name="format" @if(old('format') == 'Multimedia') checked @endif> Multimedia  &nbsp;&nbsp;&nbsp;
+                            <input aria-labelledby="text" type="radio" value="Text" name="format" @if(old('format') == 'Text') checked @endif> <span id="text">Text &nbsp;&nbsp;&nbsp;</span>
+                            <input aria-labelledby="audio" type="radio" value="Audio" name="format" @if(old('format') == 'Audio') checked @endif> <span id="audio">Audio &nbsp;&nbsp;&nbsp;</span>
+                            <input aria-labelledby="video" type="radio" value="Video" name="format" @if(old('format') == 'Video') checked @endif> <span id="video">Video &nbsp;&nbsp;&nbsp;</span>
+                            <input aria-labelledby="multimedia" type="radio" value="Multimedia" name="format" @if(old('format') == 'Multimedia') checked @endif> <span id="multimedia">Multimedia  &nbsp;&nbsp;&nbsp;</span>
                         </fieldset>
                     </div>
                 </div>

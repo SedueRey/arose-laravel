@@ -9,7 +9,7 @@
         font-size: 20px !important;
     }
     .navbar-arose a.nav-link{
-        color: rgba(255, 255, 255, 0.5) !important;
+        color: rgba(255, 255, 255, 0.9) !important;
         padding-left: 9px !important;
         padding-right: 9px !important;
         text-shadow: none !important;

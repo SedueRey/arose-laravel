@@ -104,13 +104,20 @@ $user = \Auth::user();
                             <h4>Level</h4>
                         </label>
                         <fieldset id="level">
-                            <input type="radio" value="Unknown" name="level" @if(old('level') == 'Unknown' || old('level') == '' ) checked @endif> Unknown &nbsp;&nbsp;&nbsp;
-                            <input type="radio" value="A1" name="level" @if(old('level') == 'A1') checked @endif> A1 &nbsp;&nbsp;&nbsp;
-                            <input type="radio" value="A2" name="level" @if(old('level') == 'A2') checked @endif> A2 &nbsp;&nbsp;&nbsp;
-                            <input type="radio" value="B1" name="level" @if(old('level') == 'B1') checked @endif> B1 &nbsp;&nbsp;&nbsp;
-                            <input type="radio" value="B2" name="level" @if(old('level') == 'B2') checked @endif> B2 &nbsp;&nbsp;&nbsp;
-                            <input type="radio" value="C1" name="level" @if(old('level') == 'C1') checked @endif> C1 &nbsp;&nbsp;&nbsp;
-                            <input type="radio" value="C2" name="level" @if(old('level') == 'C2') checked @endif> C2 &nbsp;&nbsp;&nbsp;
+                            <input type="radio" aria-labelledby="unknown" value="Unknown" name="level" @if(old('level') == 'Unknown' || old('level') == '' ) checked @endif>
+                            <span id="unknown"> Unknown &nbsp;&nbsp;&nbsp;</span>
+                            <input type="radio" aria-labelledby="a1" value="A1" name="level" @if(old('level') == 'A1') checked @endif>
+                            <span id="a1">A1 &nbsp;&nbsp;&nbsp;</span>
+                            <input type="radio" aria-labelledby="a2" value="A2" name="level" @if(old('level') == 'A2') checked @endif>
+                            <span id="a2">A2 &nbsp;&nbsp;&nbsp;</span>
+                            <input type="radio" aria-labelledby="b1" value="B1" name="level" @if(old('level') == 'B1') checked @endif>
+                            <span id="b1">B1 &nbsp;&nbsp;&nbsp;</span>
+                            <input type="radio" aria-labelledby="b2" value="B2" name="level" @if(old('level') == 'B2') checked @endif>
+                            <span id="b2">B2 &nbsp;&nbsp;&nbsp;</span>
+                            <input type="radio" aria-labelledby="c1" value="C1" name="level" @if(old('level') == 'C1') checked @endif>
+                            <span id="c1">C1 &nbsp;&nbsp;&nbsp;</span>
+                            <input type="radio" aria-labelledby="c2" value="C2" name="level" @if(old('level') == 'C2') checked @endif>
+                            <span id="c2">C2 &nbsp;&nbsp;&nbsp;</span>
                         </fieldset>
                     </div>
                 </div>
