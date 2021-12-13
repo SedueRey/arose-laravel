@@ -102,6 +102,27 @@ if(!isset($format)) {
                     <p>{{ ucfirst($data->type)}}</p>
                     <hr>
                     <p>{{ $data->desc }}</p>
+                    @if($data->related->count() > 0 || $data->relatedBack->count() > 0 )
+                        @if ( $data->related->count() + $data->relatedBack->count() == 1 )
+                        <h5>{{ $data->related->count() + $data->relatedBack->count() }} Binded resource</h5>
+                        @else
+                        <h5>{{ $data->related->count() + $data->relatedBack->count() }} Binded resources</h5>
+                        @endif
+                        <ul>
+                            @foreach($data->related as $obj)
+                            <li>
+                                <a href="{{$obj->filepath}}">{{ $obj->filename }}</a>
+                                <span class="badge badge-secondary">{{ $obj->format }}</span>
+                            </li>
+                            @endforeach
+                            @foreach($data->relatedBack as $obj)
+                            <li>
+                                <a href="{{$obj->filepath}}">{{ $obj->filename }}</a>
+                                <span class="badge badge-secondary">{{ $obj->format }}</span>
+                            </li>
+                            @endforeach
+                        </ul>
+                    @endif
                     <p>
                         <a href="/resources/filter/{{$format}}/{{$data->level}}" class="badge badge-secondary">{{$data->level}}</a>
                         <a href="/resources/filter/{{$data->format}}/{{$level}}" class="badge badge-secondary">{{$data->format}}</a>

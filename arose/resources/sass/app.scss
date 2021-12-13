@@ -45,3 +45,7 @@
 a.profile-userpic, a.profile-userpic > img-responsive {
     display: block;
 }
+
+.form-check[data-checked="checked"] {
+    order: -1;
+}

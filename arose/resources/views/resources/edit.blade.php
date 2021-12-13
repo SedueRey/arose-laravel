@@ -5,6 +5,7 @@
 @php
 $user = \Auth::user();
 @endphp
+<script src="//code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
 <div class="container bootstrap snippet">
     <div class="row">
         <div class="col-sm-12">
@@ -103,6 +104,66 @@ $user = \Auth::user();
                         <button class="btn btn" type="reset"><i class="glyphicon glyphicon-repeat"></i> Reset</button>
                     </div>
                 </div>
+                @if ($other->count() > 0)
+                <div class="form-group">
+                    <div class="col-xs-6">
+                        <hr/>
+                        <h4 id="related">Your resources, {{ $other->count() }} possible to bind</h4>
+                        <div class="card card-body">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text" id="basic-addon1">
+                                    <i class="fa fa-search"></i>
+                                  </span>
+                                </div>
+                                <input class="form-control" id="search" type="search" aria-labelledby="related" value="" placeholder="search for your documents" />
+                            </div>
+                            <hr>
+                            <div class="row">
+                            @foreach($other as $item)
+                            <div
+                                class="form-check searching-items col-md-4"
+                                data-filename="{{ $item->filename }}"
+                                @if (in_array($item->id, $related))
+                                data-checked="checked"
+                                @endif
+                            >
+                            <label class="form-check-label" for="related['{{$item->id}}']">
+                                <input
+                                    @if (in_array($item->id, $related))
+                                    checked
+                                    @endif
+                                    class="form-check-input"
+                                    type="checkbox"
+                                    name="related['{{$item->id}}']"
+                                    id="related['{{$item->id}}']"
+                                 /> {{ $item->filename }}</label>
+                            </div>
+                            @endforeach
+                            </div>
+                        </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <br>
+                        <button class="btn btn-secondary" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> Save</button>
+                        <button class="btn btn" type="reset"><i class="glyphicon glyphicon-repeat"></i> Reset</button>
+                    </div>
+                </div>
+                @endif
+                <script>
+                    $(document).ready(function(){
+                        $('#search').on('keyup', function() {
+                            const search = $('#search').val().toLowerCase();
+                            $('.searching-items').hide();
+                            $('.searching-items').each( function() {
+                                if ( $(this).data('filename').toLowerCase().indexOf(search) > -1 ) {
+                                    $(this).show();
+                                }
+                            });
+                        })
+                    })
+                </script>
             </form>
         </div>
     </div>

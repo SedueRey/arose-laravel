@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use App\Models\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -123,8 +124,24 @@ class ResourcesController extends Controller
         ) {
             abort(403, 'PERMISSION DENIED… YOU DIDN’T SAY THE MAGIC WORD!');
         }
+        $otherResources = Resources::where([
+            ['uploaded_by', '=' , Auth()->user()->id],
+            ['id', '<>' , $id],
+        ])
+            ->orderBy('updated_at', 'desc')
+            ->get();
+        $relatedResources = DB::select("
+        SELECT other_resource_id AS ID FROM related_resources WHERE resource_id = '".$id."'"
+        );
+        $related = [];
+        foreach ($relatedResources as $key => $value) {
+            $related[] = $value->ID;
+        }
+        $related = array_unique($related);
         return view('resources.edit', [
-            'resource' => $resource
+            'resource' => $resource,
+            'other' => $otherResources,
+            'related' => $related
         ]);
     }
 
