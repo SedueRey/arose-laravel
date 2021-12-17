@@ -83,7 +83,14 @@ class ResourcesController extends Controller
     }
 
     public function create() {
-        return view('resources.create');
+        $otherResources = Resources::where([
+            ['uploaded_by', '=' , Auth()->user()->id]
+        ])
+            ->orderBy('updated_at', 'desc')
+            ->get();
+        return view('resources.create',[
+            'other' => $otherResources
+        ]);
     }
 
     public function store(Request $request) {
@@ -108,7 +115,12 @@ class ResourcesController extends Controller
             $resource->format = $request->format;
             $resource->uploaded_by = $instructorId;
 
+
             $resource->save();
+
+            foreach ($request->related as $key => $value) {
+                $resource->related()->attach($value);
+            }
 
             return redirect()->to('resources')
             ->with('message','Resource has been uploaded.');
@@ -158,6 +170,10 @@ class ResourcesController extends Controller
         ) {
             abort(403, 'PERMISSION DENIED… YOU DIDN’T SAY THE MAGIC WORD!');
         }
+        $resource->related()->detach();
+        foreach ($request->related as $key => $value) {
+            $resource->related()->attach($value);
+        }
         $resource->filename = $request->name;
         $resource->desc = $request->description;
         $resource->level = $request->level;
@@ -182,6 +198,8 @@ class ResourcesController extends Controller
         if(Storage::exists($resource->filepath)){
             Storage::disk('public')->delete($filePath);
         }
+        $resource->related()->detach();
+        $resource->relatedBack()->detach();
         $resource->delete();
         return redirect()->to('resources')->with('message', 'Resource deleted from server');
     }

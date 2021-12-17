@@ -104,9 +104,9 @@ if(!isset($format)) {
                     <p>{{ $data->desc }}</p>
                     @if($data->related->count() > 0 || $data->relatedBack->count() > 0 )
                         @if ( $data->related->count() + $data->relatedBack->count() == 1 )
-                        <h5>{{ $data->related->count() + $data->relatedBack->count() }} Binded resource</h5>
+                        <h5>{{ $data->related->count() + $data->relatedBack->count() }} Related resource</h5>
                         @else
-                        <h5>{{ $data->related->count() + $data->relatedBack->count() }} Binded resources</h5>
+                        <h5>{{ $data->related->count() + $data->relatedBack->count() }} Related resources</h5>
                         @endif
                         <ul>
                             @foreach($data->related as $obj)

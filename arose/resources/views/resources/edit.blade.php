@@ -128,15 +128,16 @@ $user = \Auth::user();
                                 data-checked="checked"
                                 @endif
                             >
-                            <label class="form-check-label" for="related['{{$item->id}}']">
+                            <label class="form-check-label" for="related[{{$item->id}}]">
                                 <input
                                     @if (in_array($item->id, $related))
                                     checked
                                     @endif
                                     class="form-check-input"
                                     type="checkbox"
-                                    name="related['{{$item->id}}']"
-                                    id="related['{{$item->id}}']"
+                                    name="related[{{$item->id}}]"
+                                    id="related[{{$item->id}}]"
+                                    value="{{$item->id}}"
                                  /> {{ $item->filename }}</label>
                             </div>
                             @endforeach
@@ -150,7 +151,6 @@ $user = \Auth::user();
                         <button class="btn btn" type="reset"><i class="glyphicon glyphicon-repeat"></i> Reset</button>
                     </div>
                 </div>
-                @endif
                 <script>
                     $(document).ready(function(){
                         $('#search').on('keyup', function() {
@@ -164,6 +164,7 @@ $user = \Auth::user();
                         })
                     })
                 </script>
+                @endif
             </form>
         </div>
     </div>
