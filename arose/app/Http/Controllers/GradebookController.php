@@ -26,6 +26,66 @@ class GradebookController extends Controller
         return view('gradebook.config');
     }
 
+    public function excel() {
+        $user_id = Auth()->user()->id;
+        $queryGrading = "
+        SELECT
+        s.id AS student_id,
+        r.id AS rating_id, r.points AS criteria_points
+        FROM students s, ratings r, rating_student rs
+        WHERE r.id = rs.rating_id
+          AND s.id = rs.student_id
+          AND s.user_id = ?
+        ORDER BY r.id ASC
+        ";
+        $gradingData = DB::select($queryGrading, [$user_id]);
+        $studentQuery = 'SELECT * FROM students s WHERE s.user_id = ? ORDER BY s.surname, s.name';
+        $studentData = DB::select($studentQuery, [$user_id]);
+        $rubricQuery = "
+            SELECT rb.id, rb.title AS rubric_title, rb.id AS rubric_id, COUNT(c.id) AS colspan_rubric
+            FROM rubrics rb, criteria c, usedrubrics u
+            WHERE c.rubric_id = rb.id
+              AND u.rubric_id = rb.id
+              AND u.user_id   = ?
+            GROUP BY c.rubric_id
+            ORDER BY rb.id
+        ";
+        $rubricData = DB::select($rubricQuery, [$user_id]);
+        $criteriaRatingQuery = "
+        SELECT rb.id as rubric_id, c.title AS criterion_title, c.id AS criterion_id, COUNT(r.id) AS colspan_criteria
+        FROM rubrics rb, criteria c, usedrubrics u, ratings r
+        WHERE c.rubric_id = rb.id
+          AND u.rubric_id = rb.id
+          AND r.criterion_id = c.id
+          AND u.user_id = ?
+        GROUP BY r.criterion_id
+        ORDER BY c.id
+        ";
+        $criteriaRatingData = DB::select($criteriaRatingQuery, [$user_id]);
+        $ratingQuery = "
+        SELECT r.id, c.id as criteria_id, r.title AS rating_title, r.points as rating_points
+        FROM rubrics rb, criteria c, usedrubrics u, ratings r
+        WHERE c.rubric_id = rb.id
+          AND u.rubric_id = rb.id
+          AND r.criterion_id = c.id
+          AND u.user_id = ?
+        ORDER BY r.id
+        ";
+        $ratingData = DB::select($ratingQuery, [$user_id]);
+        $data = [
+            'gradingData' => $gradingData,
+            'studentData' => $studentData,
+            'rubricData' => $rubricData,
+            'criteriaRatingData' => $criteriaRatingData,
+            'ratingData' => $ratingData,
+        ];
+        // return view('gradebook.excel', $data);
+        return response()
+            ->view('gradebook.excel', $data)
+            ->header('Content-disposition', 'attachment; filename=StudentGrading.xls')
+            ->header('Content-Type', 'application/vnd.ms-excel');
+    }
+
     public function myself(){
         $user_id = Auth()->user()->id;
         $user = User::findOrFail($user_id);

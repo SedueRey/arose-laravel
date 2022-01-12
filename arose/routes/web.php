@@ -79,6 +79,7 @@ Route::group(['middleware' => ['auth']], function () {
         // Controladores / Vistas
         Route::get('/', [GradebookController::class, 'index']);
         Route::get('config', [GradebookController::class, 'config']);
+        Route::get('excel', [GradebookController::class, 'excel']);
     });
 
 
