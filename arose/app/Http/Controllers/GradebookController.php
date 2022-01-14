@@ -80,9 +80,10 @@ class GradebookController extends Controller
             'ratingData' => $ratingData,
         ];
         // return view('gradebook.excel', $data);
+        $filename = 'StudentGrading-'. str_replace('+','-', urlencode(Auth()->user()->name)).'.xls';
         return response()
             ->view('gradebook.excel', $data)
-            ->header('Content-disposition', 'attachment; filename=StudentGrading.xls')
+            ->header('Content-disposition', "attachment; filename=$filename")
             ->header('Content-Type', 'application/vnd.ms-excel');
     }
 

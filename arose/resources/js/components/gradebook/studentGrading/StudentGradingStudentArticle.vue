@@ -13,7 +13,13 @@
                 <span class="text-primary">{{ student.surname }}, {{ student.name }}</span>
                 <small>(English level to grade: {{ student.level }})</small>
             </span>
-            <strong class="studentrubric__points">{{points}} / {{ maxPoints }} points</strong>
+            <small class="studentrubric__points">
+                <strong>
+                {{points}} / {{ maxPoints }}
+                </strong>
+                (should be {{ maxUserPoints }} tops),
+                the student will pass with <em>{{ passPoints }}</em>
+            </small>
         </div>
         <div v-show="isExpanded">
         <div class="studentrubric__rubric studentusedrubric" v-for="used in rubrics" :key="used.id">
@@ -64,7 +70,23 @@ export default {
                 const maprubrics = this.rubrics.map(el => el.rubric.points);
                 return maprubrics.reduce((a, b) => a + b, 0);
             }
-        }
+        },
+        maxUserPoints() {
+            if (this.rubrics.length === 0) {
+                return 0
+            } else {
+                const maprubrics = this.rubrics.map(el => el.rubric.maxpoints);
+                return maprubrics.reduce((a, b) => a + b, 0);
+            }
+        },
+        passPoints() {
+            if (this.rubrics.length === 0) {
+                return 0
+            } else {
+                const maprubrics = this.rubrics.map(el => el.rubric.passpoints);
+                return maprubrics.reduce((a, b) => a + b, 0);
+            }
+        },
     },
     methods: {
         toggleExpand() {

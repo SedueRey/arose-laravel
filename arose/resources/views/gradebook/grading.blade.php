@@ -23,6 +23,12 @@ $photo = $user->photo;
     </li>
 </ul>
 <section class="gradebookapp">
+<p class="text-right">
+    <a href="/gradebook/excel" class="btn btn-sm btn-primary" download>
+        <i class="fas fa-file-excel"></i>
+        &nbsp;&nbsp;Export as Excel
+    </a>
+</p>
 <student-grading></student-grading>
 </section>
 @endsection

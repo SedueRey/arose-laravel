@@ -1,13 +1,35 @@
 <template>
 <div class="RubricForm">
     <div class="row">
-        <div class="col-sm-12">
+        <div class="col-sm-6">
             Rubric total points: {{ totalPoints }}
             <input type="hidden" name="rubricPoints" id="rubricPoints" v-model="totalPoints" />
         </div>
     </div>
+    <div class="row">
+        <div class="col-sm-6">
+            Rubric max points:
+            <input
+                type="number"
+                name="maxpoints"
+                id="maxpoints"
+                class="form-control form-control-sm"
+                v-model="maxpoints" />
+            &nbsp;&nbsp;points
+        </div>
+        <div class="col-sm-6">
+            Your students will pass this rubrics with:
+            <input
+                type="number"
+                name="passpoints"
+                id="passpoints"
+                class="form-control form-control-sm"
+                v-model="passpoints" />
+            &nbsp;&nbsp;points
+        </div>
+    </div>
     <div class="form-group">
-        <label for="rubricTitle">Rubric title</label>
+        <h4><br /><label for="rubricTitle">Rubric title</label></h4>
         <input
             type="text"
             class="form-control form-control-sm"
@@ -16,6 +38,16 @@
             v-model="rubricTitle"
             required placeholder="Add your rubric title"
         >
+    </div>
+    <div class="form-check">
+        <input class="form-check-input"
+            type="checkbox"
+            v-model="isPublic"
+            name="isPublic"
+            id="isPublic" />
+        <label class="form-check-label" for="isPublic">
+            I want to share this rubric with all Arose community
+        </label>
     </div>
     <hr class="hr" />
     <button
@@ -61,6 +93,9 @@ export default {
         return {
             criteria: [],
             rubricTitle: '',
+            passpoints: 0,
+            maxpoints: 0,
+            isPublic: false,
         }
     },
     components: {
@@ -93,6 +128,15 @@ export default {
         if (this.old !== null && this.old !== undefined) {
             if (this.old.rubricTitle) {
                 this.rubricTitle = this.old.rubricTitle;
+            }
+            if (this.old.passpoints) {
+                this.passpoints = this.old.passpoints;
+            }
+            if (this.old.maxpoints) {
+                this.maxpoints = this.old.maxpoints;
+            }
+            if (this.old.isPublic) {
+                this.isPublic = this.old.isPublic;
             }
             if (this.old.criteriatitle) {
                 const criteriaUUids = Object.keys(this.old.criteriatitle);

@@ -19,6 +19,9 @@ $user = \Auth::user();
     <li class="nav-item">
         <a class="nav-link" href="/aroserubrics">{{$otherrubrics}} Arose project shared rubrics</a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/sharedrubrics">{{$sharedrubrics->total()}} Instructors shared rubrics</a>
+    </li>
 </ul>
 <div class="row">
     <div class="col-md-12">
@@ -79,7 +82,10 @@ $user = \Auth::user();
                 </td>
             </tr>
             <tr>
-                <td class="text-nowrap">{{$data->points}} points</td>
+                <td class="text-nowrap">
+                    {{$data->points}},
+                    {{ $data->maxpoints ?? 0 }} max, pass with {{ $data->passpoints ?? 0 }}
+                </td>
                 <td class="text-nowrap">{{count($data->criteria)}} criteria</td>
                 <td class="text-nowrap">
                     @php

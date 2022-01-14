@@ -26,9 +26,19 @@ class RubricController extends Controller
         $otherRubrics = Rubric::with('criteria.ratings', 'usedrubrics')
             ->where('user_id', 1)->count();
 
+        $sharedRubrics = Rubric::with('criteria.ratings', 'usedrubrics')
+            ->where([
+                ['public', '=', 1],
+                ['user_id', '!=' , Auth()->user()->id],
+                ['user_id', '!=' , 1]
+            ])
+            ->orderBy('title','asc')
+            ->paginate(20);
+
         $data = [
             'myrubrics' => $myRubricsData,
             'otherrubrics' => $otherRubrics,
+            'sharedrubrics' => $sharedRubrics,
         ];
 
         return view('rubrics.index', $data );
@@ -45,12 +55,53 @@ class RubricController extends Controller
         $otherRubrics = Rubric::with('criteria.ratings', 'usedrubrics')
             ->where('user_id', Auth()->user()->id)->count();
 
+        $sharedRubrics = Rubric::with('criteria.ratings', 'usedrubrics')
+            ->where([
+                ['public', '=', 1],
+                ['user_id', '!=' , Auth()->user()->id],
+                ['user_id', '!=' , 1]
+            ])
+            ->orderBy('title','asc')
+            ->paginate(20);
+
         $data = [
             'myrubrics' => $myRubricsData,
             'otherrubrics' => $otherRubrics,
+            'sharedrubrics' => $sharedRubrics,
         ];
 
         return view('rubrics.arose', $data );
+    }
+
+    public function sharedrubrics()
+    {
+
+        $myRubricsData = Rubric::with('criteria.ratings', 'usedrubrics')
+            ->where('user_id', 1)
+            ->orderBy('title','asc')
+            ->paginate(20);
+
+        $otherRubrics = Rubric::with('criteria.ratings', 'usedrubrics')
+            ->where('user_id', Auth()->user()->id)->count();
+
+        $sharedRubrics = Rubric::with('criteria.ratings', 'usedrubrics', 'user')
+            ->where([
+                ['public', '=', 1],
+                ['user_id', '!=' , Auth()->user()->id],
+                ['user_id', '!=' , 1]
+            ])
+            ->orderBy('title','asc')
+            ->paginate(20);
+
+        // dd($sharedRubrics);
+
+        $data = [
+            'myrubrics' => $myRubricsData,
+            'otherrubrics' => $otherRubrics,
+            'sharedrubrics' => $sharedRubrics,
+        ];
+
+        return view('rubrics.shared', $data );
     }
 
     /**
@@ -73,16 +124,22 @@ class RubricController extends Controller
     {
         $validated = $request->validate([
             'rubricTitle' => 'required',
+            'maxpoints' => 'numeric',
+            'passpoints' => 'numeric',
         ]);
+        $rubric = new Rubric;
+        $rubric->title = $request->rubricTitle;
+        $rubric->points = $request->rubricPoints;
+        // 2022-01-14
+        $rubric->public = isset($request->isPublic);
+        $rubric->maxpoints = $request->maxpoints;
+        $rubric->passpoints = $request->passpoints;
+        // --
+        $rubric->user_id = Auth()->user()->id;
+        $rubric->save();
+
         if (isset($request->criteriatitle)) {
             $criteriaKeys = array_keys($request->criteriatitle);
-
-            $rubric = new Rubric;
-            $rubric->title = $request->rubricTitle;
-            $rubric->points = $request->rubricPoints;
-            $rubric->user_id = Auth()->user()->id;
-            $rubric->save();
-
             for ($i = 0; $i < count($criteriaKeys); $i++) {
                 $key = $criteriaKeys[$i];
 
@@ -159,6 +216,9 @@ class RubricController extends Controller
             'id' => $rubric->id,
             'rubricTitle' => $rubric->title,
             'rubricPoints' => $rubric->points,
+            'isPublic' => $rubric->public,
+            'maxpoints' => $rubric->maxpoints,
+            'passpoints' => $rubric->passpoints,
             'criteriatitle' => [],
             'criteriadescription' => [],
             'ratingtitle' => [],
@@ -210,7 +270,11 @@ class RubricController extends Controller
 
         $rubric->title = $request->rubricTitle;
         $rubric->points = $request->rubricPoints;
-
+        // 2022-01-14
+        $rubric->public = isset($request->isPublic);
+        $rubric->maxpoints = $request->maxpoints;
+        $rubric->passpoints = $request->passpoints;
+        // --
 
         foreach ($rubric->criteria as $criterion) {
             $criterion->ratings->each->delete();
@@ -261,6 +325,11 @@ class RubricController extends Controller
         $rubric = new Rubric;
         $rubric->title = 'Copy of '.$fromrubric->title;
         $rubric->points = $fromrubric->points;
+        // 2022-01-14
+        $rubric->public = $fromrubric->public;
+        $rubric->maxpoints = $fromrubric->maxpoints;
+        $rubric->passpoints = $fromrubric->passpoints;
+        // --
         $rubric->user_id = Auth()->user()->id;
         $rubric->save();
 

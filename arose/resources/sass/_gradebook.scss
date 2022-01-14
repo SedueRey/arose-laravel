@@ -66,6 +66,10 @@
         letter-spacing: 0.05rem;
         background: #5d5d5d;
         color: #edf1f9;
+
+        position: sticky;
+        top: 50px;
+        z-index: 19;
     }
 }
 
@@ -81,9 +85,14 @@
         padding: 0 0 0 0.75rem;
     }
     &__header {
+        background: #fff;
         cursor: pointer;
+        position: sticky;
+        top: 0;
+        z-index: 20;
+
         &:hover {
-            background: #fff;
+            background: #f0f0f0;
         }
     }
     &__header.unexpanded {
@@ -108,7 +117,7 @@
 
 .alert-fixed {
     position: fixed;
-    top: 10vh;
+    bottom: 5vh;
     left: 50%;
     width: 80vw;
     transform: translateX(-50%);

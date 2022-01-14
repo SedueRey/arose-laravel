@@ -9,7 +9,7 @@ $user = \Auth::user();
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="/">Arose project</a></li>
         <li class="breadcrumb-item"><a href="/home">Dashboard</a></li>
-        <li class="breadcrumb-item">Rubrics</li>
+        <li class="breadcrumb-item"><a href="/rubrics">Rubrics</a></li>
         <li class="breadcrumb-item active" aria-current="page">Detail: {{ substr($rubric->title, 0, 10) }}&hellip;</li>
     </ol>
 </nav>
@@ -30,7 +30,7 @@ $user = \Auth::user();
         @else
         {{ count($rubric->criteria) }} criteria,
         @endif
-        {{ $rubric->points }} points
+        {{ $rubric->maxpoints }} max points, {{ $rubric->points }} points, it will be passed with {{ $rubric->passpoints }} points
     </div>
 </div>
 <hr />

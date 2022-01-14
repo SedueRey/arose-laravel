@@ -12,7 +12,10 @@ class Rubric extends Model
     protected $fillable = [
         'title',
         'points',
-        'user_id'
+        'user_id',
+        'public',
+        'maxpoints',
+        'passpoints'
     ];
 
     protected $hidden = [

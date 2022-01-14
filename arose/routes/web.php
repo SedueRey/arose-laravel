@@ -27,15 +27,6 @@ Route::get('/resources', [ResourcesController::class, 'getData'])->name('resourc
 Route::get('/resources/filter/{format}/{level}', [ResourcesController::class, 'filterByAll']);
 Route::get('/resources/arose', [ResourcesController::class, 'filterArose']);
 
-/*
-Route::get('/admin/customers-management', [GroceryController::class, 'users']);
-Route::get('/admin/customers-management/{operation}', [GroceryController::class, 'users']);
-Route::get('/admin/customers-management/{operation}/{id}', [GroceryController::class, 'users']);
-Route::post('/admin/customers-management', [GroceryController::class, 'users']);
-Route::post('/admin/customers-management/{operation}', [GroceryController::class, 'users']);
-Route::post('/admin/customers-management/{operation}/{id}', [GroceryController::class, 'users']);
-*/
-
 Auth::routes();
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
@@ -49,6 +40,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::delete('/resources/delete/{id}', [ResourcesController::class, 'destroy'])->name('destroyResource');
 
     Route::get('/aroserubrics', [RubricController::class, 'arose'])->name('aroserubrics');
+    Route::get('/sharedrubrics', [RubricController::class, 'sharedrubrics'])->name('sharedrubrics');
     Route::get('/rubrics', [RubricController::class, 'index'])->name('rubrics');
     Route::get('/rubrics/show/{id}', [RubricController::class, 'show'])->name('showRubric');
     Route::get('/rubrics/new', [RubricController::class, 'create'])->name('createRubric');
@@ -81,7 +73,6 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('config', [GradebookController::class, 'config']);
         Route::get('excel', [GradebookController::class, 'excel']);
     });
-
 
     /* End gradebook */
 

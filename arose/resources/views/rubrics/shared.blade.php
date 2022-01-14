@@ -17,14 +17,24 @@ $user = \Auth::user();
         <a class="nav-link" href="/rubrics">My {{$otherrubrics}} rubrics</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link active" href="#">{{$myrubrics->total()}} Arose project shared rubrics</a>
+        <a class="nav-link" href="/aroserubrics">{{$myrubrics->total()}} Arose project shared rubrics</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="/sharedrubrics">{{$sharedrubrics->total()}} Instructors shared rubrics</a>
+        <a class="nav-link active" href="/#">{{$sharedrubrics->total()}} Instructors shared rubrics</a>
     </li>
 </ul>
 <div class="row">
     <div class="col-md-12">
+        @if (count($sharedrubrics) ==  0)
+        <div class="col-md-12 alert alert-warning" role="alert">
+            Sorry, there are no shared rubrics yet.
+        </div>
+        @endif
+        @if (session('message'))
+        <div class="col-md-12 alert alert-info" role="alert">
+            {{ session('message') }}
+        </div>
+        @endif
     <div class="table-responsive">
     <table class="table table-sm">
         <thead>
@@ -37,12 +47,14 @@ $user = \Auth::user();
             </tr>
         </thead>
         <tbody>
-        @foreach($myrubrics as $data)
+        @foreach($sharedrubrics as $data)
             <tr>
                 <td colspan="3">
                     <a href="/rubrics/show/{{$data->id}}">
                         {{$data->title}}
                     </a>
+                    <br />
+                    <small>Shared by <em>{{$data->user->name}}</em></small>
                 </td>
                 <td class="text-right" colspan="2">
                     @php
@@ -83,7 +95,7 @@ $user = \Auth::user();
     </div>
         {{-- Pagination --}}
         <div class="d-flex justify-content-center">
-            {!! $myrubrics->links() !!}
+            {!! $sharedrubrics->links() !!}
         </div>
 </div>
 </div>
