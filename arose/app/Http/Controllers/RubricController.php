@@ -172,7 +172,7 @@ class RubricController extends Controller
         }
 
         // dd(array_values($request->criteriatitle), array_keys($request->criteriatitle), $request);
-        return redirect()->to('home')->with('message', 'Rubric created!');
+        return redirect()->to('rubrics')->with('message', 'Rubric created!');
     }
 
     /**
