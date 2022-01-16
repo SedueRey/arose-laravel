@@ -42,7 +42,9 @@ class GradebookController extends Controller
         $studentQuery = 'SELECT * FROM students s WHERE s.user_id = ? ORDER BY s.surname, s.name';
         $studentData = DB::select($studentQuery, [$user_id]);
         $rubricQuery = "
-            SELECT rb.id, rb.title AS rubric_title, rb.id AS rubric_id, COUNT(c.id) AS colspan_rubric
+            SELECT rb.id, rb.title AS rubric_title, rb.id AS rubric_id,
+                   rb.maxpoints, rb.passpoints,
+                   COUNT(c.id) AS colspan_rubric
             FROM rubrics rb, criteria c, usedrubrics u
             WHERE c.rubric_id = rb.id
               AND u.rubric_id = rb.id
@@ -52,7 +54,10 @@ class GradebookController extends Controller
         ";
         $rubricData = DB::select($rubricQuery, [$user_id]);
         $criteriaRatingQuery = "
-        SELECT rb.id as rubric_id, c.title AS criterion_title, c.id AS criterion_id, COUNT(r.id) AS colspan_criteria
+        SELECT
+            rb.id as rubric_id,
+            c.title AS criterion_title, c.id AS criterion_id,
+            COUNT(r.id) AS colspan_criteria
         FROM rubrics rb, criteria c, usedrubrics u, ratings r
         WHERE c.rubric_id = rb.id
           AND u.rubric_id = rb.id

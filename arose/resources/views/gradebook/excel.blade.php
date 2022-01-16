@@ -14,14 +14,11 @@ foreach ($studentData as $key => $student) {
 }
 $nextCol = 6;
 foreach ($rubricData as $key => $rubric) {
-    // dd($key, $rubric);
     $criteria = array_filter($criteriaRatingData, function($obj) use ($rubric) {
         return ($obj->rubric_id === $rubric->id);
     });
-    // dd($criteria, $rubric);
     $howmuchcriteria = 0;
     foreach ($criteria as $key => $criterion) {
-        // dd($criterion);
         $howmuchcriteria += $criterion->colspan_criteria;
         $criteriaRow .= "<th colspan=\"$criterion->colspan_criteria\">$criterion->criterion_title</th>";
         $ratings = array_filter($ratingData, function($obj) use ($criterion) {
@@ -41,34 +38,26 @@ foreach ($rubricData as $key => $rubric) {
                 }
             }
             $nextCol++;
-            /*
-            $user_ratings = array_filter($gradingData, function($obj) use ($rating){
-                dd($obj);
-                return $obj->rating_id = $rating->id;
-            });
-            // dd($user_ratings);
-            foreach ($user_ratings as $key => $studentRating) {
-                $students[$studentRating->student_id][$nextCol] = $rating->rating_points;
-            }
-            // dd($user_ratings, $students);
-
-            */
         }
     }
-    $rubricRow .= "<th colspan=\"$howmuchcriteria\">$rubric->rubric_title</th>";
+    $rubricMaxPoints = "";
+    if (isset($rubric->maxpoints) && ($rubric->maxpoints > 0) ) {
+        $rubricMaxPoints = "(max. $rubric->maxpoints)";
+    }
+    $rubricPassPoints = "";
+    if (isset($rubric->passpoints) && ($rubric->passpoints > 0) ) {
+        $rubricPassPoints = "(pass. $rubric->passpoints)";
+    }
+    $rubricRow .= "<th colspan=\"$howmuchcriteria\">
+        $rubric->rubric_title $rubricMaxPoints $rubricPassPoints
+    </th>";
 }
-// dd($students);
 foreach ($students as $key => $value) {
     $studentRows[] = '<tr><td>'.implode('</td><td>', $value).'</td></tr>';
 }
 @endphp
 <table border="1">
     <thead>
-        <!--
-        <tr>
-        <th colspan="2"></th>
-        </tr>
-        -->
         <tr><th colspan="6"></th>{!! $rubricRow !!}</tr>
         <tr><th colspan="6">Student data</th>{!! $criteriaRow !!}</tr>
         <tr>
@@ -80,10 +69,6 @@ foreach ($students as $key => $value) {
             <th>Age</th>
             {!! $ratingRow !!}
         </tr>
-        <!--
-        <tr>
-        </tr>
-        -->
     </thead>
     <tbody>
         {!! implode('', $studentRows) !!}
