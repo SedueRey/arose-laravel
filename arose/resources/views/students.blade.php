@@ -20,6 +20,7 @@ $photo = $user->photo;
 <div class="row">
     <p>
         <a href="/students/new" class="btn btn-primary">Add new student</a>
+        <a href="/students/import" class="btn btn-secondary">Bulk import</a>
     </p>
     @if (count($studentData) ==  0)
     <div class="col-md-12 alert alert-warning" role="alert">

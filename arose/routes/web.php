@@ -8,6 +8,7 @@ use App\Http\Controllers\ResourcesController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\RubricController;
 use App\Http\Controllers\GradebookController;
+use App\Http\Controllers\ImportStudentsController;
 use App\Http\Middleware\VerifyCsrfToken;
 
 /*
@@ -108,4 +109,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/students/edit/{uuid}', [StudentController::class, 'edit'])->name('editStudent');
     Route::post('/students/update/{uuid}', [StudentController::class, 'update'])->name('updateStudent');
 
+    Route::get('/students/import', [ImportStudentsController::class, 'firstStep'])->name('importStudentStep1');
+    Route::post('/students/showlist', [ImportStudentsController::class, 'showListUploaded'])->name('showListUploaded');
 });
