@@ -9,13 +9,16 @@ class ExcelRule implements Rule
 {
     private $file;
 
-    public function __construct(UploadedFile $file)
+    public function __construct(?UploadedFile $file)
     {
         $this->file = $file;
     }
 
     public function passes($attribute, $value)
     {
+        if (null === $this->file) {
+            return false;
+        }
         $extension = strtolower($this->file->getClientOriginalExtension());
 
         return in_array($extension, ['csv']);

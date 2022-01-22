@@ -17,6 +17,34 @@ class ImportStudentsController extends Controller
         return view('students.index');
     }
 
+    public function importok(){
+        return view('students.importok');
+    }
+
+    public function addImportStudent(Request $request) {
+        $validated = $request->validate([
+            'name' => 'required',
+            'surname' => 'required',
+            'level' => 'required',
+            'age' => 'integer',
+        ]);
+        $instructorId = Auth()->user()->id;
+        try {
+            Student::create([
+                'name' => $request->name,
+                'surname' => $request->surname,
+                'age' => $request->age,
+                'class' => $request->class,
+                'group' => $request->group,
+                'level' => $request->level,
+                'user_id' => $instructorId,
+            ]);
+            return response()->json(['status' => 'ok'], 200);
+        } catch (\Throwable $th) {
+            return response()->json(['status' => 'error'], 400);
+        }
+    }
+
     public function showListUploaded(Request $request){
         // dd($request, $request->all(), $request->file());
         $validated = $request->validate([

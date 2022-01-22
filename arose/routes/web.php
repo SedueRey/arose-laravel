@@ -110,5 +110,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/students/update/{uuid}', [StudentController::class, 'update'])->name('updateStudent');
 
     Route::get('/students/import', [ImportStudentsController::class, 'firstStep'])->name('importStudentStep1');
+    Route::get('/students/importok', [ImportStudentsController::class, 'importok'])->name('importok');
     Route::post('/students/showlist', [ImportStudentsController::class, 'showListUploaded'])->name('showListUploaded');
+    Route::post('/students/api/addimport', [ImportStudentsController::class, 'addImportStudent'])
+        ->name('addImportStudent')
+        ->withoutMiddleware([VerifyCsrfToken::class]);
 });

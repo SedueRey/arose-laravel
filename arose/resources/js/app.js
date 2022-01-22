@@ -16,6 +16,7 @@ import ExampleComponent from './components/ExampleComponent';
 import RubricForm from './components/rubrics/RubricForm';
 import ConfigGrading from './components/gradebook/configGrading/ConfigGrading.vue';
 import StudentGrading from './components/gradebook/studentGrading/StudentGrading.vue';
+import StudentListImport from './components/students/StudentListImport.vue';
 
 /**
  * The following block of code may be used to automatically register your
@@ -39,5 +40,6 @@ const app = new Vue({
     RubricForm,
     ConfigGrading,
     StudentGrading,
+    StudentListImport
   }
 });
