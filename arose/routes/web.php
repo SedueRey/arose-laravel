@@ -23,6 +23,9 @@ use App\Http\Middleware\VerifyCsrfToken;
 */
 
 Route::post('/resources/search', [ResourcesController::class, 'search']);
+Route::get('/resources/search', function() {
+    return redirect('/resources');
+});
 Route::get('/', [ResourcesController::class, 'getIndex']);
 Route::get('/resources', [ResourcesController::class, 'getData'])->name('resources');
 Route::get('/resources/filter/{format}/{level}', [ResourcesController::class, 'filterByAll']);

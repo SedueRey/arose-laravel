@@ -97,7 +97,11 @@ if(!isset($format)) {
             <div class="row p-3">
                 <div class="col-12">
                     <h5>
-                        <a target="_blank" href="{{$data->filepath}}">{{$data->filename}}</a>
+                        @if(strcmp($data->filepath,"#") !== 0)
+                            <a target="_blank" href="{{$data->filepath}}">{{$data->filename}}</a>
+                        @else
+                            <a href="{{$data->filepath}}">{{$data->filename}}</a>
+                        @endif
                     </h5>
                     <p>{{ ucfirst($data->type)}}</p>
                     <hr>
