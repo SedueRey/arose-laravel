@@ -9,6 +9,7 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\RubricController;
 use App\Http\Controllers\GradebookController;
 use App\Http\Controllers\ImportStudentsController;
+use App\Http\Controllers\PanelAroseController;
 use App\Http\Middleware\VerifyCsrfToken;
 
 /*
@@ -106,11 +107,14 @@ Route::group(['middleware' => ['auth']], function () {
         }
     });
 
+    Route::get('/arose/stats', [PanelAroseController::class, 'stats'])->name('stats');
+
     Route::get('/students', [StudentController::class, 'index'])->name('students');
     Route::get('/students/new', [StudentController::class, 'create'])->name('newstudent');
     Route::post('/students/newaction', [StudentController::class, 'store'])->name('createStudent');
     Route::get('/students/edit/{uuid}', [StudentController::class, 'edit'])->name('editStudent');
     Route::post('/students/update/{uuid}', [StudentController::class, 'update'])->name('updateStudent');
+    Route::get('/students/delete/{uuid}', [StudentController::class, 'delete'])->name('deleteStudent');
 
     Route::get('/students/import', [ImportStudentsController::class, 'firstStep'])->name('importStudentStep1');
     Route::get('/students/importok', [ImportStudentsController::class, 'importok'])->name('importok');

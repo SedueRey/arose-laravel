@@ -20,6 +20,7 @@ storage/*.key
 .env.production
 .env.staging
 .env.development
+.env.*
 Homestead.yaml
 Homestead.json
 /.vagrant
