@@ -64,9 +64,10 @@ class ImportStudentsController extends Controller
                 $dataThreated = explode(';', $data[0]);
                 // dd($dataThreated);
                 if( $dataThreated[0] !== 'Family Name') {
+                    // dd($dataThreated);
                     $status = 'light';
                     $age = $dataThreated[2];
-                    $level = strtoupper($dataThreated[4]);
+                    $level = mb_strtoupper($dataThreated[4]);
                     if (!in_array($level, ['A1','A2','B1','B2','C1','C2'])) {
                         $status = 'warning';
                         $dataThreated[4] = 'Unknown';
@@ -79,12 +80,12 @@ class ImportStudentsController extends Controller
                     }
                     $dataThreated[6] = $status;
                     $userRaw = new StudentRaw(
-                        $dataThreated[0],
-                        $dataThreated[1],
-                        $dataThreated[2],
-                        $dataThreated[4],
-                        $dataThreated[3],
-                        $dataThreated[5],
+                        utf8_encode($dataThreated[0]),
+                        utf8_encode($dataThreated[1]),
+                        utf8_encode($dataThreated[2]),
+                        utf8_encode($dataThreated[4]),
+                        utf8_encode($dataThreated[3]),
+                        utf8_encode($dataThreated[5]),
                         $status,
                     );
                     $studentRawList[] = $userRaw;
