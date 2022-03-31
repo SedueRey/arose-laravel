@@ -45,6 +45,24 @@ class ImportStudentsController extends Controller
         }
     }
 
+    /* De momento no se usa */
+
+    private function isUTF8($string) {
+        return (utf8_encode(utf8_decode($string)) == $string);
+    }
+
+    private function convertToUTF8($str) {
+        $enc = mb_detect_encoding($str);
+
+        if ($enc && $enc != 'UTF-8') {
+            return iconv($enc, 'UTF-8', $str);
+        } else {
+            return $str;
+        }
+    }
+
+    /* FIN De momento no se usa */
+
     public function showListUploaded(Request $request){
         // dd($request, $request->all(), $request->file());
         $validated = $request->validate([
