@@ -98,7 +98,7 @@ class ResourcesController extends Controller
             'name' => 'required',
             'level' => 'required',
             'format' => 'required',
-            'filepath' => 'required|mimes:png,jpg,txt,pdf,mp3,mp4,avi,mov|max:3072'
+            'filepath' => 'required|mimes:png,jpg,txt,pdf,doc,docx,mp3,mp4,avi,mov|max:3072'
         ]);
         $instructorId = Auth()->user()->id;
         $resource = new Resources;
@@ -118,8 +118,10 @@ class ResourcesController extends Controller
 
             $resource->save();
 
-            foreach ($request->related as $key => $value) {
-                $resource->related()->attach($value);
+            if ($request->related) {
+                foreach ($request->related as $key => $value) {
+                    $resource->related()->attach($value);
+                }
             }
 
             return redirect()->to('resources')
@@ -170,9 +172,11 @@ class ResourcesController extends Controller
         ) {
             abort(403, 'PERMISSION DENIED… YOU DIDN’T SAY THE MAGIC WORD!');
         }
-        $resource->related()->detach();
-        foreach ($request->related as $key => $value) {
-            $resource->related()->attach($value);
+        if ($request->related) {
+            $resource->related()->detach();
+            foreach ($request->related as $key => $value) {
+                $resource->related()->attach($value);
+            }
         }
         $resource->filename = $request->name;
         $resource->desc = $request->description;

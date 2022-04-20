@@ -197,7 +197,22 @@ class GradebookController extends Controller
         if ($student->user_id != $user_id) {
             abort(403, 'PERMISSION DENIED… YOU DIDN’T SAY THE MAGIC WORD!');
         }
+        $ratingsFrom = "
+            SELECT rating_id FROM rating_student rs, ratings r
+            WHERE rs.rating_id = r.id
+              AND r.criterion_id = '".($request->criterion_id)."'
+              AND rs.student_id = '".($request->student_id)."'
+        ";
+        $ratingsData = DB::select($ratingsFrom);
         $student->ratings()->attach($request->rating_id);
+        $ratingsUsed = [];
+        foreach ($ratingsData as $k => $rating) {
+            $ratingsUsed[] = $rating->rating_id;
+        }
+        DB::table('rating_student')
+            ->whereIn('rating_id', $ratingsUsed)
+            ->where('student_id', $request->student_id)
+            ->delete();
         return response()->json('ok');
     }
 
