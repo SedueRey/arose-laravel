@@ -21,6 +21,12 @@ $photo = $user->photo;
     <li class="nav-item">
         <a class="nav-link" href="/gradebook/config">Gradebook configuration</a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/gradebook/stats">Grade stats</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/gradebook/summary">Student Graded summary</a>
+    </li>
 </ul>
 <section class="gradebookapp">
 <p class="text-right">

@@ -10,6 +10,7 @@ use App\Http\Controllers\RubricController;
 use App\Http\Controllers\GradebookController;
 use App\Http\Controllers\ImportStudentsController;
 use App\Http\Controllers\PanelAroseController;
+use App\Http\Controllers\StatsController;
 use App\Http\Middleware\VerifyCsrfToken;
 
 /*
@@ -77,6 +78,8 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/', [GradebookController::class, 'index']);
         Route::get('config', [GradebookController::class, 'config']);
         Route::get('excel', [GradebookController::class, 'excel']);
+        Route::get('stats', [StatsController::class, 'index']);
+        Route::get('summary', [StatsController::class, 'excel']);
     });
 
     /* End gradebook */

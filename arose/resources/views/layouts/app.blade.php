@@ -37,6 +37,9 @@
         <main class="container py-4">
             @yield('content')
         </main>
+        <main class="container-fluid py-4">
+            @yield('contentfluid')
+        </main>
     </div>
     <div class="container">
     <footer class="pt-4 my-md-5 pt-md-5 border-top">
