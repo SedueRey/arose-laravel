@@ -36,11 +36,25 @@ class PanelAroseController extends Controller
                 GROUP BY(created)
                 ORDER BY created ASC
             ");
+            $queryUsers = DB::select("
+                SELECT DATE(u.updated_at) AS created, u.id, u.name, u.email
+                FROM users u
+                ORDER BY id ASC
+            ");
+            $queryUsersAndStudents = DB::select("
+                SELECT DATE(u.updated_at) AS created, u.id, u.name, u.email, count(s.id) as students
+                FROM users u, students s
+                WHERE u.id = s.user_id
+                GROUP BY s.user_id
+                ORDER BY id ASC
+            ");
             return view('arose.stats', [
                 'registeredUsers' => $queryRegisteredUsers,
                 'addedStudents' => $queryAddedStudents,
                 'addedRubrics' => $queryAddedRubrics,
                 'resources' => $queryResources,
+                'users' => $queryUsers,
+                'usersstudents' => $queryUsersAndStudents,
             ]);
         }
     }

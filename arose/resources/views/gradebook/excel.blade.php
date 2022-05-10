@@ -53,13 +53,46 @@ foreach ($rubricData as $key => $rubric) {
     </th>";
 }
 foreach ($students as $key => $value) {
-    $studentRows[] = '<tr><td>'.implode('</td><td>', $value).'</td></tr>';
+    // $studentRows[] = '<tr><td>'.implode('</td><td>', $value).'</td></tr>';
+    $content = '<tr>';
+    $index = 0;
+    $max = 0;
+    $nonblanks = false;
+    foreach ($value as $td) {
+        $index++;
+        if (is_numeric($td) && $td != 0 && $index != 6) {
+            $content .= '<td style="text-align: center">'.$td.'</td>';
+            $max = $max + intval($td);
+            $nonblanks = true;
+        } else if (is_numeric($td)){
+            $content .= '<td style="text-align: center;">'.$td.'</td>';
+        } else {
+            $content .= '<td>'.$td.'</td>';
+        }
+    }
+    if ($max > 0) {
+        $content .= '<td style="text-align: center">'.$max.'</td>';
+    } else {
+        $content .= '<td style="text-align: center;">'.$max.'</td>';
+    }
+    $content .= '</tr>';
+    if ($nonblanks) {
+        $studentRows[] = $content;
+    }
 }
 @endphp
 <table border="1">
     <thead>
-        <tr><th colspan="6"></th>{!! $rubricRow !!}</tr>
-        <tr><th colspan="6">Student data</th>{!! $criteriaRow !!}</tr>
+        <tr>
+            <th colspan="6"></th>
+            {!! $rubricRow !!}
+            <th></th>
+        </tr>
+        <tr>
+            <th colspan="6">Student data</th>
+            {!! $criteriaRow !!}
+            <th></th>
+        </tr>
         <tr>
             <th>Given Name</th>
             <th>Family Name</th>
@@ -68,6 +101,7 @@ foreach ($students as $key => $value) {
             <th>Group</th>
             <th>Age</th>
             {!! $ratingRow !!}
+            <th>Total</th>
         </tr>
     </thead>
     <tbody>

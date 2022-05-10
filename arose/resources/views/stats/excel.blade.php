@@ -114,8 +114,12 @@ foreach ($students as $key => $value) {
 <div class="table-responsive">
 <table class="table table-striped table-bordered" style="font-size: 0.75rem;">
     <thead style="background-color: #DEDEDE">
-        <tr><th colspan="6"></th>{!! $rubricRow !!}<th></th></tr>
-        <tr><th colspan="6">Student data</th>{!! $criteriaRow !!}<th></th></tr>
+        <tr>
+            <th colspan="6"></th>{!! $rubricRow !!}<th></th>
+        </tr>
+        <tr>
+            <th colspan="6">Student data</th>{!! $criteriaRow !!}<th></th>
+        </tr>
         <tr>
             <th>Given Name</th>
             <th>Family Name</th>

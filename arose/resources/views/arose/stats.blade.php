@@ -20,6 +20,12 @@
                 <li class="nav-item">
                   <a class="nav-link" id="contact2-tab" data-toggle="tab" href="#contact2" role="tab" aria-controls="contact" aria-selected="false">Resources</a>
                 </li>
+                <li class="nav-item">
+                  <a class="nav-link" id="users-tab" data-toggle="tab" href="#users" role="tab" aria-controls="contact" aria-selected="false">Users</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" id="users-tab" data-toggle="tab" href="#usersstudents" role="tab" aria-controls="contact" aria-selected="false">Users with students</a>
+                </li>
             </ul>
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
@@ -33,8 +39,8 @@
                         <tbody>
                         @foreach($registeredUsers as $data)
                             <tr>
-                                <td><?php echo $data->created; ?></td>
-                                <td><?php echo $data->c; ?></td>
+                                <td>{{ $data->created }}</td>
+                                <td>{{ $data->c }}</td>
                             </tr>
                         @endforeach
                         </tbody>
@@ -51,8 +57,8 @@
                         <tbody>
                         @foreach($addedStudents as $data)
                             <tr>
-                                <td><?php echo $data->created; ?></td>
-                                <td><?php echo $data->c; ?></td>
+                                <td>{{ $data->created }}</td>
+                                <td>{{ $data->c }}</td>
                             </tr>
                         @endforeach
                         </tbody>
@@ -69,8 +75,8 @@
                         <tbody>
                         @foreach($addedRubrics as $data)
                             <tr>
-                                <td><?php echo $data->created; ?></td>
-                                <td><?php echo $data->c; ?></td>
+                                <td>{{ $data->created }}</td>
+                                <td>{{ $data->c }}</td>
                             </tr>
                         @endforeach
                         </tbody>
@@ -87,8 +93,54 @@
                         <tbody>
                         @foreach($resources as $data)
                             <tr>
-                                <td><?php echo $data->created; ?></td>
-                                <td><?php echo $data->c; ?></td>
+                                <td>{{ $data->created }}</td>
+                                <td>{{ $data->c }}</td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                <div class="tab-pane fade" id="users" role="tabpanel" aria-labelledby="users-tab">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>id</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($users as $data)
+                            <tr>
+                                <td>{{ $data->created }}</td>
+                                <td>{{ $data->id }}</td>
+                                <td>{{ $data->name }}</td>
+                                <td>{{ $data->email }}</td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                <div class="tab-pane fade" id="usersstudents" role="tabpanel" aria-labelledby="usersstudents-tab">
+                <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>id</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Students</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($usersstudents as $data)
+                            <tr>
+                                <td>{{ $data->created }}</td>
+                                <td>{{ $data->id }}</td>
+                                <td>{{ $data->name }}</td>
+                                <td>{{ $data->email }}</td>
+                                <td>{{ $data->students }}</td>
                             </tr>
                         @endforeach
                         </tbody>
