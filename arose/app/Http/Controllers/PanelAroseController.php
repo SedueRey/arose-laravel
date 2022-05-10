@@ -48,11 +48,18 @@ class PanelAroseController extends Controller
                 GROUP BY s.user_id
                 ORDER BY id ASC
             ");
+            $resourcesUser = DB::select("
+                SELECT r.filename, DATE(r.created_at) as created, u.name, u.email, u.id
+                FROM resources r, users u
+                WHERE uploaded_by <> 1
+                  AND u.id = uploaded_by
+            ");
             return view('arose.stats', [
                 'registeredUsers' => $queryRegisteredUsers,
                 'addedStudents' => $queryAddedStudents,
                 'addedRubrics' => $queryAddedRubrics,
                 'resources' => $queryResources,
+                'resourcesuser' => $resourcesUser,
                 'users' => $queryUsers,
                 'usersstudents' => $queryUsersAndStudents,
             ]);

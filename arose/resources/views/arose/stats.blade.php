@@ -26,6 +26,9 @@
                 <li class="nav-item">
                   <a class="nav-link" id="users-tab" data-toggle="tab" href="#usersstudents" role="tab" aria-controls="contact" aria-selected="false">Users with students</a>
                 </li>
+                <li class="nav-item">
+                  <a class="nav-link" id="users-tab" data-toggle="tab" href="#resourcesuser" role="tab" aria-controls="contact" aria-selected="false">Resources by user</a>
+                </li>
             </ul>
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
@@ -141,6 +144,30 @@
                                 <td>{{ $data->name }}</td>
                                 <td>{{ $data->email }}</td>
                                 <td>{{ $data->students }}</td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                <div class="tab-pane fade" id="resourcesuser" role="tabpanel" aria-labelledby="usersstudents-tab">
+                <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Filename</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>User id</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($resourcesuser as $data)
+                            <tr>
+                                <td>{{ $data->created }}</td>
+                                <td>{{ $data->filename }}</td>
+                                <td>{{ $data->name }}</td>
+                                <td>{{ $data->email }}</td>
+                                <td>{{ $data->id }}</td>
                             </tr>
                         @endforeach
                         </tbody>
