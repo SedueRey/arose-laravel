@@ -17,8 +17,11 @@ $user = \Auth::user();
     <form method="POST" action="{{route('updateRubric', ['id' => $rubric['id']])}}">
         @csrf
         <h1 class="h3">Edit Rubric</h1>
+        <div class="sticky rubric-sticky">
+            <button class="btn btn-primary btn-sm" type="submit">Save changes to Rubric</button>
+        </div>
         <rubric-form :old="{{ json_encode($rubric) }}"></rubric-form>
-        <button class="btn btn-primary btn-sm" type="submit">Edit rubric</button>
+        <button class="btn btn-primary btn-sm" type="submit">Save changes to Rubric</button>
     </form>
 </div>
 @endsection
