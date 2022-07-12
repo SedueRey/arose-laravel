@@ -68,6 +68,12 @@
                             <a class="dropdown-item" href="/gradebook/config">
                                 Config my Gradebook
                             </a>
+                            <a class="dropdown-item" href="/gradebook/stats">
+                                Statistics
+                            </a>
+                            <a class="dropdown-item" href="/gradebook/summary">
+                                Summary
+                            </a>
                         </div>
                     </li>
                     <li class="nav-item">

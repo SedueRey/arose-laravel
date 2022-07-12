@@ -1,3 +1,7 @@
+@extends('layouts.app')
+
+@section('contentfluid')
+
 @php
 $rubricRow = '';
 $criteriaRow = '';
@@ -53,7 +57,6 @@ foreach ($rubricData as $key => $rubric) {
     </th>";
 }
 foreach ($students as $key => $value) {
-    // $studentRows[] = '<tr><td>'.implode('</td><td>', $value).'</td></tr>';
     $content = '<tr>';
     $index = 0;
     $max = 0;
@@ -61,7 +64,7 @@ foreach ($students as $key => $value) {
     foreach ($value as $td) {
         $index++;
         if (is_numeric($td) && $td != 0 && $index != 6) {
-            $content .= '<td style="text-align: center">'.$td.'</td>';
+            $content .= '<td class="bg-info text-white" style="text-align: center">'.$td.'</td>';
             $max = $max + intval($td);
             $nonblanks = true;
         } else if (is_numeric($td)){
@@ -71,27 +74,51 @@ foreach ($students as $key => $value) {
         }
     }
     if ($max > 0) {
-        $content .= '<td style="text-align: center">'.$max.'</td>';
+        $content .= '<td class="bg-success text-white" style="text-align: center">'.$max.'</td>';
     } else {
         $content .= '<td style="text-align: center;">'.$max.'</td>';
     }
     $content .= '</tr>';
+    // $studentRows[] = '<tr><td>'.implode('</td><td>', $value).'</td></tr>';
     if ($nonblanks) {
         $studentRows[] = $content;
     }
 }
 @endphp
-<table border="1">
-    <thead>
+<div class="container gradebook">
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Arose project</a></li>
+        <li class="breadcrumb-item"><a href="/home">Dashboard</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Gradebook / Summary</li>
+    </ol>
+</nav>
+<ul class="nav nav-tabs mb-4">
+    <li class="nav-item">
+        <a class="nav-link" href="/gradebook/">Gradebook</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/gradebook/config">Gradebook configuration</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/gradebook/stats">Grade stats</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link active" href="#">Student Graded summary</a>
+    </li>
+</ul>
+<h1 class="display-6">Graded students</h1>
+<p class="lead">Students to whom a grade has not been added will not appear in this list.</p>
+</div>
+<hr />
+<div class="table-responsive">
+<table class="table table-striped table-bordered" style="font-size: 0.75rem;">
+    <thead style="background-color: #DEDEDE">
         <tr>
-            <th colspan="6"></th>
-            {!! $rubricRow !!}
-            <th></th>
+            <th colspan="6"></th>{!! $rubricRow !!}<th></th>
         </tr>
         <tr>
-            <th colspan="6">Student data</th>
-            {!! $criteriaRow !!}
-            <th></th>
+            <th colspan="6">Student data</th>{!! $criteriaRow !!}<th></th>
         </tr>
         <tr>
             <th>Given Name</th>
@@ -108,3 +135,6 @@ foreach ($students as $key => $value) {
         {!! implode('', $studentRows) !!}
     </tbody>
 </table>
+</div>
+
+@endsection

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class StudentController extends Controller
 {
@@ -89,6 +90,17 @@ class StudentController extends Controller
         return view('studentedit', [
             'student' => $student
         ]);
+    }
+
+    public function delete($uuid)
+    {
+        $student = Student::find($uuid);
+        if ($student->user_id !== Auth()->user()->id) {
+            abort(403, 'PERMISSION DENIED… YOU DIDN’T SAY THE MAGIC WORD!');
+        }
+        DB::table('rating_student')->where('student_id', '=', $uuid)->delete();
+        $student->delete();
+        return redirect()->to('students')->with('message', 'Student deleted!');
     }
 
     /**

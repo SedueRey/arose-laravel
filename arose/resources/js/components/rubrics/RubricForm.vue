@@ -1,21 +1,15 @@
 <template>
 <div class="RubricForm">
+    <pre>{{criteria}}</pre>
     <div class="row">
         <div class="col-sm-6">
+            <strong>Rubric max assignable points to student:
+            {{ maxpoints }}
+            <input type="hidden" name="maxpoints" id="maxpoints" v-model="maxpoints" />
+            &nbsp;points</strong>
+            <br />
             Rubric total points: {{ totalPoints }}
             <input type="hidden" name="rubricPoints" id="rubricPoints" v-model="totalPoints" />
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-6">
-            Rubric max points:
-            <input
-                type="number"
-                name="maxpoints"
-                id="maxpoints"
-                class="form-control form-control-sm"
-                v-model="maxpoints" />
-            &nbsp;&nbsp;points
         </div>
         <div class="col-sm-6">
             Your students will pass this rubrics with:
@@ -69,6 +63,7 @@
         :uuid="criterion.uuid"
         :criterion="criterion"
         @totalPoints="criterionPoints"
+        @maxPoints="criterionMaxPoints"
         :old="old"
     >
         <button
@@ -94,7 +89,6 @@ export default {
             criteria: [],
             rubricTitle: '',
             passpoints: 0,
-            maxpoints: 0,
             isPublic: false,
         }
     },
@@ -105,6 +99,9 @@ export default {
       totalPoints() {
         return this.criteria.reduce((a, b) => a + (b.points || 0), 0);
       },
+      maxpoints() {
+        return this.criteria.reduce((a, b) => a + (b.maxpoints || 0), 0);
+      },
     },
     methods: {
         addCriterion() {
@@ -113,6 +110,7 @@ export default {
                 title: '',
                 description: '',
                 points: 0,
+                maxpoints: 0,
             })
         },
         deleteCriterion(uuid) {
@@ -122,6 +120,11 @@ export default {
         criterionPoints(value) {
             const criterion = this.criteria.find(el => el.uuid === value.uuid);
             criterion.points = value.points;
+        },
+        criterionMaxPoints(value) {
+            const criterion = this.criteria.find(el => el.uuid === value.uuid);
+            criterion.maxpoints = value.maxpoints || 0;
+            console.log(value, criterion);
         }
     },
     mounted() {
@@ -148,6 +151,7 @@ export default {
                         title: (this.old.criteriatitle[uuid] || ''),
                         description: (this.old.criteriadescription[uuid] || ''),
                         points: 0,
+                        maxpoints: 0,
                     }
                     );
                 }

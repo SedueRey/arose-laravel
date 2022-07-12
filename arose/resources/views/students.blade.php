@@ -57,6 +57,13 @@ $photo = $user->photo;
                 <a href="/students/edit/{{$data->id}}" class="btn btn-light btn-sm">
                     <i class="fa fa-edit"></i> Edit
                 </a>
+                <a
+                    onclick="if(!confirm('Do you want to delete this student?')) return false;"
+                    href="/students/delete/{{$data->id}}"
+                    class="btn btn-danger btn-sm"
+                >
+                    <i class="fa fa-trash"></i> Delete
+                </a>
             </td>
         </tr>
     @endforeach

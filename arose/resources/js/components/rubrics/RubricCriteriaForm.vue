@@ -102,8 +102,21 @@ export default {
         uuid: this.uuid,
         points: total,
       });
+      this.$emit("maxPoints", {
+        uuid: this.uuid,
+        maxpoints: this.maxPoints,
+      });
       return total;
     },
+    maxPoints() {
+        let max = 0;
+        this.ratings.forEach(element => {
+            if (element.points > max) {
+                max = element.points
+            }
+        });
+        return max;
+    }
   },
   methods: {
     addRating() {

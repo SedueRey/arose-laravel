@@ -56,6 +56,12 @@ $photo = $user->photo;
             </div>
         </div>
         <br>
+        @if ( $user->isadmin )
+        <aside class="alert alert-primary" role="alert">
+          <h4>Admin Panel</h4>
+          <a href="/arose/stats">Access to arose admin panel</a>
+        </aside>
+        @endif
         <h3 class="pt-4">What can you do from here?</h3>
         <p class="lead pb-2">Check all our tools:</p>
         <ol class="ol mx-0" style="list-style-type:none;">
