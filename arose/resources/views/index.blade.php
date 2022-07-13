@@ -5,7 +5,7 @@
     <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto">
       <h1>What is AROSE platform?</h1>
       <p class="lead">
-        AROSE is a project founded by Eramus+ to promote the assessment of English oral skills in secondary students. Here you can register yourself and access to the digital platform developed in this project.
+        AROSE is a project founded by Eramus+ to promote the assessment of English oral skills in secondary students. Here you can register and access to the digital platform developed in this project.
       </p>
     </div>
     <section class="row px-3 mt-4">
@@ -28,10 +28,10 @@
                         <li>A tool to register and manage your <strong class="text-primary">Students</strong></li>
                         <li>A tool to create and manage <strong class="text-primary">Rubrics</strong> for assessment</li>
                         <li>A <strong class="text-primary">Gradebook</strong> to manage the marks</li>
-                        <li>A <strong class="text-primary">Forum</strong> and a <strong class="text-primary">Chat</strong> to connect with other secondary teachers</li>
+                        <li>A <strong class="text-primary">Forum</strong> and a <strong class="text-primary">Chat</strong> to connect with other secondary school teachers</li>
                     </ol>
                     <p class="ml-3">
-                    <a class="btn btn-primary mr-2" href="/register">Register here</a> and began to use AROSE
+                    <a class="btn btn-primary mr-2" href="/register">Register here</a> and begin to use AROSE
                     </p>
                 </div>
             </div>
