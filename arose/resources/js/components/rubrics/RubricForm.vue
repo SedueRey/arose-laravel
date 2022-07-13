@@ -1,6 +1,5 @@
 <template>
 <div class="RubricForm">
-    <pre>{{criteria}}</pre>
     <div class="row">
         <div class="col-sm-6">
             <strong>Rubric max assignable points to student:
