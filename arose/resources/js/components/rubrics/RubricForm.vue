@@ -123,7 +123,6 @@ export default {
         criterionMaxPoints(value) {
             const criterion = this.criteria.find(el => el.uuid === value.uuid);
             criterion.maxpoints = value.maxpoints || 0;
-            console.log(value, criterion);
         }
     },
     mounted() {

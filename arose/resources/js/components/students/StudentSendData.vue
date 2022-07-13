@@ -57,19 +57,15 @@ export default {
             window.location.href = '/students/importok'
         },
         async upload() {
-            console.log(this.start);
             if(this.start) {
-                console.log('start', this.max);
                 const calls = this.callsDone;
                 for (let index = 0; index < this.max; index++) {
                     const student = this.studentsprop[index];
-                    console.log(student);
                     if (student.status === 'light') {
                         this.name = student.name;
                         this.surname = student.surname;
                         axios.post('/students/api/addimport', student)
                             .then(response => {
-                                console.log(response);
                                 calls.push('ok');
                             });
                         await delay(75);

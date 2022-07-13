@@ -90,7 +90,6 @@ export default {
     },
     methods: {
         upload() {
-            console.log('upload');
             this.uploading = true;
         },
         endSaving() {

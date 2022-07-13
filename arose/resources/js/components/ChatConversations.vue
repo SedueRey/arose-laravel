@@ -81,7 +81,7 @@ export default {
     leaveConversation(id) {
       let participationId;
       const convo = this.conversations.find(c => c.id === id);
-      console.log(convo);
+      // console.log(convo);
       participationId = convo.participants ? convo.participants.find(
         p => p.id == window.participant.id
       ).participation[0]["id"] : convo.id;
