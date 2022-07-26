@@ -51,7 +51,7 @@
           <div class="col-12 col-md">
             <h5>About Arose Project</h5>
             <ul class="list-unstyled text-small">
-              <li><a class="text-muted" href="https://www.um.es/aroseproject/objetives/">Objectives</a></li>
+              <li><a class="text-muted" href="https://www.um.es/aroseproject/objectives/">Objectives</a></li>
               <li><a class="text-muted" href="https://www.um.es/aroseproject/partners/">Partners</a></li>
               <li><a class="text-muted" href="https://www.um.es/aroseproject/contact/">Contact</a></li>
             </ul>
