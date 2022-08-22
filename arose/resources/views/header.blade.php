@@ -27,6 +27,9 @@
                         <a class="nav-link" href="/resources">Resources</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="/resources/public">Open Educational Resources</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                     </li>
                     @if (Route::has('register'))
@@ -39,7 +42,16 @@
                         <a class="nav-link" href="/home">Dashboard</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/resources">Resources</a>
+
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a id="navbarResources" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            Resources <span class="caret"></span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarResources">
+                            <a class="dropdown-item" href="/resources">Arose Resources</a>
+                            <a class="dropdown-item" href="/resources/public">Open Educational Resources</a>
+                        </div>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-nowrap" href="/students">My Students</a>

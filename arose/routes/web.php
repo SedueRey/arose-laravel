@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Input;
 use App\Http\Controllers\GroceryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ResourcesController;
+use App\Http\Controllers\PublicResources;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\RubricController;
 use App\Http\Controllers\GradebookController;
@@ -32,6 +33,7 @@ Route::get('/', [ResourcesController::class, 'getIndex']);
 Route::get('/resources', [ResourcesController::class, 'getData'])->name('resources');
 Route::get('/resources/filter/{format}/{level}', [ResourcesController::class, 'filterByAll']);
 Route::get('/resources/arose', [ResourcesController::class, 'filterArose']);
+Route::get('/resources/public', [PublicResources::class, 'index'])->name('publicresources');
 
 Auth::routes();
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
